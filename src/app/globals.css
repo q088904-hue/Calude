@@ -518,6 +518,19 @@
 .sc-e4      { animation-delay: 0.21s;  }
 .sc-e5      { animation-delay: 0.28s;  }
 
+@keyframes sc-reveal {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.sc-reveal { opacity: 0; }
+.sc-reveal[data-revealed="true"] {
+  animation: sc-reveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .sc-reveal { opacity: 1 !important; }
+  .sc-reveal[data-revealed="true"] { animation: none !important; }
+}
+
 /* Amber gradient rule — editorial section separator */
 .sc-rule {
   height: 1px;
