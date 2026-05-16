@@ -7,10 +7,14 @@ export function StagecraftHeader({
   label,
   sticky = true,
   children,
+  backHref = "/stagecraft",
+  backLabel = "← Stagecraft",
 }: {
   label: string;
   sticky?: boolean;
   children?: React.ReactNode;
+  backHref?: string;
+  backLabel?: string;
 }) {
   return (
     <header
@@ -20,10 +24,10 @@ export function StagecraftHeader({
     >
       <div className="flex items-center gap-3 shrink-0">
         <Link
-          href="/stagecraft"
+          href={backHref}
           className="font-mono text-xs text-sc-dim hover:text-sc-muted transition-colors"
         >
-          ← Stagecraft
+          {backLabel}
         </Link>
         <span className="text-sc-border text-xs">·</span>
         <span className="font-mono text-xs tracking-widest text-sc-gold uppercase">

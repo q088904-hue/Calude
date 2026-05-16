@@ -326,7 +326,7 @@ export default function CompanyDeepDivePage({
   return (
     <div className="stagecraft-root min-h-screen bg-sc-bg text-sc-ink">
       {/* Header */}
-      <StagecraftHeader label="Company">
+      <StagecraftHeader label="Company" backHref="/stagecraft/companies" backLabel="← Companies">
         <span className="font-mono text-xs text-sc-muted">{pack.shortName}</span>
         {/* Start session CTA in header */}
         <Link
