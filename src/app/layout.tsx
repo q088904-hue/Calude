@@ -65,6 +65,10 @@ export default function RootLayout({
             __html: `(function(){try{var s=localStorage.getItem('theme');var d=window.matchMedia('(prefers-color-scheme: dark)').matches;if(s==='dark'||(s===null&&d)){document.documentElement.classList.add('dark')}}catch(e){}})()`,
           }}
         />
+        <noscript>
+          {/* If JS is unavailable, reveal-on-scroll content must not stay hidden */}
+          <style>{`.sc-reveal{opacity:1 !important}`}</style>
+        </noscript>
       </head>
       <body className="min-h-full flex flex-col font-sans bg-[var(--background)] text-[var(--foreground)] transition-colors duration-300">
         {children}

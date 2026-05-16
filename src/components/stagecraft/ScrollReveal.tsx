@@ -36,7 +36,7 @@ export function ScrollReveal({
     <Tag
       // @ts-expect-error polymorphic ref is sound for the allowed tags
       ref={ref}
-      data-revealed={revealed ? "true" : "false"}
+      data-revealed={revealed ? "true" : undefined}
       style={{ animationDelay: `${delay}ms` }}
       className={`sc-reveal ${className}`}
     >
