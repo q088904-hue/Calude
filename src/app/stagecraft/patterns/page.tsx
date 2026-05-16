@@ -9,6 +9,8 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { StagecraftHeader } from "@/components/stagecraft/StagecraftHeader";
+import { ScrollReveal } from "@/components/stagecraft/ScrollReveal";
 import type {
   PatternData,
   PatternsPayload,
@@ -456,27 +458,7 @@ export default function PatternsPage() {
   return (
     <div className="stagecraft-root min-h-screen bg-sc-bg text-sc-ink">
       {/* Header */}
-      <header className="border-b border-sc-border px-6 py-4 flex items-center justify-between sticky top-0 bg-sc-bg z-10">
-        <div className="flex items-center gap-3">
-          <Link
-            href="/stagecraft"
-            className="font-mono text-xs text-sc-dim hover:text-sc-muted transition-colors"
-          >
-            ← Stagecraft
-          </Link>
-          <span className="text-sc-border text-xs">·</span>
-          <Link
-            href="/stagecraft/history"
-            className="font-mono text-xs text-sc-muted hover:text-sc-gold transition-colors"
-          >
-            History
-          </Link>
-          <span className="text-sc-border text-xs">·</span>
-          <span className="font-display text-base font-semibold text-sc-ink">
-            Patterns
-          </span>
-        </div>
-
+      <StagecraftHeader label="Patterns">
         {/* Trend legend */}
         {data && data.patterns.length > 0 && data.hasEnoughData && (
           <div className="flex items-center gap-3 font-mono text-[10px]">
@@ -485,7 +467,7 @@ export default function PatternsPage() {
             <span className="text-sc-red">↑ {worsening}</span>
           </div>
         )}
-      </header>
+      </StagecraftHeader>
 
       <main className="mx-auto max-w-2xl px-6 py-10 space-y-8">
         {/* Hero */}
@@ -493,7 +475,7 @@ export default function PatternsPage() {
           <p className="font-mono text-xs tracking-widest text-sc-gold uppercase mb-2">
             Grammar &amp; delivery patterns
           </p>
-          <h1 className="font-display text-3xl font-semibold text-sc-ink leading-tight">
+          <h1 className="font-fraunces text-3xl font-semibold text-sc-ink leading-tight">
             What keeps coming back?
           </h1>
           {data && (
@@ -567,16 +549,18 @@ export default function PatternsPage() {
             </div>
 
             {/* Pattern rows */}
-            <div className="space-y-2">
-              {data.patterns.map((pattern, i) => (
-                <PatternRow
-                  key={pattern.tag}
-                  pattern={pattern}
-                  rank={i + 1}
-                  maxRate={maxRate}
-                />
-              ))}
-            </div>
+            <ScrollReveal>
+              <div className="space-y-2">
+                {data.patterns.map((pattern, i) => (
+                  <PatternRow
+                    key={pattern.tag}
+                    pattern={pattern}
+                    rank={i + 1}
+                    maxRate={maxRate}
+                  />
+                ))}
+              </div>
+            </ScrollReveal>
 
             {/* Priority callout */}
             {data.patterns.length > 0 && (() => {
@@ -585,26 +569,28 @@ export default function PatternsPage() {
               );
               if (!top) return null;
               return (
-                <div className="rounded-sm border border-sc-gold-dim bg-sc-gold-bg px-4 py-4">
-                  <p className="font-mono text-[10px] tracking-widest text-sc-gold uppercase mb-1.5">
-                    Focus drill
-                  </p>
-                  <p className="text-sm text-sc-ink">
-                    Your most persistent pattern is{" "}
-                    <strong className="font-semibold">[{top.tag}]</strong> —
-                    {top.totalCount} occurrences across{" "}
-                    {top.sessions.length} session
-                    {top.sessions.length !== 1 ? "s" : ""}. Set{" "}
-                    <span className="font-mono text-sc-gold">focus grammar</span>{" "}
-                    in your next session to drill against it specifically.
-                  </p>
-                  <Link
-                    href="/stagecraft?focus=grammar"
-                    className="inline-block mt-3 rounded-sm border border-sc-gold-dim bg-sc-gold/10 px-3 py-1.5 font-mono text-xs text-sc-gold hover:bg-sc-gold/20 transition-colors"
-                  >
-                    Start a session with focus grammar →
-                  </Link>
-                </div>
+                <ScrollReveal delay={80}>
+                  <div className="rounded-sm border border-sc-gold-dim bg-sc-gold-bg px-4 py-4">
+                    <p className="font-mono text-[10px] tracking-widest text-sc-gold uppercase mb-1.5">
+                      Focus drill
+                    </p>
+                    <p className="text-sm text-sc-ink">
+                      Your most persistent pattern is{" "}
+                      <strong className="font-semibold">[{top.tag}]</strong> —
+                      {top.totalCount} occurrences across{" "}
+                      {top.sessions.length} session
+                      {top.sessions.length !== 1 ? "s" : ""}. Set{" "}
+                      <span className="font-mono text-sc-gold">focus grammar</span>{" "}
+                      in your next session to drill against it specifically.
+                    </p>
+                    <Link
+                      href="/stagecraft?focus=grammar"
+                      className="inline-block mt-3 rounded-sm border border-sc-gold-dim bg-sc-gold/10 px-3 py-1.5 font-mono text-xs text-sc-gold hover:bg-sc-gold/20 transition-colors"
+                    >
+                      Start a session with focus grammar →
+                    </Link>
+                  </div>
+                </ScrollReveal>
               );
             })()}
 

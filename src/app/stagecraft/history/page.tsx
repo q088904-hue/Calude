@@ -6,6 +6,8 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { StagecraftHeader } from "@/components/stagecraft/StagecraftHeader";
+import { ScrollReveal } from "@/components/stagecraft/ScrollReveal";
 import {
   LineChart,
   Line,
@@ -104,42 +106,21 @@ export default function HistoryPage() {
   return (
     <div className="stagecraft-root min-h-screen bg-sc-bg text-sc-ink">
       {/* Header */}
-      <header className="border-b border-sc-border px-6 py-4 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <Link
-            href="/"
-            className="font-mono text-xs text-sc-dim hover:text-sc-muted transition-colors"
-          >
-            ← Home
-          </Link>
-          <span className="text-sc-border text-xs">·</span>
-          <Link
-            href="/stagecraft"
-            className="font-mono text-xs text-sc-muted hover:text-sc-gold transition-colors"
-          >
-            Stagecraft
-          </Link>
-          <span className="text-sc-border text-xs">·</span>
-          <span className="font-display text-base font-semibold text-sc-ink">
-            History
-          </span>
-        </div>
-        <div className="flex items-center gap-2">
-          <Link
-            href="/stagecraft/patterns"
-            className="rounded border border-sc-border bg-sc-surface px-3 py-1.5 text-xs font-mono text-sc-muted hover:border-sc-gold-dim hover:text-sc-gold transition-colors"
-          >
-            Patterns
-          </Link>
-          <Link
-            href="/stagecraft/memorize"
-            className="flex items-center gap-1.5 rounded border border-sc-border bg-sc-surface px-3 py-1.5 text-xs font-mono text-sc-muted hover:border-sc-gold-dim hover:text-sc-gold transition-colors"
-          >
-            <span className="text-sc-gold">♥</span>
-            <span>Memorize queue</span>
-          </Link>
-        </div>
-      </header>
+      <StagecraftHeader label="History">
+        <Link
+          href="/stagecraft/patterns"
+          className="rounded border border-sc-border bg-sc-surface px-3 py-1.5 text-xs font-mono text-sc-muted hover:border-sc-gold-dim hover:text-sc-gold transition-colors"
+        >
+          Patterns
+        </Link>
+        <Link
+          href="/stagecraft/memorize"
+          className="flex items-center gap-1.5 rounded border border-sc-border bg-sc-surface px-3 py-1.5 text-xs font-mono text-sc-muted hover:border-sc-gold-dim hover:text-sc-gold transition-colors"
+        >
+          <span className="text-sc-gold">♥</span>
+          <span>Memorize queue</span>
+        </Link>
+      </StagecraftHeader>
 
       <main className="mx-auto max-w-2xl px-6 py-10 space-y-10">
         {/* Hero */}
@@ -147,7 +128,7 @@ export default function HistoryPage() {
           <p className="font-mono text-xs tracking-widest text-sc-gold uppercase mb-3">
             Your progress
           </p>
-          <h1 className="font-display text-3xl font-semibold text-sc-ink leading-tight">
+          <h1 className="font-fraunces text-3xl font-semibold text-sc-ink leading-tight">
             Session history
           </h1>
         </div>
@@ -668,7 +649,9 @@ function SessionList({ sessions }: { sessions: SessionSummary[] }) {
         Past sessions
       </p>
       {sessions.map((s, i) => (
-        <SessionRow key={s.id} session={s} index={i} />
+        <ScrollReveal key={s.id} delay={i * 60}>
+          <SessionRow session={s} index={i} />
+        </ScrollReveal>
       ))}
     </div>
   );
