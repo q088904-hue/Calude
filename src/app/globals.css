@@ -1,0 +1,506 @@
+@import "tailwindcss";
+
+/* ============================================
+   DARK MODE VARIANT — class-based (.dark)
+   Tailwind v4 defaults `dark:` to the
+   prefers-color-scheme media query. We toggle a
+   `.dark` class on <html>, so we must redefine the
+   variant or every `dark:` utility silently no-ops.
+   ============================================ */
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ============================================
+   DATAMATICS DESIGN INTELLIGENCE
+   Design System Tokens
+   ============================================ */
+
+:root {
+  /* Brand */
+  --brand-red: #E4002B;
+  --brand-red-light: #FF1A45;
+  --brand-red-dark: #B8001F;
+  --brand-red-glow: rgba(228, 0, 43, 0.15);
+
+  /* Surfaces */
+  --surface-primary: #FFFFFF;
+  --surface-secondary: #FAFAFA;
+  --surface-tertiary: #F3F3F3;
+  --surface-dark: #0A0A0A;
+  --surface-elevated: #FFFFFF;
+
+  /* Text */
+  --text-primary: #0A0A0A;
+  --text-secondary: #5C5C5C;
+  --text-tertiary: #9A9A9A;
+  --text-inverse: #FFFFFF;
+
+  /* Borders */
+  --border-subtle: #EBEBEB;
+  --border-medium: #D4D4D4;
+
+  /* Semantic */
+  --color-success: #22C55E;
+  --color-warning: #F59E0B;
+  --color-info: #3B82F6;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.04);
+  --shadow-lg: 0 1px 3px rgba(0,0,0,0.03), 0 8px 30px rgba(0,0,0,0.06);
+  --shadow-xl: 0 1px 3px rgba(0,0,0,0.03), 0 16px 50px rgba(0,0,0,0.08);
+  --shadow-red: 0 1px 2px rgba(228,0,43,0.2), 0 8px 24px rgba(228,0,43,0.15);
+  --shadow-red-hover: 0 1px 2px rgba(228,0,43,0.3), 0 12px 32px rgba(228,0,43,0.2);
+
+  /* Motion */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* Layout */
+  --max-width: 1200px;
+  --nav-height: 64px;
+
+  /* Background */
+  --background: #FFFFFF;
+  --foreground: #0A0A0A;
+}
+
+/* ============================================
+   DARK MODE OVERRIDES — Cosmos-inspired
+   ============================================ */
+
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ffffff;
+
+  --surface-primary: #0a0a0a;
+  --surface-secondary: #111111;
+  --surface-tertiary: #181818;
+  --surface-elevated: #141414;
+  --surface-dark: #e8e8e8;
+
+  --text-primary: #f0f0f0;
+  --text-secondary: #888888;
+  --text-tertiary: #555555;
+  --text-inverse: #0a0a0a;
+
+  --border-subtle: #1e1e1e;
+  --border-medium: #2a2a2a;
+
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.5);
+  --shadow-md: 0 1px 3px rgba(0,0,0,0.5), 0 4px 16px rgba(0,0,0,0.4);
+  --shadow-lg: 0 1px 3px rgba(0,0,0,0.5), 0 8px 30px rgba(0,0,0,0.6);
+  --shadow-xl: 0 1px 3px rgba(0,0,0,0.4), 0 16px 50px rgba(0,0,0,0.7);
+
+  --shadow-red: 0 1px 2px rgba(228,0,43,0.3), 0 8px 24px rgba(228,0,43,0.25);
+  --shadow-red-hover: 0 1px 2px rgba(228,0,43,0.4), 0 12px 32px rgba(228,0,43,0.3);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-brand-red: var(--brand-red);
+  --color-brand-red-light: var(--brand-red-light);
+  --color-brand-red-dark: var(--brand-red-dark);
+  --color-brand-red-glow: var(--brand-red-glow);
+  --color-surface-primary: var(--surface-primary);
+  --color-surface-secondary: var(--surface-secondary);
+  --color-surface-tertiary: var(--surface-tertiary);
+  --color-surface-dark: var(--surface-dark);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+  --color-text-inverse: var(--text-inverse);
+  --color-border-subtle: var(--border-subtle);
+  --color-border-medium: var(--border-medium);
+  --color-success: var(--color-success);
+  --color-warning: var(--color-warning);
+  --color-info: var(--color-info);
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-plus-jakarta);
+  --font-mono: var(--font-jetbrains-mono);
+}
+
+/* ============================================
+   MEENTRACK V2 COLOR TOKENS
+   Ocean-themed dark palette for the fishing intelligence app.
+
+   Uses plain @theme (not @theme inline) so Tailwind v4 generates
+   channel variables for every color — enabling opacity modifiers
+   like bg-mt-aqua/15, border-mt-border/50, text-mt-ink/80, etc.
+
+   Naming convention — prefix `mt-`, semantic role:
+     Surfaces : mt-base · mt-bg · mt-surface · mt-raised · mt-border · mt-subtle · mt-mesh
+     Accents  : mt-aqua · mt-aqua-dim · mt-teal · mt-green · mt-amber · mt-red · mt-crimson
+     Text     : mt-ink (primary) · mt-muted (secondary) · mt-dim (tertiary/disabled)
+
+   Usage in JSX:
+     Tailwind class  — bg-mt-surface, text-mt-aqua, border-mt-border/50
+     CSS var ref     — style={{ color: "var(--color-mt-aqua)" }}, etc.
+   ============================================ */
+
+@theme {
+  /* ── Backgrounds — deep ocean layers ───────────────────────────── */
+  --color-mt-base:    #071020;   /* deepest — page root                */
+  --color-mt-deep:    #071830;   /* deep card accent (AI advisory)     */
+  --color-mt-bg:      #0A1628;   /* app background                     */
+  --color-mt-surface: #0D1F38;   /* card surfaces                      */
+  --color-mt-raised:  #112847;   /* elevated cards / modals            */
+  --color-mt-border:  #1A3050;   /* borders, dividers                  */
+  --color-mt-subtle:  #1F3A5C;   /* hover / pressed states             */
+  --color-mt-mesh:    #0E2340;   /* gradient mesh mid-point            */
+
+  /* ── Brand accents — ocean-inspired ────────────────────────────── */
+  --color-mt-aqua:     #00E5FF;  /* primary CTA, links (high vis)      */
+  --color-mt-aqua-dim: #009BB5;  /* secondary / muted aqua             */
+  --color-mt-teal:     #0EA5BF;  /* depth indicators, map accents      */
+  --color-mt-green:    #00D97E;  /* safe, good, positive               */
+  --color-mt-amber:    #FFB800;  /* caution, mid-scores                */
+  --color-mt-orange:   #FF8C00;  /* warm caution (forecast, trial bar) */
+  --color-mt-red:      #FF3B30;  /* danger, alerts                     */
+  --color-mt-crimson:  #B00020;  /* critical / no-go                   */
+
+  /* ── Text ───────────────────────────────────────────────────────── */
+  --color-mt-ink:   #F0F8FF;     /* primary — headings, hero numbers   */
+  --color-mt-muted: #8FA3BF;     /* secondary — labels, metadata       */
+  --color-mt-dim:   #4D6680;     /* tertiary — disabled, placeholders  */
+
+  /* ── Glow shadows — score-band cards & CardShell ─────────────── */
+  /* color-mix() resolves at runtime; var() refs resolve via cascade */
+  --shadow-mt-card-glow:  0 0 28px color-mix(in srgb, var(--color-mt-aqua) 10%, transparent);
+  --shadow-mt-aqua-glow:  0 0 32px color-mix(in srgb, var(--color-mt-aqua) 25%, transparent);
+  --shadow-mt-green-glow: 0 0 32px color-mix(in srgb, var(--color-mt-green) 25%, transparent);
+  --shadow-mt-amber-glow: 0 0 32px color-mix(in srgb, var(--color-mt-amber) 20%, transparent);
+}
+
+/* ============================================
+   BASE RESET & DEFAULTS
+   Wrapped in @layer base so that Tailwind v4 utility classes
+   (which live in @layer utilities) can correctly override these.
+   Unlayered CSS beats @layer utilities — that is why every spacing
+   utility (px / mx etc.) was zeroed out by the old universal reset.
+   ============================================ */
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  }
+
+  ::selection {
+    background: var(--brand-red);
+    color: white;
+  }
+
+  /* ============================================
+     PREMIUM SCROLLBAR — in @layer base so that
+     .scrollbar-none (@layer utilities) can override width/display.
+     ============================================ */
+
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--border-medium);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--text-tertiary);
+  }
+}
+
+/* ============================================
+   TYPOGRAPHY UTILITIES
+   ============================================ */
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.text-display {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+}
+
+.text-headline {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  font-weight: 700;
+}
+
+/* ============================================
+   COMPONENT UTILITIES
+   ============================================ */
+
+.card-elevated {
+  background: var(--surface-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  box-shadow: var(--shadow-lg);
+}
+
+.section-container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+@media (min-width: 768px) {
+  .section-container {
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+}
+
+/* ============================================
+   HERO ENTRY ANIMATIONS — CSS-native so they
+   run even when RAF is throttled (inactive tab)
+   ============================================ */
+
+@keyframes hero-fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes hero-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.hero-enter-1 {
+  animation: hero-fade-up 0.6s cubic-bezier(0.16,1,0.3,1) 0.05s both;
+}
+.hero-enter-2 {
+  animation: hero-fade-up 0.7s cubic-bezier(0.16,1,0.3,1) 0.15s both;
+}
+.hero-enter-3 {
+  animation: hero-fade-up 0.6s cubic-bezier(0.16,1,0.3,1) 0.3s both;
+}
+.hero-enter-4 {
+  animation: hero-fade-up 0.6s cubic-bezier(0.16,1,0.3,1) 0.45s both;
+}
+.hero-enter-5 {
+  animation: hero-fade-in 0.8s ease 0.85s both;
+}
+
+/* Floating card stagger entries */
+.float-card-1  { animation: hero-fade-in 0.7s ease 0.3s  both; }
+.float-card-2  { animation: hero-fade-in 0.7s ease 0.42s both; }
+.float-card-3  { animation: hero-fade-in 0.7s ease 0.54s both; }
+.float-card-4  { animation: hero-fade-in 0.7s ease 0.66s both; }
+.float-card-5  { animation: hero-fade-in 0.7s ease 0.78s both; }
+.float-card-6  { animation: hero-fade-in 0.7s ease 0.90s both; }
+.float-card-7  { animation: hero-fade-in 0.7s ease 1.02s both; }
+.float-card-8  { animation: hero-fade-in 0.7s ease 1.14s both; }
+.float-card-9  { animation: hero-fade-in 0.7s ease 1.26s both; }
+.float-card-10 { animation: hero-fade-in 0.7s ease 1.38s both; }
+.float-card-11 { animation: hero-fade-in 0.7s ease 1.50s both; }
+.float-card-12 { animation: hero-fade-in 0.7s ease 1.62s both; }
+
+/* ============================================
+   ANIMATED RED LINE (signature element)
+   ============================================ */
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.red-line-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.red-line-shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+/* ============================================
+   FOCUS STYLES (accessibility)
+   ============================================ */
+
+:focus-visible {
+  outline: 2px solid var(--brand-red);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* MeenTrack V2 — override the global brand-red focus ring with aqua.
+   Scoped to .meentrack-v2 so it doesn't affect other routes.
+   No border-radius override — modern browsers follow the element's own
+   border-radius automatically, so pills get pill outlines and square
+   buttons get square outlines without any extra rules. */
+.meentrack-v2 :focus-visible {
+  outline-color: var(--color-mt-aqua);
+  outline-offset: 3px;
+}
+
+/* ============================================
+   GRAIN TEXTURE (subtle)
+   ============================================ */
+
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.015;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* ============================================
+   STAGECRAFT — "THE BRIEFING ROOM"
+   Dark editorial design system for the
+   executive interview practice agent.
+   ============================================ */
+
+@theme {
+  /* Backgrounds */
+  --color-sc-void:    #080809;   /* page root                          */
+  --color-sc-bg:      #0D0D0F;   /* app background                     */
+  --color-sc-surface: #131316;   /* card surfaces                      */
+  --color-sc-raised:  #1A1A1E;   /* elevated / hover                   */
+  --color-sc-border:  #26262B;   /* hairline borders                   */
+  --color-sc-line:    #1E1E22;   /* dividers                           */
+
+  /* Text */
+  --color-sc-ink:     #EDE8DF;   /* primary — warm cream               */
+  --color-sc-muted:   #78746F;   /* secondary — labels                 */
+  --color-sc-dim:     #48453F;   /* tertiary — disabled                */
+
+  /* Accent — amber/gold */
+  --color-sc-gold:    #C9973A;   /* primary CTA, active states         */
+  --color-sc-gold-dim:#6E521F;   /* gold borders, subtle               */
+  --color-sc-gold-bg: rgba(201,151,58,0.08); /* gold tinted surface    */
+
+  /* States */
+  --color-sc-red:     #E25E4A;   /* recording indicator                */
+  --color-sc-green:   #3D9A6E;   /* success / memorized                */
+  --color-sc-green-bg:rgba(61,154,110,0.10);
+}
+
+/* Mic button pulse animation — recording state */
+@keyframes sc-pulse-ring {
+  0%   { transform: scale(1);    opacity: 0.7; }
+  70%  { transform: scale(1.55); opacity: 0;   }
+  100% { transform: scale(1.55); opacity: 0;   }
+}
+
+/* Feedback stream cursor blink */
+@keyframes sc-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* Subtle shimmer on streaming text */
+@keyframes sc-stream-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0);   }
+}
+
+/* Score bar grow */
+@keyframes sc-bar-grow {
+  from { width: 0; }
+}
+
+.sc-pulse-ring::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  background: var(--color-sc-red);
+  animation: sc-pulse-ring 1.4s ease-out infinite;
+}
+
+.sc-pulse-ring::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  background: var(--color-sc-red);
+  animation: sc-pulse-ring 1.4s ease-out infinite 0.5s;
+}
+
+.sc-stream-cursor::after {
+  content: '▋';
+  animation: sc-blink 1s step-end infinite;
+  color: var(--color-sc-gold);
+  margin-left: 2px;
+}
+
+/* Stagecraft scoped focus ring */
+.stagecraft-root :focus-visible {
+  outline: 1.5px solid var(--color-sc-gold);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Stagecraft audio player — minimal */
+.stagecraft-root audio {
+  filter: invert(1) hue-rotate(180deg) brightness(0.8);
+  width: 100%;
+  height: 32px;
+}
+
+/* Staggered entry animations — setup screen elements reveal in sequence */
+@keyframes sc-fade-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0);   }
+}
+
+.sc-entry   { animation: sc-fade-up 0.4s cubic-bezier(0.25, 1, 0.5, 1) both; }
+.sc-e1      { animation-delay: 0s;     }
+.sc-e2      { animation-delay: 0.07s;  }
+.sc-e3      { animation-delay: 0.14s;  }
+.sc-e4      { animation-delay: 0.21s;  }
+.sc-e5      { animation-delay: 0.28s;  }
+
+/* Amber gradient rule — editorial section separator */
+.sc-rule {
+  height: 1px;
+  background: linear-gradient(to right, var(--color-sc-gold-dim), transparent);
+}
+
+/* Prose-like feedback rendering inside stagecraft */
+.sc-feedback strong { color: var(--color-sc-ink); font-weight: 600; }
+.sc-feedback em     { color: var(--color-sc-muted); font-style: italic; }
+.sc-feedback code   {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 0.85em;
+  background: var(--color-sc-raised);
+  border: 1px solid var(--color-sc-border);
+  border-radius: 3px;
+  padding: 0 4px;
+  color: var(--color-sc-gold);
+}

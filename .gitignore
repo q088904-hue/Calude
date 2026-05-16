@@ -45,3 +45,13 @@ next-env.d.ts
 
 # Brainstorming visual companion
 .superpowers/
+
+# Separate sibling projects (not part of Stagecraft)
+/ai-insider-brief/
+/john-job-agent/
+
+# Local agent state
+/.claude/
+
+# Git worktrees
+/.worktrees/
