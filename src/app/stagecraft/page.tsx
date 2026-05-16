@@ -49,6 +49,7 @@ import {
 } from "@/lib/stagecraft/speechRecognition";
 import { GooeyText } from "@/components/stagecraft/GooeyText";
 import { ScrollReveal } from "@/components/stagecraft/ScrollReveal";
+import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
 
 type Stage = "setup" | "warmup" | "question" | "report";
 
@@ -937,6 +938,7 @@ function StagecraftInner() {
               </span>
             )}
           </Link>
+          <AnimatedThemeToggler className="ml-2 shrink-0" />
         </div>
       </header>
 
