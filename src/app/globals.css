@@ -121,6 +121,7 @@
   --font-sans: var(--font-inter);
   --font-display: var(--font-plus-jakarta);
   --font-mono: var(--font-jetbrains-mono);
+  --font-fraunces: var(--font-fraunces);
 }
 
 /* ============================================
@@ -385,29 +386,60 @@
    executive interview practice agent.
    ============================================ */
 
-@theme {
-  /* Backgrounds */
-  --color-sc-void:    #080809;   /* page root                          */
-  --color-sc-bg:      #0D0D0F;   /* app background                     */
-  --color-sc-surface: #131316;   /* card surfaces                      */
-  --color-sc-raised:  #1A1A1E;   /* elevated / hover                   */
-  --color-sc-border:  #26262B;   /* hairline borders                   */
-  --color-sc-line:    #1E1E22;   /* dividers                           */
+/* Stagecraft palette — light (default) */
+:root {
+  --sc-void:     #EFE9DA;
+  --sc-bg:       #F4EFE4;
+  --sc-surface:  #FBF7EC;
+  --sc-raised:   #FFFFFF;
+  --sc-border:   #D8CFBA;
+  --sc-line:     #E4DCC8;
+  --sc-ink:      #1F1B16;
+  --sc-muted:    #6B6457;
+  --sc-dim:      #A89F8A;        /* decorative / disabled only — not body text */
+  --sc-gold:     #A8761F;
+  --sc-gold-dim: #C9A35E;        /* accent border only — not body text */
+  --sc-gold-bg:  rgba(168,118,31,0.10);
+  --sc-red:      #C0432F;
+  --sc-green:    #2F7D55;
+  --sc-green-bg: rgba(47,125,85,0.12);
+}
 
-  /* Text */
-  --color-sc-ink:     #EDE8DF;   /* primary — warm cream               */
-  --color-sc-muted:   #78746F;   /* secondary — labels                 */
-  --color-sc-dim:     #48453F;   /* tertiary — disabled                */
+/* Stagecraft palette — dark (original values) */
+.dark {
+  --sc-void:     #080809;
+  --sc-bg:       #0D0D0F;
+  --sc-surface:  #131316;
+  --sc-raised:   #1A1A1E;
+  --sc-border:   #26262B;
+  --sc-line:     #1E1E22;
+  --sc-ink:      #EDE8DF;
+  --sc-muted:    #78746F;
+  --sc-dim:      #48453F;
+  --sc-gold:     #C9973A;
+  --sc-gold-dim: #6E521F;
+  --sc-gold-bg:  rgba(201,151,58,0.08);
+  --sc-red:      #E25E4A;
+  --sc-green:    #3D9A6E;
+  --sc-green-bg: rgba(61,154,110,0.10);
+}
 
-  /* Accent — amber/gold */
-  --color-sc-gold:    #C9973A;   /* primary CTA, active states         */
-  --color-sc-gold-dim:#6E521F;   /* gold borders, subtle               */
-  --color-sc-gold-bg: rgba(201,151,58,0.08); /* gold tinted surface    */
-
-  /* States */
-  --color-sc-red:     #E25E4A;   /* recording indicator                */
-  --color-sc-green:   #3D9A6E;   /* success / memorized                */
-  --color-sc-green-bg:rgba(61,154,110,0.10);
+@theme inline {
+  --color-sc-void:     var(--sc-void);
+  --color-sc-bg:       var(--sc-bg);
+  --color-sc-surface:  var(--sc-surface);
+  --color-sc-raised:   var(--sc-raised);
+  --color-sc-border:   var(--sc-border);
+  --color-sc-line:     var(--sc-line);
+  --color-sc-ink:      var(--sc-ink);
+  --color-sc-muted:    var(--sc-muted);
+  --color-sc-dim:      var(--sc-dim);
+  --color-sc-gold:     var(--sc-gold);
+  --color-sc-gold-dim: var(--sc-gold-dim);
+  --color-sc-gold-bg:  var(--sc-gold-bg);
+  --color-sc-red:      var(--sc-red);
+  --color-sc-green:    var(--sc-green);
+  --color-sc-green-bg: var(--sc-green-bg);
 }
 
 /* Mic button pulse animation — recording state */
@@ -467,7 +499,7 @@
 }
 
 /* Stagecraft audio player — minimal */
-.stagecraft-root audio {
+.dark .stagecraft-root audio {
   filter: invert(1) hue-rotate(180deg) brightness(0.8);
   width: 100%;
   height: 32px;
