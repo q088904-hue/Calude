@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 
 export interface GalleryItem {
@@ -12,9 +13,9 @@ export interface GalleryItem {
 export function GalleryHoverCarousel({ items }: { items: GalleryItem[] }) {
   const [active, setActive] = useState(0);
   return (
-    <div className="flex gap-2 w-full h-[420px] overflow-hidden">
+    <div className="flex gap-2 w-full h-[420px] overflow-hidden" role="list" aria-label="Company prep packs">
       {items.map((it, idx) => (
-        <a
+        <Link
           key={it.id}
           href={it.href}
           onMouseEnter={() => setActive(idx)}
@@ -34,7 +35,7 @@ export function GalleryHoverCarousel({ items }: { items: GalleryItem[] }) {
               {it.title}
             </span>
           </div>
-        </a>
+        </Link>
       ))}
     </div>
   );
