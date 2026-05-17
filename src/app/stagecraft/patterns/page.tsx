@@ -165,10 +165,10 @@ function Sparkline({
 
   const strokeColor =
     trend === "improving"
-      ? "#4ade80" // green
+      ? "var(--sc-green)"
       : trend === "worsening"
-        ? "#f87171" // red
-        : "#d4a843"; // gold
+        ? "var(--sc-red)"
+        : "var(--sc-gold)";
 
   return (
     <svg
