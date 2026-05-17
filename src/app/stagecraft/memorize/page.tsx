@@ -11,6 +11,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { StagecraftHeader } from "@/components/stagecraft/StagecraftHeader";
 import type { MemorizedAnswer } from "@/lib/stagecraft/types";
 import { renderSampleAnswer } from "@/lib/stagecraft/feedbackRenderers";
 
@@ -391,20 +392,7 @@ export default function MemorizePage() {
   return (
     <div className="stagecraft-root min-h-screen bg-sc-bg text-sc-ink">
       {/* Header */}
-      <header className="border-b border-sc-border px-6 py-4 flex items-center justify-between sticky top-0 bg-sc-bg z-10">
-        <div className="flex items-center gap-3">
-          <Link
-            href="/stagecraft"
-            className="font-mono text-xs text-sc-dim hover:text-sc-muted transition-colors"
-          >
-            ← Stagecraft
-          </Link>
-          <span className="text-sc-border text-xs">·</span>
-          <span className="font-display text-base font-semibold text-sc-ink">
-            Memorize queue
-          </span>
-        </div>
-
+      <StagecraftHeader label="Memorize">
         <div className="flex items-center gap-2">
           {!loading && items.length > 0 && (
             <span className="font-mono text-xs text-sc-dim">
@@ -428,7 +416,7 @@ export default function MemorizePage() {
             </button>
           )}
         </div>
-      </header>
+      </StagecraftHeader>
 
       <main className="mx-auto max-w-2xl px-6 py-10">
         {/* ── LIST MODE ── */}

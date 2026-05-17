@@ -10,6 +10,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { StagecraftHeader } from "@/components/stagecraft/StagecraftHeader";
 import type { HistoryPayload } from "@/app/api/stagecraft/history/route";
 
 // ── Checklist definition ──────────────────────────────────────────────────────
@@ -429,20 +430,7 @@ export default function ChecklistPage() {
   return (
     <div className="stagecraft-root min-h-screen bg-sc-bg text-sc-ink">
       {/* Header */}
-      <header className="border-b border-sc-border px-6 py-4 flex items-center justify-between sticky top-0 bg-sc-bg z-10">
-        <div className="flex items-center gap-3">
-          <Link
-            href="/stagecraft"
-            className="font-mono text-xs text-sc-dim hover:text-sc-muted transition-colors"
-          >
-            ← Stagecraft
-          </Link>
-          <span className="text-sc-border text-xs">·</span>
-          <span className="font-display text-base font-semibold text-sc-ink">
-            Pre-interview checklist
-          </span>
-        </div>
-
+      <StagecraftHeader label="Checklist">
         {items && (
           <div className="flex items-center gap-2">
             <span className={`font-display text-2xl font-semibold tabular-nums ${readinessColor}`}>
@@ -453,7 +441,7 @@ export default function ChecklistPage() {
             </span>
           </div>
         )}
-      </header>
+      </StagecraftHeader>
 
       <main className="mx-auto max-w-2xl px-6 py-10 space-y-8">
         {/* Hero */}
