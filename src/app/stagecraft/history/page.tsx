@@ -4,7 +4,7 @@
 // Shows Kohler readiness composite, score trends over time,
 // all-time grammar pattern frequency, and a reverse-chrono session list.
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { StagecraftHeader } from "@/components/stagecraft/StagecraftHeader";
 import { ScrollReveal } from "@/components/stagecraft/ScrollReveal";
@@ -31,16 +31,19 @@ function readScVar(name: string, fallback: string): string {
 }
 
 function useScColors() {
-  const ref = useRef<HTMLDivElement>(null);
-  // Re-read on every render so the chart reacts to theme switches immediately.
-  // getComputedStyle is synchronous and cheap; no effect or state needed.
-  const colors = {
+  const read = () => ({
     gold:  readScVar("--sc-gold",  "#C9973A"),
     muted: readScVar("--sc-muted", "#78746F"),
     green: readScVar("--sc-green", "#3D9A6E"),
     dim:   readScVar("--sc-dim",   "#48453F"),
-  };
-  return { ref, colors };
+  });
+  const [colors, setColors] = useState(read);
+  useEffect(() => {
+    const obs = new MutationObserver(() => setColors(read()));
+    obs.observe(document.documentElement, { attributeFilter: ["class"] });
+    return () => obs.disconnect();
+  }, []);
+  return colors;
 }
 
 // ─── Trend computation helpers ───────────────────────────────────────────────
@@ -269,7 +272,7 @@ function SummaryCard({ label, value }: { label: string; value: string }) {
 // ─── Trend chart ─────────────────────────────────────────────────────────────
 
 function TrendChart({ sessions }: { sessions: SessionSummary[] }) {
-  const { ref, colors } = useScColors();
+  const colors = useScColors();
 
   // Oldest first for the chart
   const chartData = [...sessions]
@@ -287,7 +290,7 @@ function TrendChart({ sessions }: { sessions: SessionSummary[] }) {
     }));
 
   return (
-    <div ref={ref} className="rounded-sm border border-sc-border bg-sc-surface">
+    <div className="rounded-sm border border-sc-border bg-sc-surface">
       <div className="px-4 py-3 border-b border-sc-line">
         <span className="font-mono text-xs tracking-widest text-sc-dim uppercase">
           Score trends — last {chartData.length} sessions
@@ -337,7 +340,7 @@ function TrendChart({ sessions }: { sessions: SessionSummary[] }) {
               dataKey="content"
               stroke={colors.muted}
               strokeWidth={1.5}
-              strokeOpacity={0.7}
+              strokeOpacity={0.5}
               dot={false}
             />
             <Line
