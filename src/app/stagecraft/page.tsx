@@ -3236,7 +3236,7 @@ function MicButton(props: {
             className="absolute inset-1.5 rounded-full bg-sc-red flex items-center justify-center hover:brightness-110 transition-all sc-pulse-ring"
             aria-label="Stop recording"
           >
-            <span className="w-4 h-4 rounded-sm bg-sc-raised" />
+            <span className="w-4 h-4 rounded-sm bg-white" />
           </button>
         </div>
 

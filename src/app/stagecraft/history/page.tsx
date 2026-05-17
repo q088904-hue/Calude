@@ -678,7 +678,7 @@ function SessionList({ sessions }: { sessions: SessionSummary[] }) {
         Past sessions
       </p>
       {sessions.map((s, i) => (
-        <ScrollReveal key={s.id} delay={i * 60}>
+        <ScrollReveal key={s.id} delay={Math.min(i * 60, 600)}>
           <SessionRow session={s} index={i} />
         </ScrollReveal>
       ))}

@@ -121,7 +121,7 @@
   --font-sans: var(--font-inter);
   --font-display: var(--font-plus-jakarta);
   --font-mono: var(--font-jetbrains-mono);
-  --font-fraunces: var(--font-fraunces);
+  --font-fraunces: var(--font-fraunces); /* next/font injects --font-fraunces on <html> */
 }
 
 /* ============================================
