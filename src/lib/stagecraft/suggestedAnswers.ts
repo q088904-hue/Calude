@@ -237,7 +237,53 @@ add(
 );
 
 // ─── Negotiate scenarios ─────────────────────────────────────────────────────
-// (populated in a later task)
+
+add(
+  "What is your current CTC? We need to understand where you are before we can discuss an offer.",
+  {
+    answer:
+      "Respectfully, that number is not the right starting point for either of us. [pause] What matters is the scope of this role and what the market pays for it. **I am targeting the range that reflects market value for a Creative Director at this level** — and I would rather anchor there than to a figure from a different context. Can we start from that basis?",
+    note:
+      "Deflects current CTC disclosure; redirects firmly to market value and role scope without revealing or inventing a number.",
+  },
+);
+
+add("What are your salary expectations for this role?", {
+  answer:
+    "Based on the scope and the market for a Creative Director at this level, I am anchoring at the upper end. [pause] This role carries brand strategy, team leadership, and execution at scale — **the number that reflects that combination sits at the high end of the market band for senior creative leadership here**. I am looking at a range where that market rate is my floor, not my ceiling.",
+  note:
+    "Anchors high using market and scope framing; no fabricated figure; backs the position with role complexity.",
+});
+
+add(
+  "That is above our budget. We were thinking more in the ₹42–48L range. Can you work with that?",
+  {
+    answer:
+      "Before we move on numbers, let us make sure we are comparing the same thing. [pause] The ₹42–48L range does not account for a team of six, an AI-driven pipeline, and 100+ campaigns a year in-house. **The question is not whether I can work with that range, but whether it reflects the full value of this role.** It does not — and that is the conversation I want to have.",
+    note:
+      "Reframes without countering numerically first; challenges the anchor with scope and value, not a competing number.",
+  },
+);
+
+add(
+  "I appreciate the context, but we need a specific number from you right now to move this forward.",
+  {
+    answer:
+      "Fair enough — here it is. [pause] My number is the top of the market band for a Creative Director leading brand, team, and AI workflow at this scope. **That is the figure I am standing on, and I am comfortable with the silence that follows it.** I am not hedging, and I am not negotiating against myself. The number stands.",
+    note:
+      "Names aspiration as 'top of market band' without fabricating a figure; calm, no apology, lets silence hold.",
+  },
+);
+
+add(
+  "Our final offer is ₹62L CTC. This is the best we can do. Can we move forward?",
+  {
+    answer:
+      "I appreciate you getting there — ₹62L works as the base. [pause] Before we close, I want to ask for one thing: an accelerated performance review at six months rather than twelve, with a defined compensation trigger tied to it. **A six-month review with a pre-agreed uplift mechanism is a clean way to bridge the gap and gives us both a milestone to work toward.** Can we build that in?",
+    note:
+      "Accepts with a condition; echoes the ₹62L from the scenario question; asks for one more thing cleanly without rejecting the offer.",
+  },
+);
 
 // ─── Company packs ───────────────────────────────────────────────────────────
 // (populated in a later task)
