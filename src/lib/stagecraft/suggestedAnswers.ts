@@ -286,4 +286,302 @@ add(
 );
 
 // ─── Company packs ───────────────────────────────────────────────────────────
-// (populated in a later task)
+
+// Kohler India
+add("Why are you looking to move after 18 years at Datamatics?", {
+  answer:
+    "Eighteen years is not the story — what I built inside those years is. [pause] Brand systems, a six-person team, 100+ global campaigns a year, and an AI pipeline I designed from the ground up. **The work I want next is design-led, premium, and consumer-facing** — and Kohler is exactly where that ambition points. That is the move I am making.",
+  note:
+    "Forward-looking reframe; echoes realNumbers; bridges tenure to aspiration without sounding like an escape.",
+});
+
+add(
+  "You have spent your career in B2B enterprise. We are a premium consumer brand. Why should we believe you can make that shift?",
+  {
+    answer:
+      "The discipline is the same — the register changes. [pause] B2B taught me to make design earn its place under constraint, across markets, at scale. What changes for a premium consumer brand is the emotional load the work must carry. I understand that distinction clearly. **I am not unlearning B2B — I am applying its rigour to work that now needs to move people**, not just inform them.",
+    note:
+      "Covers Kohler and Emaar (shared question text); calm reframe; no fabricated consumer experience.",
+  },
+);
+
+add("Critique our current brand honestly — what would you change and why?", {
+  answer:
+    "Critiquing with respect is how I think about this. [pause] Kohler's global brand is restrained, material-honest, and earns its premium positioning consistently. What I notice in the India market is occasional moments where the visual language over-explains — it trusts the product to speak less than it should. **My instinct would be to let the craft carry more weight and the copy carry less.** That is the direction I would push.",
+  note:
+    "Uses Kohler's own companyPack vocabulary; no invented facts; grounded critique that shows taste, not arrogance.",
+});
+
+add("What does premium design mean to you?", {
+  answer:
+    "Premium is not about cost — it is about intention. [pause] A premium piece of design removes everything that does not need to be there, then makes what remains work harder than you thought possible. It is restraint with confidence. **Premium is when the absence of something communicates as much as the presence of something.** That is the bar I apply to my own work.",
+  note:
+    "Craft philosophy question; no fabricated metric; matches Kohler's vocabulary of restraint and earned elegance.",
+});
+
+add(
+  "How would you approach integrating AI into this team's workflow in year one?",
+  {
+    answer:
+      "Year one is about removing the friction that slows good creative down. [pause] I have done this before — built an N8N pipeline integrating HeyGen and ElevenLabs that cut video production from two days to under two minutes. The principle is the same here: **identify the highest-volume bottlenecks, automate the assembly, and protect the craft decisions for human judgment.** By month twelve, the team should be working faster without working harder.",
+    note:
+      "Covers Kohler AI question; uses only verified realNumbers; concrete roadmap in 40–70 words.",
+  },
+);
+
+add(
+  "Your tenure at one company is long. How do we know you are not just institutionalised?",
+  {
+    answer:
+      "Institutionalisation is choosing comfort over challenge — I have done the opposite. [pause] In 18 years I ran full rebrands, built a team from scratch, overhauled our production system twice, and designed an AI pipeline before anyone asked for one. **Each of those was a choice to make things harder in the short term because the long-term output demanded it.** That is not institutionalisation — that is how I operate.",
+    note:
+      "Stress question; non-defensive reframe; draws on real career evidence without inventing numbers.",
+  },
+);
+
+// Hettich India
+add("What do you know about our company and our brand?", {
+  answer:
+    "Hettich is 130 years of German precision — hinges, drawer systems, sliding hardware built on the idea that functional beauty is not a compromise. [pause] In India, the brand works through architects, interior designers, and builders — specification marketing rather than mass consumer. **What distinguishes Hettich is the discipline to make precision visible**, not just functional. That is a creative brief I find genuinely compelling.",
+  note:
+    "HR round brand knowledge answer; all facts sourced from companyPacks.ts; no fabricated specifics.",
+});
+
+add("How do you measure creative success beyond awards and likes?", {
+  answer:
+    "Awards tell you how the industry feels — they do not tell you if the work is doing its job. [pause] I measure success through the brief: did it reach the right audience, did it move a metric the business cares about, is the brand more consistent six months later? **The metric I trust most is how much less we have to explain ourselves** to clients. That signals clarity.",
+  note:
+    "Hettich metric-conscious culture; bridges enterprise discipline to measurable creative outcomes.",
+});
+
+add("Walk me through a rebrand or brand evolution you led.", {
+  answer:
+    "The Datamatics rebrand was a system problem before it was a creative one. [pause] The brand had drifted across acquired units — each with its own visual logic. I led a cross-unit audit, rebuilt the design system, and staged the rollout so no active campaigns went dark. **Every unit shipped under one consistent identity within two cycles, zero delay.** That is what brand system leadership looks like.",
+  note:
+    "Maps directly to Brand Transformation STAR story; no invented metrics; Hettich-relevant framing on system over aesthetic.",
+});
+
+add(
+  "How do you design for different cultures — what changes between India, the UAE, and Southeast Asia?",
+  {
+    answer:
+      "Culture changes the emotional logic behind the same visual choice. [pause] In India, warmth comes through in layout density and human reference; in the GCC, geometric precision carries authority; in Southeast Asia, aspiration works through status and craft detail. **What never changes is the underlying brand architecture — that has to hold across all of it.** Consistency in the system, flexibility in the expression.",
+    note:
+      "Covers Hettich, Marriott Dubai, and Emaar Dubai (same question text); honest principle-based answer with genuine cultural observation; no fabricated cross-cultural project experience.",
+  },
+);
+
+add(
+  "How do you build creative culture in a B2B or enterprise environment?",
+  {
+    answer:
+      "Creative culture in B2B is built on clarity, not inspiration. [pause] Tight briefs, visible standards, fast feedback loops. At Datamatics I built an in-house function that runs 100+ global campaigns a year — the culture behind that was simple: **high standards, clear ownership, and a CD who stays close to the work.** That is what I have seen actually hold.",
+    note:
+      "Most transferable strength question per Hettich why field; uses In-House Creative System STAR; real number; operational answer.",
+  },
+);
+
+add(
+  "Our brand is not yet as design-led as the top tier. Why would you join rather than wait for a brand that is already there?",
+  {
+    answer:
+      "A brand that is already there does not need what I offer. [pause] What I do well is build — systems, standards, culture, pipelines. The interesting opportunities are where the gap between where the brand is and where it could be is still real. **Hettich has the foundations and the ambition — the creative layer is the work still to be done.** That is the work I want.",
+    note:
+      "Builder opportunity reframe per Hettich watch-out; confident and honest; no flattery; no fabricated facts.",
+  },
+);
+
+// Marriott Dubai
+add("Are you open to relocation or extended travel?", {
+  answer:
+    "Fully open — Dubai is a considered move, not a reluctant one. [pause] I have been building toward a global creative role and the Gulf market is where the premium brand work I want to do is concentrated. There is no hesitation on relocation. **Dubai is the right market for the next chapter**, and I am ready to commit to it without conditions.",
+  note:
+    "Covers Marriott Dubai and Emaar Dubai (same question text); confident relocation statement; no hedging.",
+});
+
+add(
+  "How do you balance brand consistency with the need for creative freshness?",
+  {
+    answer:
+      "Consistency and freshness are not opposites — they operate at different levels of the brand. [pause] Consistency lives in the foundations: the visual system, the tone, the core idea. Freshness lives in execution: how you interpret those foundations for a new campaign, channel, or season. **The brief is always to push as far as the system allows**, not to redesign the system with every campaign. That is the creative director's job.",
+    note:
+      "Multi-brand Marriott stewardship question; frames the tension correctly; no fabricated example needed.",
+  },
+);
+
+add(
+  "What does motion and digital design add to a brand that static cannot?",
+  {
+    answer:
+      "Motion carries the emotional beat that a still frame can only suggest. [pause] A static image shows a room; motion lets the light move, the door open, the sound settle in. For a hospitality brand, that is not a production upgrade — it is the difference between a product shot and an experience. **Motion is how you make someone feel the stay before they book it.** That is what it adds.",
+    note:
+      "Experience-first hospitality question; craft answer; motion is in John's stated skills; no fabricated production example.",
+  },
+);
+
+add(
+  "How do you build the case for design as a business function, not a service function?",
+  {
+    answer:
+      "Design earns its seat at the strategy table by speaking the language that the table already trusts. [pause] The argument is not aesthetic — it is economic. Better visual clarity reduces decision friction. Stronger brand coherence increases loyalty and repeat booking. Faster production through better systems lowers cost-per-asset. **The case for design is always a revenue and efficiency case**, not a beauty case. That is the argument that lands.",
+    note:
+      "CMO/RevPAR framing per why field; bridges creative to hospitality business metrics without fabricating RevPAR figures.",
+  },
+);
+
+add(
+  "Sell me the idea of hiring you over a Creative Director who has already worked at a premium consumer brand.",
+  {
+    answer:
+      "Someone from a premium consumer brand knows the category — they may not know how to build what you need. [pause] I bring 18 years of building a creative function at scale, a design system held under real pressure, and an AI workflow that changed how fast a team produces. **That enterprise infrastructure discipline is hard to find in a pure lifestyle creative.** That combination is what I am offering.",
+    note:
+      "No hospitality experience bridge; uses realNumbers for proof; honest about difference without being defensive.",
+  },
+);
+
+// Emaar Dubai
+add("What would you do in your first 90 days?", {
+  answer:
+    "Ninety days is three phases: listen, assess, begin. [pause] The first thirty are for understanding — the brand's current state, the team's capability, the brief backlog, and where the system is weakest. Days thirty to sixty, I find the highest-leverage fixes and start building. **By day ninety, the team has seen how I work and the first new output is already in market.** That is the pace I set.",
+  note:
+    "Emaar speed-at-scale question; structured 30-60-90 answer; no fabricated Emaar-specific deliverables.",
+});
+
+add("Walk me through your strongest piece of work.", {
+  answer:
+    "The work I am proudest of is the one I built from nothing — the Datamatics in-house creative system. [pause] Not a campaign: an infrastructure call. A team of six, 100+ global campaigns a year, an AI pipeline that cut video from two days to under two minutes. **The ambition: make enterprise creative perform at agency standard** — at a fraction of the cost. That is the bar I set.",
+  note:
+    "Emaar landmark-scale question; uses In-House Creative System + AI STAR stories; realNumbers throughout.",
+});
+
+add(
+  "How do you approach integrating AI into this team's workflow in year one?",
+  {
+    answer:
+      "The first thing I do is audit where the team loses time to tasks that need no human judgment. [pause] At Datamatics that led me to build an N8N pipeline integrating HeyGen and ElevenLabs — video dropped from two days to under two minutes, campaign output forty percent faster. **The same logic applies here: find the bottleneck, automate the repetitive, protect the creative decisions.** At Emaar's scale that ROI compounds fast.",
+    note:
+      "Emaar AI question; different opener from Kohler AI answer; same facts, Emaar-specific framing on scale and ROI.",
+  },
+);
+
+// Marina Bay Sands
+add(
+  "Are you open to relocating to Singapore, and are you familiar with the EP application process?",
+  {
+    answer:
+      "Singapore is a deliberate target — not a fallback. [pause] I have been scoping creative director roles in Singapore and Dubai specifically because that is where the premium brand work at global scale is happening. The EP process is something I have researched, and I am prepared to move through it without hesitation. **The relocation is not a risk factor — it is part of the plan.** I am ready.",
+    note:
+      "MBS EP question; confident without overconfidence; honest about research, not fabricating EP experience.",
+  },
+);
+
+add(
+  "MBS operates across entertainment, hospitality, gaming, retail, and MICE. How do you maintain brand coherence across such a wide range of guest experiences?",
+  {
+    answer:
+      "Brand coherence at that scale is an architecture question, not a style question. [pause] The master brand supplies the foundations — design language, spatial standards, typographic logic, photography bar. Each vertical owns its execution within those foundations. At Datamatics I unified acquired business units with different audiences under one consistent system. **The principle is that the system holds the coherence — the CD holds the system.** That is the discipline.",
+    note:
+      "MBS brand systems question; maps DAM and Datamatics unification experience; architecture framing per why field.",
+  },
+);
+
+add(
+  "Walk me through the most culturally complex brief you have designed for — how did you navigate competing sensitivities across markets?",
+  {
+    answer:
+      "The most complex briefs I managed were global technology campaigns running simultaneously across APAC, the Middle East, and Europe. [pause] Each market had different aesthetic expectations and status cues. My approach: hold the brand architecture constant, regionalise the execution — different imagery, pacing, reference points, same system. **What protected us was a clear framework: which elements are fixed, which are flexible, who approves the deviation.** That structure removed the conflict.",
+    note:
+      "MBS cultural complexity question; honest about the nature of the work at Datamatics global campaigns; no fabricated client named; principled approach + real evidence.",
+  },
+);
+
+add(
+  "What does luxury mean when your audience spans international tourists, local Singapore residents, high-net-worth gamblers, and corporate convention delegates — sometimes in the same week?",
+  {
+    answer:
+      "Luxury is not one thing — it is the right thing, precisely calibrated. [pause] For an HNW casino guest, it is exclusivity and discretion. For a MICE delegate, seamlessness and command. For a tourist, the sense of being somewhere genuinely extraordinary. **The visual system has to hold at every tier without cheapening any of them.** That means brand tiers, not one-size-fits-all creative. That is the architecture I would build.",
+    note:
+      "Audience stratification question per MBS why field; principled answer grounded in brand architecture thinking; no fabricated luxury brand experience.",
+  },
+);
+
+add(
+  "How do you integrate AI into a premium experiential brand's creative workflow without degrading the quality the brand is known for?",
+  {
+    answer:
+      "The risk is not AI — it is removing the human checkpoint from the wrong place. [pause] At Datamatics I built an N8N pipeline that cut video from two days to under two minutes, forty percent faster overall. Quality held because of one rule: **AI handles the assembly, a human makes every creative decision.** For a brand at MBS's level, that rule does not change. Speed applies to production, not judgment.",
+    note:
+      "MBS AI question; speed-to-market framing per why field; clear quality safeguard principle; all metrics from realNumbers.",
+  },
+);
+
+add(
+  "You have no direct hospitality or entertainment industry experience. What gives you confidence you can deliver creative at Marina Bay Sands' standard from day one?",
+  {
+    answer:
+      "Sector experience is one input — creative infrastructure is another. [pause] I have 18 years building what MBS needs: brand systems across complex multi-unit operations, a team shipping 100+ global campaigns a year, a production pipeline built from scratch. **What I bring is not hospitality experience — it is the discipline to raise and hold a premium bar under scale and speed.** That is what day one looks like.",
+    note:
+      "No hospitality experience reframe per MBS why field; calm and non-defensive; uses realNumbers; bridges enterprise discipline to luxury execution.",
+  },
+);
+
+// Pidilite India
+add(
+  "Fevicol is one of India's most iconic advertising legacies. How do you feel about working inside that creative heritage, and what would you bring to it?",
+  {
+    answer:
+      "Working inside an iconic creative legacy is a privilege with real responsibility. [pause] Fevicol earned its status through decades of advertising that understood Indian life — warm, witty, deeply human. My role is to protect what built it while bringing the brand into the formats where its next-generation buyers already live. **What I bring is brand system discipline** and genuine respect for what this brand has earned.",
+    note:
+      "Pidilite HR round; respectful of legacy without being deferential; honest about what John brings; no fabrication.",
+  },
+);
+
+add(
+  "Pidilite's core buyer is the contractor, mason, and carpenter in tier-2 and tier-3 cities. How does your creative experience speak to that audience?",
+  {
+    answer:
+      "Directly, my work has been urban and digital — I will not pretend otherwise. [pause] What I bring is a clear plan: field visits, learning visual codes that earn trust in those markets, regional hires who know that India from the inside. **My job is not to write the brief in Mumbai — it is to build the team that makes the work speak to them.** That is the honest answer.",
+    note:
+      "Tier-2/3 audience question; honest about gap; no fabricated rural India experience; plan-based answer grounded in real leadership approach.",
+  },
+);
+
+add(
+  "Walk me through a campaign you created that had genuine mass-market or cultural breadth — something that worked beyond urban India.",
+  {
+    answer:
+      "The broadest work I have led spanned multiple markets — but not vernacular Indian markets. [pause] What I can show is range: campaigns across APAC, the Middle East, and Europe calibrated for different cultural registers within one brand system. **The transferable skill is building creative that holds across audiences who think and feel differently**, and leading the team that makes it happen. For Hindi-belt reach, I would hire for it.",
+    note:
+      "Honest answer where profile has no vernacular India example; transferable principle + honest plan; no fabricated mass-market campaign.",
+  },
+);
+
+add(
+  "How would you approach brand premiumisation for a brand like Dr. Fixit or Fevicol DE without alienating the core trade and construction audience that made these brands iconic?",
+  {
+    answer:
+      "Premiumisation works when it climbs without abandoning — you extend up, you do not leave behind. [pause] The trade audience trusts Dr. Fixit because it is always honest about its job. The premium line earns its place by being visibly more capable, not just more expensive-looking. **You never make the original feel lesser in order to make the premium feel better.** That is where most premiumisation efforts fail.",
+    note:
+      "Strategic creative question; grounded in brand architecture principle; no fabricated Pidilite research; honest brand thinking.",
+  },
+);
+
+add(
+  "How do you integrate AI and modern production tools into a creative process that must resonate with audiences who primarily consume content in Hindi and regional languages?",
+  {
+    answer:
+      "The pipeline I built at Datamatics — N8N with HeyGen and ElevenLabs — handles multilingual voice and localised video. [pause] The same architecture scales to Hindi and regional: generate the master, localise the audio, adapt the visual references for the register. **What AI enables here is not just speed — it is the volume of regional variants that was previously too expensive to produce.** That changes what vernacular reach is possible.",
+    note:
+      "Pidilite AI question; frames AI pipeline in terms of regional content velocity; all facts from realNumbers; no fabricated Hindi campaign.",
+  },
+);
+
+add(
+  "Your career has been in global enterprise B2B for urban, English-language markets. Pidilite is vernacular India. How do we know you can genuinely understand this audience, not just brief an agency to handle it?",
+  {
+    answer:
+      "That is a fair challenge and I will answer honestly. [pause] I do not have vernacular India the way someone who grew up in it does. What I commit to: field visits, regional hires who know that India, and willingness to be corrected. **Understanding an audience you did not grow up with is a leadership discipline** — humility and structured listening. That is how I earn the right to lead this.",
+    note:
+      "Sharpest challenge per Pidilite why field; honest non-defensive reframe; no fabricated rural India experience; plan grounded in real leadership principle.",
+  },
+);
