@@ -482,7 +482,7 @@ export default function DebriefPage() {
   return (
     <div className="stagecraft-root min-h-screen bg-sc-bg text-sc-ink">
       {/* ── Header ── */}
-      <StagecraftHeader label="Debrief" backHref="/" backLabel="← Home">
+      <StagecraftHeader label="Debrief">
         {avgComposite !== null && (
           <span className={`font-display text-xl font-semibold tabular-nums ${
             avgComposite >= 8 ? "text-sc-green" : avgComposite >= 6 ? "text-sc-gold" : "text-sc-red"

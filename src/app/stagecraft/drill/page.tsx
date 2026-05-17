@@ -461,7 +461,7 @@ function DrillPage() {
   return (
     <div className="stagecraft-root min-h-screen bg-sc-bg text-sc-ink">
       {/* ── Header ── */}
-      <StagecraftHeader label="Drill" backHref="/" backLabel="← Home">
+      <StagecraftHeader label="Drill">
         <span className="font-mono text-xs text-sc-dim tabular-nums">
           {attempts.length === 0
             ? "no attempts yet"

@@ -414,7 +414,7 @@ export default function NegotiatePage() {
   return (
     <div className="stagecraft-root min-h-screen bg-sc-bg text-sc-ink">
       {/* ── Header ── */}
-      <StagecraftHeader label="Negotiate" backHref="/" backLabel="← Home">
+      <StagecraftHeader label="Negotiate">
         <span className="font-mono text-xs text-sc-dim tabular-nums">
           {attempts.length === 0 ? "no attempts yet" : `${attempts.length} attempt${attempts.length !== 1 ? "s" : ""}`}
         </span>

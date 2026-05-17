@@ -149,7 +149,7 @@ function PlanPageInner() {
 
   return (
     <div className="stagecraft-root min-h-screen bg-sc-bg text-sc-ink">
-      <StagecraftHeader label="90-Day Plan">
+      <StagecraftHeader label="30-60-90 Plan">
         {state === "done" && (
           <Link
             href={drillHref}

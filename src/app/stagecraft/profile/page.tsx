@@ -161,7 +161,7 @@ export default function ProfilePage() {
   return (
     <div className="stagecraft-root min-h-screen bg-sc-bg text-sc-ink">
       {/* Header */}
-      <StagecraftHeader label="Profile" backHref="/" backLabel="← Home">
+      <StagecraftHeader label="Profile">
         <div className="flex items-center gap-2">
           <button
             type="button"
