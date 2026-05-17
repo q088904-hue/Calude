@@ -121,7 +121,7 @@ add(
   "You're coming from 18 years at one company. How do we know you can adapt quickly?",
   {
     answer:
-      "What I have found is that tenure is not the same as stagnation. [pause] In 18 years I moved through full rebrands, tool migrations, team builds from scratch, and building an AI pipeline no one had asked for yet. Every two or three years the brief changed substantially. **I adapted because the work demanded it**, not because someone told me to. Change is something I seek out.",
+      "What I have found is that tenure is not the same as stagnation. [pause] In 18 years I moved through a full brand transformation, tool migrations, team builds from scratch, and building an AI pipeline no one had asked for yet. Every two or three years the brief changed substantially. **I adapted because the work demanded it**, not because someone told me to. Change is something I seek out.",
     note: "Calm reframe for a high-risk question; uses concrete evidence of change-inside-tenure.",
   },
 );
@@ -333,7 +333,7 @@ add(
   "Your tenure at one company is long. How do we know you are not just institutionalised?",
   {
     answer:
-      "Institutionalisation is choosing comfort over challenge — I have done the opposite. [pause] In 18 years I ran full rebrands, built a team from scratch, overhauled our production system twice, and designed an AI pipeline before anyone asked for one. **Each of those was a choice to make things harder in the short term because the long-term output demanded it.** That is not institutionalisation — that is how I operate.",
+      "Institutionalisation is choosing comfort over challenge — I have done the opposite. [pause] In 18 years I led a full brand unification, built a team from scratch, built an in-house creative system, then rebuilt the workflow with an AI pipeline no one asked for. **Each was a choice to make things harder short term because the long-term output demanded it.** That is not institutionalisation — that is how I operate.",
     note:
       "Stress question; non-defensive reframe; draws on real career evidence without inventing numbers.",
   },
@@ -570,7 +570,7 @@ add(
   "How do you integrate AI and modern production tools into a creative process that must resonate with audiences who primarily consume content in Hindi and regional languages?",
   {
     answer:
-      "The pipeline I built at Datamatics — N8N with HeyGen and ElevenLabs — handles multilingual voice and localised video. [pause] The same architecture scales to Hindi and regional: generate the master, localise the audio, adapt the visual references for the register. **What AI enables here is not just speed — it is the volume of regional variants that was previously too expensive to produce.** That changes what vernacular reach is possible.",
+      "The pipeline I built at Datamatics — N8N with HeyGen and ElevenLabs — cut video from two days to under two minutes. [pause] That same architecture extends naturally to Hindi and regional-language voice: master once, localise the audio, adapt the references. **What AI enables is not just speed — it is the volume of regional variants that was once too expensive to produce.** That changes what vernacular reach is possible.",
     note:
       "Pidilite AI question; frames AI pipeline in terms of regional content velocity; all facts from realNumbers; no fabricated Hindi campaign.",
   },
