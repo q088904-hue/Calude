@@ -9,6 +9,7 @@
 
 import { useCallback, useState } from "react";
 import Link from "next/link";
+import { StagecraftHeader } from "@/components/stagecraft/StagecraftHeader";
 import type { RecruiterPayload } from "@/app/api/stagecraft/recruiter/route";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
@@ -195,19 +196,7 @@ export default function RecruiterPage() {
   return (
     <div className="stagecraft-root min-h-screen bg-sc-bg text-sc-ink">
       {/* Header */}
-      <header className="border-b border-sc-border px-6 py-4 flex items-center justify-between sticky top-0 bg-sc-bg z-10">
-        <div className="flex items-center gap-3">
-          <Link
-            href="/stagecraft"
-            className="font-mono text-xs text-sc-dim hover:text-sc-muted transition-colors"
-          >
-            ← Stagecraft
-          </Link>
-          <span className="text-sc-border text-xs">·</span>
-          <span className="font-display text-base font-semibold text-sc-ink">
-            Recruiter Coach
-          </span>
-        </div>
+      <StagecraftHeader label="Recruiter">
         {state === "result" && result && (
           <div className="flex items-center gap-2">
             {result.detectedCompany && (
@@ -224,7 +213,7 @@ export default function RecruiterPage() {
             </button>
           </div>
         )}
-      </header>
+      </StagecraftHeader>
 
       <main className="mx-auto max-w-2xl px-6 py-10 space-y-8">
         {/* ── Compose state ── */}

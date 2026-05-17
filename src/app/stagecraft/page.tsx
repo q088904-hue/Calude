@@ -47,6 +47,9 @@ import {
   type SREvent,
   type SRInstance,
 } from "@/lib/stagecraft/speechRecognition";
+import { GooeyText } from "@/components/stagecraft/GooeyText";
+import { ScrollReveal } from "@/components/stagecraft/ScrollReveal";
+import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
 
 type Stage = "setup" | "warmup" | "question" | "report";
 
@@ -935,6 +938,7 @@ function StagecraftInner() {
               </span>
             )}
           </Link>
+          <AnimatedThemeToggler className="ml-2 shrink-0" />
         </div>
       </header>
 
@@ -1931,9 +1935,13 @@ function SetupView(props: {
             The briefing room
           </p>
         </div>
-        <h1 className="font-display text-4xl font-semibold text-sc-ink leading-tight tracking-tight">
+        <h1 className="font-fraunces text-4xl font-semibold text-sc-ink leading-tight tracking-tight">
           Prepare for the room.
         </h1>
+        <GooeyText
+          className="font-fraunces text-sc-gold text-2xl mt-1"
+          texts={["Creative Director", "Brand Leader", "AI-native Operator"]}
+        />
         <div className="sc-rule mt-4" />
 
         {/* Interview countdown or set-target prompt */}
@@ -1958,13 +1966,18 @@ function SetupView(props: {
       </div>
 
       {/* ── Time-based nav ───────────────────────────────────────── */}
-      <TimeNav />
+      <ScrollReveal delay={0}>
+        <TimeNav />
+      </ScrollReveal>
 
       {/* ── Daily practice tracker ───────────────────────────────── */}
-      <DailyPracticeTracker sessionCount={history?.sessions.length ?? 0} />
+      <ScrollReveal delay={80}>
+        <DailyPracticeTracker sessionCount={history?.sessions.length ?? 0} />
+      </ScrollReveal>
 
       {/* ── Status grid — only when history exists ──────────────── */}
       {last && history && (
+        <ScrollReveal delay={160}>
         <div className="grid grid-cols-2 gap-3 mb-8 sc-entry sc-e2">
           {/* Left: Readiness panel */}
           <div
@@ -2059,6 +2072,7 @@ function SetupView(props: {
             </div>
           </div>
         </div>
+        </ScrollReveal>
       )}
 
       {/* ── Recommendation card — shown after 2+ sessions ─────── */}
@@ -2070,7 +2084,9 @@ function SetupView(props: {
       )}
 
       {/* ── Quick Fire entry ────────────────────────────────────── */}
-      <QuickFireCard />
+      <ScrollReveal delay={240}>
+        <QuickFireCard />
+      </ScrollReveal>
 
       {/* ── Priority drills ─────────────────────────────────────── */}
       <PriorityDrillsPanel

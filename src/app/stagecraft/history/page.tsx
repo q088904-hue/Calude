@@ -6,6 +6,8 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { StagecraftHeader } from "@/components/stagecraft/StagecraftHeader";
+import { ScrollReveal } from "@/components/stagecraft/ScrollReveal";
 import {
   LineChart,
   Line,
@@ -16,6 +18,33 @@ import {
   ReferenceLine,
 } from "recharts";
 import type { HistoryPayload, SessionSummary } from "@/app/api/stagecraft/history/route";
+
+// ─── Resolve CSS vars for Recharts (chart props don't accept CSS variables) ───
+
+/** Reads a single --sc-* CSS custom property from the document root. */
+function readScVar(name: string, fallback: string): string {
+  if (typeof window === "undefined") return fallback;
+  const v = getComputedStyle(document.documentElement)
+    .getPropertyValue(name)
+    .trim();
+  return v || fallback;
+}
+
+function useScColors() {
+  const read = () => ({
+    gold:  readScVar("--sc-gold",  "#C9973A"),
+    muted: readScVar("--sc-muted", "#78746F"),
+    green: readScVar("--sc-green", "#3D9A6E"),
+    dim:   readScVar("--sc-dim",   "#48453F"),
+  });
+  const [colors, setColors] = useState(read);
+  useEffect(() => {
+    const obs = new MutationObserver(() => setColors(read()));
+    obs.observe(document.documentElement, { attributeFilter: ["class"] });
+    return () => obs.disconnect();
+  }, []);
+  return colors;
+}
 
 // ─── Trend computation helpers ───────────────────────────────────────────────
 
@@ -104,42 +133,21 @@ export default function HistoryPage() {
   return (
     <div className="stagecraft-root min-h-screen bg-sc-bg text-sc-ink">
       {/* Header */}
-      <header className="border-b border-sc-border px-6 py-4 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <Link
-            href="/"
-            className="font-mono text-xs text-sc-dim hover:text-sc-muted transition-colors"
-          >
-            ← Home
-          </Link>
-          <span className="text-sc-border text-xs">·</span>
-          <Link
-            href="/stagecraft"
-            className="font-mono text-xs text-sc-muted hover:text-sc-gold transition-colors"
-          >
-            Stagecraft
-          </Link>
-          <span className="text-sc-border text-xs">·</span>
-          <span className="font-display text-base font-semibold text-sc-ink">
-            History
-          </span>
-        </div>
-        <div className="flex items-center gap-2">
-          <Link
-            href="/stagecraft/patterns"
-            className="rounded border border-sc-border bg-sc-surface px-3 py-1.5 text-xs font-mono text-sc-muted hover:border-sc-gold-dim hover:text-sc-gold transition-colors"
-          >
-            Patterns
-          </Link>
-          <Link
-            href="/stagecraft/memorize"
-            className="flex items-center gap-1.5 rounded border border-sc-border bg-sc-surface px-3 py-1.5 text-xs font-mono text-sc-muted hover:border-sc-gold-dim hover:text-sc-gold transition-colors"
-          >
-            <span className="text-sc-gold">♥</span>
-            <span>Memorize queue</span>
-          </Link>
-        </div>
-      </header>
+      <StagecraftHeader label="History">
+        <Link
+          href="/stagecraft/patterns"
+          className="rounded border border-sc-border bg-sc-surface px-3 py-1.5 text-xs font-mono text-sc-muted hover:border-sc-gold-dim hover:text-sc-gold transition-colors"
+        >
+          Patterns
+        </Link>
+        <Link
+          href="/stagecraft/memorize"
+          className="flex items-center gap-1.5 rounded border border-sc-border bg-sc-surface px-3 py-1.5 text-xs font-mono text-sc-muted hover:border-sc-gold-dim hover:text-sc-gold transition-colors"
+        >
+          <span className="text-sc-gold">♥</span>
+          <span>Memorize queue</span>
+        </Link>
+      </StagecraftHeader>
 
       <main className="mx-auto max-w-2xl px-6 py-10 space-y-10">
         {/* Hero */}
@@ -147,7 +155,7 @@ export default function HistoryPage() {
           <p className="font-mono text-xs tracking-widest text-sc-gold uppercase mb-3">
             Your progress
           </p>
-          <h1 className="font-display text-3xl font-semibold text-sc-ink leading-tight">
+          <h1 className="font-fraunces text-3xl font-semibold text-sc-ink leading-tight">
             Session history
           </h1>
         </div>
@@ -264,6 +272,8 @@ function SummaryCard({ label, value }: { label: string; value: string }) {
 // ─── Trend chart ─────────────────────────────────────────────────────────────
 
 function TrendChart({ sessions }: { sessions: SessionSummary[] }) {
+  const colors = useScColors();
+
   // Oldest first for the chart
   const chartData = [...sessions]
     .reverse()
@@ -288,9 +298,9 @@ function TrendChart({ sessions }: { sessions: SessionSummary[] }) {
       </div>
       <div className="px-2 py-4">
         <div className="flex items-center gap-4 px-2 pb-3">
-          <Legend color="#C9973A" label="English" />
-          <Legend color="#EDE8DF" label="Content" />
-          <Legend color="#3D9A6E" label="Delivery" />
+          <Legend color={colors.gold}  label="English" />
+          <Legend color={colors.muted} label="Content" />
+          <Legend color={colors.green} label="Delivery" />
         </div>
         <ResponsiveContainer width="100%" height={180}>
           <LineChart
@@ -299,36 +309,36 @@ function TrendChart({ sessions }: { sessions: SessionSummary[] }) {
           >
             <XAxis
               dataKey="label"
-              tick={{ fill: "#48453F", fontSize: 10, fontFamily: "monospace" }}
+              tick={{ fill: colors.dim, fontSize: 10, fontFamily: "monospace" }}
               axisLine={false}
               tickLine={false}
             />
             <YAxis
               domain={[0, 10]}
               ticks={[0, 5, 8, 10]}
-              tick={{ fill: "#48453F", fontSize: 10, fontFamily: "monospace" }}
+              tick={{ fill: colors.dim, fontSize: 10, fontFamily: "monospace" }}
               axisLine={false}
               tickLine={false}
             />
             <Tooltip content={<ChartTooltip />} />
             <ReferenceLine
               y={8}
-              stroke="#C9973A"
+              stroke={colors.gold}
               strokeDasharray="3 3"
               strokeOpacity={0.4}
             />
             <Line
               type="monotone"
               dataKey="english"
-              stroke="#C9973A"
+              stroke={colors.gold}
               strokeWidth={2}
-              dot={{ fill: "#C9973A", r: 3, strokeWidth: 0 }}
+              dot={{ fill: colors.gold, r: 3, strokeWidth: 0 }}
               activeDot={{ r: 4 }}
             />
             <Line
               type="monotone"
               dataKey="content"
-              stroke="#EDE8DF"
+              stroke={colors.muted}
               strokeWidth={1.5}
               strokeOpacity={0.5}
               dot={false}
@@ -336,7 +346,7 @@ function TrendChart({ sessions }: { sessions: SessionSummary[] }) {
             <Line
               type="monotone"
               dataKey="delivery"
-              stroke="#3D9A6E"
+              stroke={colors.green}
               strokeWidth={1.5}
               strokeOpacity={0.6}
               dot={false}
@@ -668,7 +678,9 @@ function SessionList({ sessions }: { sessions: SessionSummary[] }) {
         Past sessions
       </p>
       {sessions.map((s, i) => (
-        <SessionRow key={s.id} session={s} index={i} />
+        <ScrollReveal key={s.id} delay={Math.min(i * 60, 600)}>
+          <SessionRow session={s} index={i} />
+        </ScrollReveal>
       ))}
     </div>
   );

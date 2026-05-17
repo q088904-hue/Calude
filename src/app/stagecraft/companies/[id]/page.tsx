@@ -11,6 +11,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getPackById, COMPANY_PACKS } from "@/lib/stagecraft/companyPacks";
 import { useState } from "react";
+import { StagecraftHeader } from "@/components/stagecraft/StagecraftHeader";
+import { ScrollReveal } from "@/components/stagecraft/ScrollReveal";
 
 // ── Company-specific question selections ──────────────────────────────────────
 // Hardest / most likely questions for each company — curated per brand.
@@ -324,20 +326,8 @@ export default function CompanyDeepDivePage({
   return (
     <div className="stagecraft-root min-h-screen bg-sc-bg text-sc-ink">
       {/* Header */}
-      <header className="border-b border-sc-border px-6 py-4 flex items-center justify-between sticky top-0 bg-sc-bg z-10">
-        <div className="flex items-center gap-3">
-          <Link
-            href="/stagecraft/companies"
-            className="font-mono text-xs text-sc-dim hover:text-sc-muted transition-colors"
-          >
-            ← Companies
-          </Link>
-          <span className="text-sc-border text-xs">·</span>
-          <span className="font-display text-base font-semibold text-sc-ink">
-            {pack.shortName}
-          </span>
-        </div>
-
+      <StagecraftHeader label="Company" backHref="/stagecraft/companies" backLabel="← Companies">
+        <span className="font-mono text-xs text-sc-muted">{pack.shortName}</span>
         {/* Start session CTA in header */}
         <Link
           href={`/stagecraft?company=${pack.id}`}
@@ -348,7 +338,7 @@ export default function CompanyDeepDivePage({
         >
           Practice session →
         </Link>
-      </header>
+      </StagecraftHeader>
 
       <main className="mx-auto max-w-2xl px-6 py-10 space-y-8">
         {/* Hero */}
@@ -356,31 +346,34 @@ export default function CompanyDeepDivePage({
           <p className="font-mono text-xs tracking-widest text-sc-gold uppercase mb-2">
             Company prep brief
           </p>
-          <h1 className="font-display text-3xl font-semibold text-sc-ink leading-tight">
+          <h1 className="font-fraunces text-3xl font-semibold text-sc-ink leading-tight">
             {pack.label}
           </h1>
         </div>
 
         {/* ── Round structure ── */}
-        <div className="space-y-2">
-          <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase">
-            Interview structure
-          </p>
-          <div className="flex flex-wrap items-center gap-2">
-            {roundSteps.map((step, i) => (
-              <div key={i} className="flex items-center gap-2">
-                <span className="rounded-sm border border-sc-border bg-sc-surface px-3 py-1.5 font-mono text-xs text-sc-muted">
-                  {step}
-                </span>
-                {i < roundSteps.length - 1 && (
-                  <span className="text-sc-dim font-mono text-xs">→</span>
-                )}
-              </div>
-            ))}
+        <ScrollReveal delay={0}>
+          <div className="space-y-2">
+            <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase">
+              Interview structure
+            </p>
+            <div className="flex flex-wrap items-center gap-2">
+              {roundSteps.map((step, i) => (
+                <div key={i} className="flex items-center gap-2">
+                  <span className="rounded-sm border border-sc-border bg-sc-surface px-3 py-1.5 font-mono text-xs text-sc-muted">
+                    {step}
+                  </span>
+                  {i < roundSteps.length - 1 && (
+                    <span className="text-sc-dim font-mono text-xs">→</span>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
+        </ScrollReveal>
 
         {/* ── Watch-outs ── */}
+        <ScrollReveal delay={80}>
         <div className="rounded-sm border border-sc-red/30 bg-sc-red/5 overflow-hidden">
           <div className="px-4 py-3 border-b border-sc-red/20">
             <p className="font-mono text-[10px] tracking-widest text-sc-red uppercase">
@@ -398,8 +391,10 @@ export default function CompanyDeepDivePage({
             ))}
           </div>
         </div>
+        </ScrollReveal>
 
         {/* ── Brand brief ── */}
+        <ScrollReveal delay={160}>
         <div className="rounded-sm border border-sc-border bg-sc-surface overflow-hidden">
           <button
             type="button"
@@ -449,9 +444,11 @@ export default function CompanyDeepDivePage({
             </div>
           )}
         </div>
+        </ScrollReveal>
 
         {/* ── Company-specific questions ── */}
         {questions.length > 0 && (
+          <ScrollReveal delay={240}>
           <div className="space-y-3">
             <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase">
               Questions to prepare — specific to this company
@@ -504,9 +501,11 @@ export default function CompanyDeepDivePage({
               </div>
             ))}
           </div>
+          </ScrollReveal>
         )}
 
         {/* ── CTA ── */}
+        <ScrollReveal delay={320}>
         <div className="rounded-sm border border-sc-gold-dim bg-sc-gold-bg px-5 py-5 space-y-3">
           <p className="font-mono text-[10px] tracking-widest text-sc-gold uppercase">
             You are ready to practice
@@ -536,8 +535,10 @@ export default function CompanyDeepDivePage({
             </Link>
           </div>
         </div>
+        </ScrollReveal>
 
         {/* Other companies */}
+        <ScrollReveal delay={400}>
         <div className="border-t border-sc-border pt-6 space-y-2">
           <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase mb-3">
             Other target companies
@@ -554,6 +555,7 @@ export default function CompanyDeepDivePage({
             ))}
           </div>
         </div>
+        </ScrollReveal>
       </main>
     </div>
   );
