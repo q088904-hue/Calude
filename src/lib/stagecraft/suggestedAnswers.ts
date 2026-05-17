@@ -208,7 +208,33 @@ add(
 );
 
 // ─── Drill bank ──────────────────────────────────────────────────────────────
-// (populated in a later task)
+
+add("Why Kohler? What draws you to this role specifically?", {
+  answer:
+    "The role caught my attention for a specific reason — it is not a brand-building position, it is a craft position. [pause] Kohler leads with design conviction in a category that usually leads with function. After 18 years building a B2B brand system at scale, I want work where **the design quality is the product**, not the wrapper around it. That is the fit I am looking for.",
+  note:
+    "Distinguishes role-fit from brand-flattery; bridges B2B tenure to a craft-led aspiration without inventing specifics.",
+});
+
+add(
+  "Walk me through the AI pipeline you built — what problem did it solve, and what did it change?",
+  {
+    answer:
+      "Start with the problem, not the tool — video production was a two-day cycle per asset, which made campaigns slow and expensive to iterate. [pause] I built an N8N pipeline integrating HeyGen and ElevenLabs with brand checkpoints at each stage. **The cycle dropped from two days to under two minutes**, and campaign production got roughly forty percent faster overall. That is what the pipeline actually changed.",
+    note:
+      "Business-problem-first structure per drill context; all metrics from realNumbers (2-day→2-min, ~40% faster).",
+  },
+);
+
+add(
+  "Tell me about a time you had to lead a team through a major creative direction change.",
+  {
+    answer:
+      "A real direction change tests the team before it tests the work. [pause] At Datamatics the brand had drifted across acquisitions, and my task was to unify it without pausing active campaigns. I led a cross-unit audit, rebuilt the design system, and staged the rollout with review checkpoints. **Every unit landed under one consistent identity within two cycles, with no campaign delays.** That is what leading through change looks like.",
+    note:
+      "Full STAR via Brand Transformation story; result stated explicitly; no invented metrics.",
+  },
+);
 
 // ─── Negotiate scenarios ─────────────────────────────────────────────────────
 // (populated in a later task)
