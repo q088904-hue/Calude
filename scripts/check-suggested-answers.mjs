@@ -23,22 +23,35 @@ function extractQuestions(src) {
   return out;
 }
 
-const { getSuggestedAnswer } = await import(
+const { getSuggestedAnswer, normalizeQuestion } = await import(
   "../src/lib/stagecraft/suggestedAnswers.ts"
 );
 
-const missing = [];
-let total = 0;
+// Collect all occurrences: { normalizedKey -> first-seen source file }
+const seenFirst = new Map(); // normalizedKey -> first file
+let occurrences = 0;
 for (const f of BANK_FILES) {
   for (const q of extractQuestions(readFileSync(f, "utf8"))) {
-    total++;
-    if (!getSuggestedAnswer(q)) missing.push(`${f} :: ${q}`);
+    occurrences++;
+    const key = normalizeQuestion(q);
+    if (!seenFirst.has(key)) seenFirst.set(key, { q, f });
   }
 }
+const uniqueTotal = seenFirst.size;
 
-if (missing.length) {
-  console.error(`❌ ${missing.length}/${total} bank questions have NO suggested answer:`);
-  for (const m of missing) console.error("  - " + m);
+// Find missing: de-duplicated by normalized key, one example source per unique question
+const missingEntries = [];
+for (const [, { q, f }] of seenFirst) {
+  if (!getSuggestedAnswer(q)) missingEntries.push(`${f} :: ${q}`);
+}
+
+if (missingEntries.length) {
+  console.error(
+    `❌ ${missingEntries.length} of ${uniqueTotal} unique bank questions have NO suggested answer:`
+  );
+  for (const m of missingEntries) console.error("  - " + m);
   process.exit(1);
 }
-console.log(`✅ All ${total} bank questions have a suggested answer.`);
+console.log(
+  `✅ All ${uniqueTotal} unique bank questions covered (${occurrences} occurrences across 4 banks).`
+);
