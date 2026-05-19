@@ -11,6 +11,7 @@ import { parseFeedbackSections } from "@/lib/stagecraft/feedbackParser";
 import { renderSampleAnswer } from "@/lib/stagecraft/feedbackRenderers";
 import type { Round } from "@/lib/stagecraft/types";
 import { getSRClass, type SREvent, type SRInstance } from "@/lib/stagecraft/speechRecognition";
+import { SuggestedAnswer } from "@/components/stagecraft/SuggestedAnswer";
 
 // ─── question bank ────────────────────────────────────────────────────────────
 
@@ -714,6 +715,7 @@ export default function QuickFirePage() {
           <p className="font-display text-2xl font-semibold text-sc-ink leading-snug tracking-tight">
             &ldquo;{current.question}&rdquo;
           </p>
+          <SuggestedAnswer question={current.question} />
         </div>
 
         {/* Answer area */}

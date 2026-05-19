@@ -18,6 +18,7 @@ import { getSRClass, type SREvent, type SRInstance } from "@/lib/stagecraft/spee
 import { getPackById } from "@/lib/stagecraft/companyPacks";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
+import { SuggestedAnswer } from "@/components/stagecraft/SuggestedAnswer";
 
 // ── Drill bank ────────────────────────────────────────────────────────────────
 
@@ -530,6 +531,7 @@ function DrillPage() {
           <p className="font-mono text-xs text-sc-muted leading-relaxed">
             {drill.context}
           </p>
+          <SuggestedAnswer question={drill.question} />
         </div>
 
         {/* ── Mastery tracker ── */}

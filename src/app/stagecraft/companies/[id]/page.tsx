@@ -13,6 +13,7 @@ import { getPackById, COMPANY_PACKS } from "@/lib/stagecraft/companyPacks";
 import { useState } from "react";
 import { StagecraftHeader } from "@/components/stagecraft/StagecraftHeader";
 import { ScrollReveal } from "@/components/stagecraft/ScrollReveal";
+import { SuggestedAnswer } from "@/components/stagecraft/SuggestedAnswer";
 
 // ── Company-specific question selections ──────────────────────────────────────
 // Hardest / most likely questions for each company — curated per brand.
@@ -481,6 +482,7 @@ export default function CompanyDeepDivePage({
                       {q.why}
                     </p>
                   </div>
+                  <SuggestedAnswer question={q.question} />
                 </div>
 
                 {/* Drill this question link */}

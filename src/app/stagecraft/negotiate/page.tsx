@@ -9,6 +9,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { StagecraftHeader } from "@/components/stagecraft/StagecraftHeader";
 import { getSRClass, type SREvent, type SRInstance } from "@/lib/stagecraft/speechRecognition";
+import { SuggestedAnswer } from "@/components/stagecraft/SuggestedAnswer";
 
 // ── Market bands ──────────────────────────────────────────────────────────────
 
@@ -507,6 +508,7 @@ export default function NegotiatePage() {
             &ldquo;{scenario.question}&rdquo;
           </p>
           <p className="font-mono text-xs text-sc-muted leading-relaxed">{scenario.context}</p>
+          <SuggestedAnswer question={scenario.question} />
         </div>
 
         {/* ── Score tally for this scenario ── */}
