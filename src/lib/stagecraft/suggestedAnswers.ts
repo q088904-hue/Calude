@@ -13,7 +13,8 @@ export interface SuggestedAnswer {
 /** Normalize a question so wording/punctuation variants resolve to one key. */
 export function normalizeQuestion(q: string): string {
   return q
-    .replace(/[''""]/g, (m) => (m === "'" || m === "'" ? "'" : '"'))
+    .replace(/[‘’]/g, "'")
+    .replace(/[“”]/g, '"')
     .replace(/\s+/g, " ")
     .trim()
     .toLowerCase();
