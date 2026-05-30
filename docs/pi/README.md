@@ -20,6 +20,15 @@ Surface: `/pi/govern` · `/pi/login` · `/api/pi/*` · proxy gate `src/proxy.ts`
 | [launch/3-TRAINING.md](./launch/3-TRAINING.md) | Wave participants | 15-min agenda, demo script, onboarding checklist, FAQ |
 | [launch/4-ADOPTION-TOOLKIT.md](./launch/4-ADOPTION-TOOLKIT.md) | Program lead | Weekly KPI, feedback, issue-report, success-story templates |
 | [launch/5-30-DAY-REVIEW-DECK.md](./launch/5-30-DAY-REVIEW-DECK.md) | Leadership | Day-30 review presentation (decision: fund Generate?) |
+| [launch/6-PRE-ROLLOUT-EXEC-REVIEW.md](./launch/6-PRE-ROLLOUT-EXEC-REVIEW.md) | Program lead | Investment-committee red-team of the business case (blind spots) |
+| [launch/7-LEADERSHIP-DECISION-BRIEF.md](./launch/7-LEADERSHIP-DECISION-BRIEF.md) | Leadership | One-page: proven / not proven / why Wave-1 / what's measured / Day-30 decision / Generate evidence bar |
+| [launch/8-WAVE1-MEASUREMENT-PLAN.md](./launch/8-WAVE1-MEASUREMENT-PLAN.md) | Program lead / Creative | Primary objective: measure the mechanical-vs-design cleanup split (4 time categories) |
+| [launch/9-DECISION-MATRIX.md](./launch/9-DECISION-MATRIX.md) | Leadership | Day-30 Scenario A/B/C → Generate / Layout-Storytelling / Pause |
+
+> **Framing standard (all leadership-facing docs):** the **technical solution is validated**; **business
+> value is unproven** and enters a structured **Wave-1 measurement phase**. Benefit figures are marked
+> **[VALIDATED]** / **[HYPOTHESIS]** / **[PROJECTION — to be measured]**. No proven ROI, productivity,
+> cleanup-reduction, or adoption is claimed without measured evidence.
 
 ## Strategy & Engineering (development history)
 | Doc | Purpose |

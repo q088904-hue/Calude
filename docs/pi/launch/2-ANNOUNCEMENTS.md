@@ -16,17 +16,18 @@ We're launching **Govern + Fix v1**, an internal tool that automatically checks 
 against the Datamatics brand standard and corrects the mechanical issues — fonts, brand colors,
 template, logo/footer — while keeping the deck fully editable.
 
-**Why it matters:** today the Creative & Brand team manually cleans up decks from across the
-organization. Govern + Fix automates the repetitive ~60–70% of that work, freeing senior design
-time and ensuring outbound decks are on-brand.
+**What's proven today:** the **technical solution is validated**. On a real IDP customer deck it
+auto-corrected brand mechanics, lifted a compliance score from 52 to 73, and preserved 100%
+editability — running entirely inside Datamatics, no data leaving our environment.
 
-**Validated on our own assets:** on a real IDP customer deck it lifted compliance from 52 to 73,
-fixed 373 violations, and preserved 100% editability. It runs entirely inside Datamatics — no data
-leaves our environment.
+**What's not proven yet:** the *business* value. We believe Govern + Fix can remove a large share of
+the Creative team's manual cleanup — but we have **not** measured how much, and we're not claiming a
+number. **Wave-1 is a structured measurement phase** to establish that evidence.
 
-**Rollout:** Creative & Brand first, then Marketing, Pre-Sales, and Sales/Leadership. We'll review
-results with you at **Day 30** to decide on the next phase (auto-generation), which is deliberately
-gated on this pilot's results.
+**Rollout:** Creative & Brand first, then Marketing, Pre-Sales, and Sales/Leadership. Wave-1's first
+task is to **measure the actual cleanup baseline and the mechanical-vs-design split**. We review the
+evidence with you at **Day 30** to decide on the next phase (auto-generation) — deliberately gated on
+measured results, not projections.
 
 **Ask:** [sponsor] is sponsoring; please encourage your teams to use it when invited.
 

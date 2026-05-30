@@ -3,9 +3,15 @@
 
 **Prepared for:** Datamatics Leadership
 **Module:** Presentation Intelligence (PI) — Govern + Fix
-**Status:** Internal-Release Ready (Grade A)
+**Status:** Technically Validated · Release-Ready (Grade A) · Entering structured measurement (Wave-1)
 **Classification:** Internal — Strategic
 **Date:** 2026-05
+
+> **Framing (read first):** "Release-ready / Grade A" refers to the **technical solution** — the
+> engine, editability guarantee, and security are validated and hardened. It does **NOT** assert
+> proven business value. ROI, productivity gain, cleanup reduction, and adoption are **unproven
+> hypotheses** that Wave-1 is designed to measure. Treat every benefit figure in this document as a
+> hypothesis or projection unless explicitly marked **[VALIDATED]**.
 
 ---
 
@@ -140,8 +146,10 @@ Designed to produce signal from **even one deck** (no large pilot required):
 | Estimated cleanup minutes saved | feedback |
 | Decks governed · unique users | run history |
 
-Surfaced live (Fix Impact card + program KPI strip) and aggregated server-side. Validated at N=1
-(52→73, 373/445 violations fixed, 100% editability, 35 min saved).
+Surfaced live (Fix Impact card + program KPI strip) and aggregated server-side. The framework itself
+is proven end-to-end at N=1 — **technical** results are validated (52→73, 373/445 violations fixed,
+100% editability); the "35 min saved" figure is a single illustrative test entry, **not** a measured
+business result. Real time-saved evidence is what Wave-1 collects.
 
 ---
 
@@ -197,10 +205,14 @@ Quarterly value =
  + employee self-service time saved
 ```
 
-- **Direct:** removes the mechanical 60–70% of brand cleanup (font/color/template) from the Creative queue, on an *already-incurred, measurable* cost base.
-- **Indirect:** senior designers redeployed to high-value work; faster turnaround; brand-incident reduction; a compounding, Datamatics-owned brand-compliance asset.
-- **Strategic:** an internal capability that doubles as a **reference implementation** for Datamatics' own digital-transformation client offerings.
-- **Risk profile:** contained — single-module build, zero external dependencies/egress, internal-only.
+> **Status of these figures: HYPOTHESES, not results.** The model below is a *framework* to be
+> populated by Wave-1 measurement. No business benefit is proven yet; the cleanup baseline and the
+> mechanical-vs-design split are unmeasured and are Wave-1's first deliverable.
+
+- **Direct [HYPOTHESIS — to be measured]:** removes a share of mechanical brand cleanup (font/color/template) from the Creative queue. The *size* of that share is unknown until Wave-1 measures the mechanical-vs-design split.
+- **Indirect [HYPOTHESIS]:** senior designers redeployed to high-value work; faster turnaround; brand-incident reduction; a compounding, Datamatics-owned brand-compliance asset.
+- **Strategic [HYPOTHESIS]:** an internal capability that *could* double as a reference implementation for Datamatics' transformation offerings — no external demand validated.
+- **Risk profile [VALIDATED]:** contained — single-module build, zero external dependencies/egress, internal-only.
 
 ---
 
@@ -209,10 +221,10 @@ Quarterly value =
 1. **Go-live prep:** set `PI_SESSION_SECRET`; apply migration `004` (or persistent host); issue access code; confirm @datamatics.com allow-list.
 2. **Wave 1 — Creative & Brand (owners):** they run the live inbound cleanup queue through PI, validate scoring against their eye, and own the ruleset. Signal accrues passively (no pilot recruitment).
 3. **Wave 2 — Marketing:** brand collateral; expand template/ruleset coverage; they champion the brand system.
-4. **Wave 3 — Pre-Sales / Proposals:** highest-ROI volume; capture cleanup-minutes-saved.
+4. **Wave 3 — Pre-Sales / Proposals:** highest *expected* volume; capture cleanup-minutes-saved.
 5. **Wave 4 — Sales / Leadership:** account decks; visibility drives org-wide pull.
 6. **Promote on evidence:** after organic decks accrue, review the KPI strip (score lift, fix rate, editability 100%, minutes saved). **Gate to wider rollout** = editability stays 100% + Creative confirms scoring + satisfaction ≥3.5/5 — regardless of deck count.
-7. **Then fund Phase 1A (Generate)** on the proven foundation.
+7. **Then fund Phase 1A (Generate)** on the **validated engine** — and only if Wave-1's *measured* evidence (esp. the mechanical-vs-design split) supports it.
 
 ---
 

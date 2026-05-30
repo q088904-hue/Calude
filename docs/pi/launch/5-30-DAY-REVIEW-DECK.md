@@ -13,9 +13,9 @@ Results, learnings, and the Generate decision · [date] · presenter
 
 ### Slide 2 — Where we started (recap, 30 seconds)
 - Problem: Creative team = manual cleanup bottleneck for all decks.
-- We launched Govern + Fix to automate the mechanical ~60–70% of that work.
-- Validated pre-launch on a real IDP deck: 52→73, 100% editability.
-- "Today we report what 30 days of real use shows."
+- We launched Govern + Fix to automate brand-mechanical cleanup (fonts, reds, template, logo/footer).
+- Pre-launch: **technical solution validated** on a real IDP deck (52→73, 100% editability). Business value was **explicitly unproven** — Wave-1 was the measurement phase.
+- "Today we report what 30 days of *measured* use shows — including the actual mechanical-vs-design cleanup split."
 
 ### Slide 3 — Adoption
 - Decks governed: **[__]** · Unique users: **[__]** · Repeat users: **[__]**

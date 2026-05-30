@@ -2,8 +2,12 @@
 
 **Audience:** Leadership · CIO · Marketing Leadership · Creative Leadership · Business Heads
 **Format:** 14 slides · ~20-min readout + 10-min Q&A
-**Presenter note:** numbers marked **[validated]** are measured on real Datamatics assets;
-numbers marked **[projected]** are estimates to be confirmed during the 30-day pilot.
+**Headline frame (say this up front):** *"Govern + Fix has successfully validated the technical
+solution and is entering a structured measurement phase. We are not claiming business benefits yet —
+Wave-1 exists to measure them."*
+**Labelling convention:** **[VALIDATED]** = measured on real Datamatics assets · **[HYPOTHESIS]** =
+belief to be tested in Wave-1 · **[PROJECTION — to be measured]** = estimate, not a result.
+Nothing in this deck asserts proven ROI, productivity, cleanup reduction, or adoption.
 
 ---
 
@@ -64,9 +68,9 @@ Tested on the **actual Datamatics master template + a real IDP customer deck**:
 
 ---
 
-### Slide 8 — Compliance Improvements
-- Mechanical violations (fonts, brand reds, template, logo/footer) — **the ~60–70% of cleanup** — automated.
-- Score lift is immediate and measurable per deck (before → after shown to every user).
+### Slide 8 — Compliance Capability (what the engine does)
+- **[VALIDATED]** Mechanical violations (fonts, brand reds, template, logo/footer) are auto-corrected; score lift is measurable per deck (before → after shown to every user).
+- **[HYPOTHESIS]** that mechanical issues are the majority of cleanup effort — **this is precisely what Wave-1 measures** (see Slide 12). We are not asserting the share today.
 - Off-brand drift is caught *before* decks reach clients.
 - The ruleset is **owned by Creative & Brand** and versioned — governance stays with the brand owners.
 
@@ -81,11 +85,12 @@ Tested on the **actual Datamatics master template + a real IDP customer deck**:
 
 ---
 
-### Slide 10 — Internal Productivity Benefits
-- Creative team redeployed from mechanical cleanup → high-value design.
-- Faster proposal/RFP turnaround (self-serve pre-cleaning).
-- Consistent, on-brand decks across every department.
-- **[projected]** ~50%+ reduction in mechanical cleanup effort — to be confirmed in the 30-day pilot.
+### Slide 10 — Expected Internal Productivity Benefits *(Hypotheses — to be measured in Wave-1)*
+*None of the below is proven. Each is a hypothesis Wave-1 will test:*
+- **[HYPOTHESIS]** Creative team redeployed from mechanical cleanup → high-value design.
+- **[HYPOTHESIS]** Faster proposal/RFP turnaround via self-serve pre-cleaning.
+- **[VALIDATED]** Consistent brand mechanics across decks (the engine does this deterministically).
+- **[PROJECTION — to be measured]** Reduction in mechanical cleanup effort. We deliberately state **no number** until Wave-1 measures the real cleanup baseline and the mechanical-vs-design split.
 
 ---
 
@@ -93,7 +98,7 @@ Tested on the **actual Datamatics master template + a real IDP customer deck**:
 Evidence-led waves, expand by pull:
 1. **Creative & Brand** (owners — validate scoring, own ruleset)
 2. **Marketing** (brand-literate, high volume)
-3. **Pre-Sales / Proposals** (highest ROI)
+3. **Pre-Sales / Proposals** (highest *expected* volume — to be validated)
 4. **Sales / Leadership** (visibility)
 - 20-min training per wave · Teams support channel · weekly KPI review.
 
@@ -118,10 +123,11 @@ Generate (auto-create new decks) is **on the roadmap but gated**. We invest only
 ---
 
 ### Slide 14 — Recommendation
-- **Approve internal launch of Govern + Fix v1** (release-ready, validated, hardened, documented).
-- Start with **Creative & Brand as Wave 1** this week.
-- **Reconvene at Day 30** against the gate to decide on Generate.
-- **Ask:** name an executive sponsor + confirm the Creative team lead as ruleset owner.
+- **The technical solution is validated** (engine, editability, security) — and **release-ready**. We are **not** claiming proven business value; that is Wave-1's job.
+- **Approve Wave-1 as a structured measurement phase** — start with **Creative & Brand this week**.
+- **Wave-1's first deliverable is the cleanup baseline + mechanical-vs-design split** — the primary business-validation activity.
+- **Reconvene at Day 30** to decide on Generate against the evidence (not projections).
+- **Ask:** name an executive sponsor + a Govern operational owner + confirm the Creative lead as ruleset owner.
 
 ---
 

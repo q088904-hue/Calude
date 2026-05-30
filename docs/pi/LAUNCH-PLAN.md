@@ -10,7 +10,7 @@ How we roll out Govern + Fix internally, support it, measure it, and decide whet
 |---|---|---|---|
 | **1** | **Creative & Brand** (owners) | They are the bottleneck the tool relieves, and they own the ruleset. They validate scoring against their own eye. | Go-Live verification passed |
 | **2** | **Marketing** | Brand-literate, tolerant of AI drafts, high volume of branded collateral. | Wave-1 satisfaction ≥3.5/5, editability 100% |
-| **3** | **Pre-Sales / Proposals** | Highest-ROI (RFP/proposal cleanup), but highest-stakes/lowest-trust — earns from Waves 1-2 proof. | Wave-2 adoption steady |
+| **3** | **Pre-Sales / Proposals** | Highest *expected* volume (RFP/proposal cleanup) — ROI to be measured — but highest-stakes/lowest-trust, so earns from Waves 1-2 proof. | Wave-2 adoption steady |
 | **4** | **Sales / Leadership** | Account decks, board decks; visibility drives org pull. | 30-Day Review = positive |
 
 Principle: **expand by pull, on evidence.** No wave opens until the prior wave's signal clears.
