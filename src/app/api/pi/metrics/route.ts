@@ -1,17 +1,38 @@
 import { NextResponse } from "next/server";
-import { recordMetric, summarizeKpis } from "@/lib/pi/metrics";
+import {
+  recordMetric,
+  summarizeKpis,
+  requirePersistence,
+  PiPersistenceError,
+} from "@/lib/pi/metrics";
 import { getSessionUser } from "@/lib/pi/auth/session";
 
 export const runtime = "nodejs";
 
+function persistenceGuard(): NextResponse | null {
+  try {
+    requirePersistence();
+    return null;
+  } catch (e) {
+    if (e instanceof PiPersistenceError) {
+      return NextResponse.json({ error: e.message }, { status: 503 });
+    }
+    throw e;
+  }
+}
+
 /** GET → aggregate KPI summary (meaningful even at N=1). */
 export async function GET() {
+  const blocked = persistenceGuard();
+  if (blocked) return blocked;
   const kpis = await summarizeKpis();
   return NextResponse.json(kpis);
 }
 
 /** POST → record a feedback record (satisfaction + estimated cleanup minutes saved). */
 export async function POST(req: Request) {
+  const blocked = persistenceGuard();
+  if (blocked) return blocked;
   try {
     const body = await req.json();
     const satisfaction = Number(body.satisfaction);

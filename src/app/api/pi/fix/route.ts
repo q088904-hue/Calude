@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import { applyFix, countViolations } from "@/lib/pi/fix/apply";
-import { recordMetric } from "@/lib/pi/metrics";
+import { recordMetric, requirePersistence, PiPersistenceError } from "@/lib/pi/metrics";
 import { getSessionUser } from "@/lib/pi/auth/session";
+import { rateLimit, clientIp } from "@/lib/pi/ratelimit";
 import type { FixMode } from "@/lib/pi/types";
 
 export const runtime = "nodejs";
@@ -13,6 +14,24 @@ const PPTX_MIME =
 
 export async function POST(req: Request) {
   try {
+    // Abuse cap: 30 fixes / minute per client.
+    const limit = rateLimit(`fix:${clientIp(req)}`, 30, 60_000);
+    if (!limit.allowed) {
+      return NextResponse.json(
+        { error: "Too many requests. Please slow down." },
+        { status: 429, headers: { "Retry-After": String(limit.retryAfterSec) } }
+      );
+    }
+    // Fail closed if production persistence is unconfigured (fix writes an audit row).
+    try {
+      requirePersistence();
+    } catch (e) {
+      if (e instanceof PiPersistenceError) {
+        return NextResponse.json({ error: e.message }, { status: 503 });
+      }
+      throw e;
+    }
+
     const form = await req.formData();
     const file = form.get("file");
     const mode = (form.get("mode") === "enforce" ? "enforce" : "snap") as FixMode;

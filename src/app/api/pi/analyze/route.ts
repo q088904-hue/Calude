@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { analyzePptx } from "@/lib/pi/analyze";
+import { rateLimit, clientIp } from "@/lib/pi/ratelimit";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -10,6 +11,15 @@ const PPTX_MIME =
 
 export async function POST(req: Request) {
   try {
+    // Abuse cap: 30 analyses / minute per client.
+    const limit = rateLimit(`analyze:${clientIp(req)}`, 30, 60_000);
+    if (!limit.allowed) {
+      return NextResponse.json(
+        { error: "Too many requests. Please slow down." },
+        { status: 429, headers: { "Retry-After": String(limit.retryAfterSec) } }
+      );
+    }
+
     const form = await req.formData();
     const file = form.get("file");
     if (!(file instanceof File)) {

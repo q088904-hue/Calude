@@ -65,7 +65,23 @@ export interface AuditEntry {
   editabilityPassed: boolean;
 }
 
-// ── provider selection ────────────────────────────────────────────────────────
+// ── provider selection + production guard ──────────────────────────────────────
+
+/** Read bounds — eliminate unbounded scans. */
+const MAX_ROWS = 5000; // hard cap per table per query
+const WINDOW_DAYS = 90; // KPI/aggregate window
+
+/** Thrown when production runs without a configured persistence backend. */
+export class PiPersistenceError extends Error {
+  constructor() {
+    super(
+      "PI persistence is not configured. In production set NEXT_PUBLIC_SUPABASE_URL and " +
+        "SUPABASE_SERVICE_ROLE_KEY and apply migration 004_pi_govern.sql. " +
+        "The JSONL fallback is for local development only."
+    );
+    this.name = "PiPersistenceError";
+  }
+}
 
 function supabaseEnabled(): boolean {
   return Boolean(
@@ -73,8 +89,24 @@ function supabaseEnabled(): boolean {
   );
 }
 
+/**
+ * Resolve the persistence mode, FAILING CLOSED in production.
+ * Production REQUIRES Supabase — JSONL is dev-only. Routes catch the error and
+ * return a 503 with the operator message, rather than silently losing audit/KPI
+ * data to an ephemeral local file.
+ */
+export function requirePersistence(): "supabase" | "local" {
+  if (supabaseEnabled()) return "supabase";
+  if (process.env.NODE_ENV === "production") throw new PiPersistenceError();
+  return "local";
+}
+
 const METRICS_PATH =
   process.env.PI_METRICS_PATH || resolve(process.cwd(), ".pi-data/metrics.jsonl");
+
+function windowStartIso(): string {
+  return new Date(Date.now() - WINDOW_DAYS * 86_400_000).toISOString();
+}
 
 // ── local (JSONL) provider ──────────────────────────────────────────────────
 
@@ -90,7 +122,10 @@ async function localAppend(rec: MetricRecord): Promise<void> {
 async function localReadAll(): Promise<MetricRecord[]> {
   try {
     const raw = await fs.readFile(METRICS_PATH, "utf8");
-    return raw.split("\n").filter(Boolean).map((l) => JSON.parse(l) as MetricRecord);
+    const lines = raw.split("\n").filter(Boolean);
+    // Bound: only the most recent MAX_ROWS entries (dev-only store).
+    const recent = lines.length > MAX_ROWS ? lines.slice(-MAX_ROWS) : lines;
+    return recent.map((l) => JSON.parse(l) as MetricRecord);
   } catch {
     return [];
   }
@@ -138,8 +173,18 @@ async function supabaseAppend(rec: MetricRecord): Promise<void> {
 
 async function supabaseReadAll(): Promise<MetricRecord[]> {
   try {
-    const runs = await table("pi_runs").select("*");
-    const fb = await table("pi_feedback").select("*");
+    // Bounded: last WINDOW_DAYS, newest first, capped at MAX_ROWS per table.
+    const since = windowStartIso();
+    const runs = await table("pi_runs")
+      .select("*")
+      .gte("created_at", since)
+      .order("created_at", { ascending: false })
+      .limit(MAX_ROWS);
+    const fb = await table("pi_feedback")
+      .select("*")
+      .gte("created_at", since)
+      .order("created_at", { ascending: false })
+      .limit(MAX_ROWS);
     const out: MetricRecord[] = [];
     for (const r of (runs.data ?? []) as Record<string, unknown>[]) {
       out.push({
@@ -179,11 +224,11 @@ async function supabaseReadAll(): Promise<MetricRecord[]> {
 export const STORE_KIND: "local" | "supabase" = supabaseEnabled() ? "supabase" : "local";
 
 export async function recordMetric(rec: MetricRecord): Promise<void> {
-  return supabaseEnabled() ? supabaseAppend(rec) : localAppend(rec);
+  return requirePersistence() === "supabase" ? supabaseAppend(rec) : localAppend(rec);
 }
 
 async function readAll(): Promise<MetricRecord[]> {
-  return supabaseEnabled() ? supabaseReadAll() : localReadAll();
+  return requirePersistence() === "supabase" ? supabaseReadAll() : localReadAll();
 }
 
 export async function summarizeKpis(): Promise<KpiSummary> {
@@ -216,21 +261,48 @@ export async function summarizeKpis(): Promise<KpiSummary> {
   };
 }
 
-/** Governance audit history — most recent first. */
+/** Governance audit history — most recent first. Bounded at the source. */
 export async function listAudit(limit = 50): Promise<AuditEntry[]> {
-  const records = await readAll();
+  const cap = Math.min(Math.max(1, limit), 200);
+  const toEntry = (f: FixMetric): AuditEntry => ({
+    ts: f.ts,
+    userEmail: f.userEmail,
+    filename: f.filename,
+    mode: f.mode,
+    beforeScore: f.beforeScore,
+    afterScore: f.afterScore,
+    violationsFixed: f.violationsFixed,
+    editabilityPassed: f.editabilityPassed,
+  });
+
+  if (requirePersistence() === "supabase") {
+    // DB returns only `cap` rows (no full-table scan).
+    const rows = await table("pi_runs")
+      .select("*")
+      .order("created_at", { ascending: false })
+      .limit(cap);
+    return ((rows.data ?? []) as Record<string, unknown>[]).map((r) =>
+      toEntry({
+        type: "fix",
+        ts: String(r.created_at ?? ""),
+        userEmail: String(r.user_email ?? ""),
+        filename: String(r.filename ?? ""),
+        mode: (r.mode as "snap" | "enforce") ?? "snap",
+        beforeScore: Number(r.before_score ?? 0),
+        afterScore: Number(r.after_score ?? 0),
+        violationsDetected: Number(r.violations_detected ?? 0),
+        violationsFixed: Number(r.violations_fixed ?? 0),
+        editabilityPassed: Boolean(r.editability_passed),
+        slideCount: Number(r.slide_count ?? 0),
+      })
+    );
+  }
+
+  // Local (dev): bounded read already caps to MAX_ROWS.
+  const records = await localReadAll();
   return records
     .filter((r): r is FixMetric => r.type === "fix")
     .sort((a, b) => (a.ts < b.ts ? 1 : -1))
-    .slice(0, limit)
-    .map((f) => ({
-      ts: f.ts,
-      userEmail: f.userEmail,
-      filename: f.filename,
-      mode: f.mode,
-      beforeScore: f.beforeScore,
-      afterScore: f.afterScore,
-      violationsFixed: f.violationsFixed,
-      editabilityPassed: f.editabilityPassed,
-    }));
+    .slice(0, cap)
+    .map(toEntry);
 }
