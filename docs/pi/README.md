@@ -12,6 +12,15 @@ Surface: `/pi/govern` · `/pi/login` · `/api/pi/*` · proxy gate `src/proxy.ts`
 | [30-DAY-REVIEW.md](./30-DAY-REVIEW.md) | Leadership | Fill-in review template → invest-in-Generate decision |
 | [RELEASE-PACKAGE.md](./RELEASE-PACKAGE.md) | All | One-page user + beta + support reference |
 
+## Launch & Adoption Package (Product Owner / PM)
+| Doc | Audience | Purpose |
+|---|---|---|
+| [launch/1-EXEC-ROLLOUT-DECK.md](./launch/1-EXEC-ROLLOUT-DECK.md) | Leadership / CIO / Business Heads | 14-slide executive rollout presentation |
+| [launch/2-ANNOUNCEMENTS.md](./launch/2-ANNOUNCEMENTS.md) | All teams | Leadership / Creative / Marketing / Pre-Sales announcements |
+| [launch/3-TRAINING.md](./launch/3-TRAINING.md) | Wave participants | 15-min agenda, demo script, onboarding checklist, FAQ |
+| [launch/4-ADOPTION-TOOLKIT.md](./launch/4-ADOPTION-TOOLKIT.md) | Program lead | Weekly KPI, feedback, issue-report, success-story templates |
+| [launch/5-30-DAY-REVIEW-DECK.md](./launch/5-30-DAY-REVIEW-DECK.md) | Leadership | Day-30 review presentation (decision: fund Generate?) |
+
 ## Strategy & Engineering (development history)
 | Doc | Purpose |
 |---|---|
