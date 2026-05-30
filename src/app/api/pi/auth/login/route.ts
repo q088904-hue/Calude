@@ -26,7 +26,16 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Invalid beta access code." }, { status: 403 });
     }
 
-    const token = await signToken(buildPayload(email), sessionSecret());
+    let secret: string;
+    try {
+      secret = sessionSecret(); // throws in production if unset/default → fail closed
+    } catch {
+      return NextResponse.json(
+        { error: "Sign-in is not available: server authentication is not configured." },
+        { status: 503 }
+      );
+    }
+    const token = await signToken(buildPayload(email), secret);
     const res = NextResponse.json({ ok: true, email: email.trim().toLowerCase() });
     res.cookies.set(PI_COOKIE, token, {
       httpOnly: true,

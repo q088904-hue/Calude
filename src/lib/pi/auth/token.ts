@@ -10,6 +10,27 @@ export interface SessionPayload {
   exp: number;
 }
 
+/** The dev-only fallback secret. Using this in production is a hard error. */
+export const DEV_SESSION_SECRET = "pi-dev-insecure-secret-change-me";
+
+/**
+ * Resolve the session-signing secret, FAILING CLOSED in production.
+ *
+ * In production, an unset or default secret means anyone could forge a session
+ * cookie (full auth bypass). Rather than silently run with a public key, we
+ * throw — callers translate this into a denied request / 503, locking the gate
+ * until `PI_SESSION_SECRET` is set to a real value. Edge-safe (no Node imports).
+ */
+export function resolveSessionSecret(): string {
+  const s = process.env.PI_SESSION_SECRET;
+  if (process.env.NODE_ENV === "production" && (!s || s === DEV_SESSION_SECRET)) {
+    throw new Error(
+      "PI_SESSION_SECRET must be set to a secure, non-default value in production — refusing to sign/verify sessions with a publicly known key."
+    );
+  }
+  return s || DEV_SESSION_SECRET;
+}
+
 const enc = new TextEncoder();
 const dec = new TextDecoder();
 

@@ -7,13 +7,14 @@
  */
 
 import { cookies } from "next/headers";
-import { verifyToken, type SessionPayload } from "./token";
+import { verifyToken, resolveSessionSecret, type SessionPayload } from "./token";
 
 export const PI_COOKIE = "pi_session";
 export const SESSION_TTL_MS = 8 * 60 * 60 * 1000; // 8h
 
+/** Fail-closed secret (throws in production if unset/default). */
 export function sessionSecret(): string {
-  return process.env.PI_SESSION_SECRET || "pi-dev-insecure-secret-change-me";
+  return resolveSessionSecret();
 }
 
 export function allowedDomain(): string {
@@ -32,11 +33,16 @@ export function isDatamaticsEmail(email: string): boolean {
 
 /** Read + verify the current session from the request cookies (route handlers). */
 export async function getSessionUser(): Promise<{ email: string } | null> {
-  const store = await cookies();
-  const token = store.get(PI_COOKIE)?.value;
-  if (!token) return null;
-  const payload = await verifyToken(token, sessionSecret());
-  return payload ? { email: payload.email } : null;
+  try {
+    const store = await cookies();
+    const token = store.get(PI_COOKIE)?.value;
+    if (!token) return null;
+    const payload = await verifyToken(token, sessionSecret());
+    return payload ? { email: payload.email } : null;
+  } catch {
+    // Misconfigured secret in production → fail closed (treat as no session).
+    return null;
+  }
 }
 
 export function buildPayload(email: string): SessionPayload {

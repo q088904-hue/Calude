@@ -118,3 +118,29 @@ test("analyzePptx rejects a valid zip that is not a PowerPoint", async () => {
   const buf = await z.generateAsync({ type: "nodebuffer" });
   await assert.rejects(() => analyzePptx(buf as Buffer), /Not a PowerPoint/);
 });
+
+test("resolveSessionSecret fails closed in production with default/unset secret (P0)", async () => {
+  const { resolveSessionSecret, DEV_SESSION_SECRET } = await import("../../src/lib/pi/auth/token");
+  const origEnv = process.env.NODE_ENV;
+  const origSecret = process.env.PI_SESSION_SECRET;
+  try {
+    // production + unset → must throw (no silent default-key auth)
+    (process.env as Record<string, string>).NODE_ENV = "production";
+    delete process.env.PI_SESSION_SECRET;
+    assert.throws(() => resolveSessionSecret(), /must be set/);
+    // production + default value → must throw
+    process.env.PI_SESSION_SECRET = DEV_SESSION_SECRET;
+    assert.throws(() => resolveSessionSecret(), /must be set/);
+    // production + real secret → ok
+    process.env.PI_SESSION_SECRET = "a-real-long-random-secret";
+    assert.equal(resolveSessionSecret(), "a-real-long-random-secret");
+    // development + unset → dev default allowed
+    (process.env as Record<string, string>).NODE_ENV = "development";
+    delete process.env.PI_SESSION_SECRET;
+    assert.equal(resolveSessionSecret(), DEV_SESSION_SECRET);
+  } finally {
+    (process.env as Record<string, string>).NODE_ENV = origEnv as string;
+    if (origSecret === undefined) delete process.env.PI_SESSION_SECRET;
+    else process.env.PI_SESSION_SECRET = origSecret;
+  }
+});

@@ -6,13 +6,9 @@
  */
 
 import { NextResponse, type NextRequest } from "next/server";
-import { verifyToken } from "@/lib/pi/auth/token";
+import { verifyToken, resolveSessionSecret } from "@/lib/pi/auth/token";
 
 const PI_COOKIE = "pi_session";
-
-function secret(): string {
-  return process.env.PI_SESSION_SECRET || "pi-dev-insecure-secret-change-me";
-}
 
 // Paths that must remain reachable without a session.
 function isPublic(path: string): boolean {
@@ -27,8 +23,15 @@ export async function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
   if (isPublic(pathname)) return NextResponse.next();
 
-  const token = req.cookies.get(PI_COOKIE)?.value;
-  const user = token ? await verifyToken(token, secret()) : null;
+  // Fail closed: if the secret is misconfigured in production, resolveSessionSecret
+  // throws → user stays null → access is denied (never verify with a default key).
+  let user = null;
+  try {
+    const token = req.cookies.get(PI_COOKIE)?.value;
+    user = token ? await verifyToken(token, resolveSessionSecret()) : null;
+  } catch {
+    user = null;
+  }
   if (user) return NextResponse.next();
 
   // API → 401 JSON; pages → redirect to login with return path.
