@@ -114,7 +114,7 @@ function GradedCard({ pair, n }: { pair: GradedPair; n: number }) {
     composite >= 8 ? "text-sc-green" : composite >= 6 ? "text-sc-gold" : "text-sc-red";
 
   return (
-    <div className="rounded-sm border border-sc-border bg-sc-surface overflow-hidden">
+    <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm overflow-hidden">
       <div className="px-4 py-4 space-y-3">
         {/* Question + composite */}
         <div className="flex items-start gap-3">
@@ -136,7 +136,7 @@ function GradedCard({ pair, n }: { pair: GradedPair; n: number }) {
         {pair.patterns.length > 0 && (
           <div className="flex flex-wrap gap-1.5 pl-8">
             {[...new Set(pair.patterns)].map((p) => (
-              <span key={p} className="rounded-sm border border-sc-border bg-sc-raised px-2 py-0.5 font-mono text-xs text-sc-muted">
+              <span key={p} className="rounded-sc border border-sc-border bg-sc-raised shadow-sc-sm px-2 py-0.5 font-mono text-xs text-sc-muted">
                 {p}
               </span>
             ))}
@@ -200,7 +200,7 @@ function GradingCard({ pair, n, streaming, partial }: {
   partial: string;
 }) {
   return (
-    <div className="rounded-sm border border-sc-border bg-sc-surface px-4 py-4 space-y-3">
+    <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-4 py-4 space-y-3">
       <div className="flex items-start gap-3">
         <span className="font-mono text-xs text-sc-dim shrink-0 mt-0.5 w-5 text-right">{n}</span>
         <p className="text-sm font-medium text-sc-ink leading-snug flex-1">{pair.question}</p>
@@ -548,7 +548,7 @@ export default function DebriefPage() {
                   type="date"
                   value={date}
                   onChange={(e) => setDate(e.target.value)}
-                  className="rounded-sm border border-sc-border bg-sc-surface px-3 py-2 text-sm text-sc-ink focus:border-sc-gold-dim focus:outline-none transition-colors"
+                  className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-3 py-2 text-sm text-sc-ink focus:border-sc-gold-dim focus:outline-none transition-colors"
                 />
               </div>
             </div>
@@ -560,7 +560,7 @@ export default function DebriefPage() {
               </p>
 
               {pairs.map((pair, i) => (
-                <div key={pair.id} className="rounded-sm border border-sc-border bg-sc-surface overflow-hidden">
+                <div key={pair.id} className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm overflow-hidden">
                   {/* Pair header */}
                   <div className="px-4 py-2.5 border-b border-sc-line flex items-center justify-between bg-sc-raised">
                     <div className="flex items-center gap-3">
@@ -721,7 +721,7 @@ export default function DebriefPage() {
 
             {/* Pending cards (greyed out) */}
             {stage === "grading" && validPairs.slice(gradingIndex + 1).map((pair, i) => (
-              <div key={pair.id} className="rounded-sm border border-sc-border bg-sc-surface px-4 py-3 opacity-30">
+              <div key={pair.id} className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-4 py-3 opacity-30">
                 <div className="flex items-start gap-3">
                   <span className="font-mono text-xs text-sc-dim shrink-0 mt-0.5 w-5 text-right">
                     {graded.length + i + 2}
@@ -767,7 +767,7 @@ export default function DebriefPage() {
                   {saveStatus === "saved" && (
                     <Link
                       href="/stagecraft/history"
-                      className="rounded-sm border border-sc-border bg-sc-surface px-4 py-2.5 font-mono text-xs text-sc-dim hover:text-sc-gold hover:border-sc-gold-dim transition-colors"
+                      className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-4 py-2.5 font-mono text-xs text-sc-dim hover:text-sc-gold hover:border-sc-gold-dim transition-colors"
                     >
                       View in history →
                     </Link>

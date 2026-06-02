@@ -868,7 +868,7 @@ export default function QuickFirePage() {
           <div ref={feedbackRef} className="sc-entry sc-e3 space-y-3">
             {/* Scores */}
             {scores && (
-              <div className="rounded-sm border border-sc-border bg-sc-surface px-5 py-4 space-y-3">
+              <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-5 py-4 space-y-3">
                 <ScoreBar label="Content" value={scores.content} />
                 <ScoreBar label="English" value={scores.english} />
                 <ScoreBar label="Delivery" value={scores.delivery} />
@@ -899,7 +899,7 @@ export default function QuickFirePage() {
                 ).map(({ key, label, content }) => (
                   <div
                     key={key}
-                    className="rounded-sm border border-sc-border bg-sc-surface overflow-hidden"
+                    className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm overflow-hidden"
                   >
                     <button
                       type="button"
@@ -923,7 +923,7 @@ export default function QuickFirePage() {
               </div>
             ) : (
               /* Raw streaming text while sections not yet parseable */
-              <div className="rounded-sm border border-sc-border bg-sc-surface px-4 py-4 text-sm text-sc-muted leading-relaxed whitespace-pre-wrap font-mono">
+              <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-4 py-4 text-sm text-sc-muted leading-relaxed whitespace-pre-wrap font-mono">
                 {feedback}
               </div>
             )}
@@ -995,7 +995,7 @@ export default function QuickFirePage() {
                     <button
                       type="button"
                       onClick={fireAnother}
-                      className="flex-1 rounded-sm border border-sc-border bg-sc-surface px-3 py-2.5 text-xs font-mono text-sc-muted hover:border-sc-gold-dim hover:text-sc-gold transition-colors"
+                      className="flex-1 rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-3 py-2.5 text-xs font-mono text-sc-muted hover:border-sc-gold-dim hover:text-sc-gold transition-colors"
                     >
                       Skip →
                     </button>
@@ -1008,14 +1008,14 @@ export default function QuickFirePage() {
                         setRevisedAnswer(answer);
                         setRevising(true);
                       }}
-                      className="flex-1 rounded-sm border border-sc-border bg-sc-surface px-3 py-2.5 text-xs font-mono text-sc-muted hover:border-sc-gold-dim hover:text-sc-gold transition-colors"
+                      className="flex-1 rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-3 py-2.5 text-xs font-mono text-sc-muted hover:border-sc-gold-dim hover:text-sc-gold transition-colors"
                     >
                       Improve anyway
                     </button>
                   )}
                   <Link
                     href="/stagecraft"
-                    className="rounded-sm border border-sc-border bg-sc-surface px-3 py-2.5 text-xs font-mono text-sc-muted hover:border-sc-gold-dim hover:text-sc-gold transition-colors"
+                    className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-3 py-2.5 text-xs font-mono text-sc-muted hover:border-sc-gold-dim hover:text-sc-gold transition-colors"
                   >
                     Done
                   </Link>
@@ -1035,7 +1035,7 @@ export default function QuickFirePage() {
                 </button>
                 <Link
                   href="/stagecraft"
-                  className="rounded-sm border border-sc-border bg-sc-surface px-4 py-3 text-xs font-mono text-sc-muted hover:border-sc-gold-dim hover:text-sc-gold transition-colors"
+                  className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-4 py-3 text-xs font-mono text-sc-muted hover:border-sc-gold-dim hover:text-sc-gold transition-colors"
                 >
                   Done
                 </Link>
@@ -1103,7 +1103,7 @@ export default function QuickFirePage() {
 
             {/* Score comparison */}
             {revisionDone && scores && revisedScores && (
-              <div className="rounded-sm border border-sc-border bg-sc-surface px-5 py-4 space-y-3">
+              <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-5 py-4 space-y-3">
                 <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase mb-1">
                   Score comparison
                 </p>

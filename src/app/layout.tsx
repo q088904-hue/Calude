@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Plus_Jakarta_Sans, JetBrains_Mono, Fraunces } from "next/font/google";
+import { Inter, Plus_Jakarta_Sans, JetBrains_Mono, Geist } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -21,11 +21,12 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
-const fraunces = Fraunces({
+// twenty.com-style display: Geist (clean grotesque). Bound to the existing
+// --font-fraunces var name so all `font-fraunces` consumers switch with no rename.
+const fraunces = Geist({
   variable: "--font-fraunces",
   subsets: ["latin"],
   display: "swap",
-  axes: ["opsz", "SOFT"],
 });
 
 export const viewport: Viewport = {

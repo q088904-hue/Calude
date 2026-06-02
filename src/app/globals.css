@@ -386,26 +386,34 @@
    executive interview practice agent.
    ============================================ */
 
-/* Stagecraft palette — light (default) */
+/* Stagecraft palette — light (default). twenty.com-style: clean near-white
+   surfaces, light-gray borders, soft elevation; gold kept as the brand accent. */
 :root {
-  --sc-void:     #EFE9DA;
-  --sc-bg:       #F4EFE4;
-  --sc-surface:  #FBF7EC;
+  --sc-void:     #F4F2EE;
+  --sc-bg:       #FBFAF8;
+  --sc-surface:  #FFFFFF;
   --sc-raised:   #FFFFFF;
-  --sc-border:   #D8CFBA;
-  --sc-line:     #E4DCC8;
-  --sc-ink:      #1F1B16;
-  --sc-muted:    #6B6457;
-  --sc-dim:      #A89F8A;        /* decorative / disabled only — not body text */
-  --sc-gold:     #A8761F;
+  --sc-border:   #E7E3DC;
+  --sc-line:     #F0EDE7;
+  --sc-ink:      #1C1A17;
+  --sc-muted:    #6B6660;
+  --sc-dim:      #A8A29A;        /* decorative / disabled only — not body text */
+  --sc-gold:     #8A6118;        /* brand accent — AA (5.29:1) as text on --sc-bg */
   --sc-gold-dim: #C9A35E;        /* accent border only — not body text */
   --sc-gold-bg:  rgba(168,118,31,0.10);
   --sc-red:      #C0432F;
   --sc-green:    #2F7D55;
   --sc-green-bg: rgba(47,125,85,0.12);
+
+  /* Elevation (twenty.com soft shadows) */
+  --sc-shadow-sm: 0 1px 2px rgba(28,26,23,0.06);
+  --sc-shadow-md: 0 4px 12px rgba(28,26,23,0.08);
+
+  /* Product-focused motion ease */
+  --ease-sc: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Stagecraft palette — dark (original values) */
+/* Stagecraft palette — dark (original values, preserved verbatim) */
 .dark {
   --sc-void:     #080809;
   --sc-bg:       #0D0D0F;
@@ -422,6 +430,10 @@
   --sc-red:      #E25E4A;
   --sc-green:    #3D9A6E;
   --sc-green-bg: rgba(61,154,110,0.10);
+
+  /* Elevation — higher opacity to read on dark surfaces */
+  --sc-shadow-sm: 0 1px 2px rgba(0,0,0,0.4);
+  --sc-shadow-md: 0 4px 12px rgba(0,0,0,0.5);
 }
 
 @theme inline {
@@ -440,6 +452,15 @@
   --color-sc-red:      var(--sc-red);
   --color-sc-green:    var(--sc-green);
   --color-sc-green-bg: var(--sc-green-bg);
+
+  /* Elevation utilities → shadow-sc-sm / shadow-sc-md */
+  --shadow-sc-sm: var(--sc-shadow-sm);
+  --shadow-sc-md: var(--sc-shadow-md);
+
+  /* Radius system (4–6px) → rounded-sc-sm / rounded-sc / rounded-sc-lg */
+  --radius-sc-sm: 4px;
+  --radius-sc:    6px;
+  --radius-sc-lg: 10px;
 }
 
 /* Mic button pulse animation — recording state */
@@ -519,13 +540,16 @@
 .sc-e5      { animation-delay: 0.28s;  }
 
 @keyframes sc-reveal {
-  from { opacity: 0; transform: translateY(24px); }
+  from { opacity: 0; transform: translateY(12px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 .sc-reveal { opacity: 0; }
 .sc-reveal[data-revealed="true"] {
-  animation: sc-reveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: sc-reveal 0.4s var(--ease-sc) both;
 }
+
+/* Product-focused easing utility */
+.ease-sc { transition-timing-function: var(--ease-sc); }
 @media (prefers-reduced-motion: reduce) {
   .sc-reveal { opacity: 1 !important; }
   .sc-reveal[data-revealed="true"] { animation: none !important; }

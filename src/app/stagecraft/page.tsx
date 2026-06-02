@@ -1265,7 +1265,7 @@ function QuickFireCard() {
     <div className="mb-8 sc-entry sc-e3">
       <Link
         href="/stagecraft/quickfire"
-        className="group block rounded-sm border border-sc-border bg-sc-surface hover:border-sc-gold-dim transition-all"
+        className="group block rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm hover:border-sc-gold-dim transition-all"
       >
         <div className="px-5 py-4">
           <div className="flex items-center justify-between mb-3">
@@ -1315,7 +1315,7 @@ function PriorityDrillsPanel({
         <div className="flex-1 h-px bg-sc-border" />
       </div>
 
-      <div className="rounded-sm border border-sc-border bg-sc-surface overflow-hidden divide-y divide-sc-line">
+      <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm overflow-hidden divide-y divide-sc-line">
         {PRIORITY_DRILLS.map((d, i) => {
           const isActive = activeDrill.trim() === d.question.trim();
           return (
@@ -1714,7 +1714,7 @@ function DailyBriefPanel({
   if (dismissed || (!loading && !brief)) return null;
 
   return (
-    <div className="mt-5 rounded-sm border border-sc-border bg-sc-surface overflow-hidden sc-entry sc-e1b">
+    <div className="mt-5 rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm overflow-hidden sc-entry sc-e1b">
       <div className="px-4 py-2.5 border-b border-sc-line flex items-center justify-between">
         <p className="font-mono text-[10px] tracking-widest text-sc-gold uppercase">
           Today&apos;s brief
@@ -2016,7 +2016,7 @@ function SetupView(props: {
           </div>
 
           {/* Right: Last session score rows */}
-          <div className="rounded-sm border border-sc-border bg-sc-surface p-4">
+          <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm p-4">
             <p className="font-mono text-xs tracking-widest text-sc-dim uppercase mb-3">
               Last session
             </p>
@@ -2133,7 +2133,7 @@ function SetupView(props: {
             const pack = getPackById(props.companyPackId);
             if (!pack) return null;
             return (
-              <div className="rounded-sm border border-sc-border bg-sc-surface px-4 py-3 space-y-2 mb-3">
+              <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-4 py-3 space-y-2 mb-3">
                 <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase">
                   Prep context · {pack.rounds}
                 </p>
@@ -2155,7 +2155,7 @@ function SetupView(props: {
           </label>
           <input
             type="text"
-            className="w-full rounded-sm border border-sc-border bg-sc-surface px-4 py-3 text-sm text-sc-ink placeholder:text-sc-dim focus:border-sc-gold-dim focus:outline-none transition-colors"
+            className="w-full rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-4 py-3 text-sm text-sc-ink placeholder:text-sc-dim focus:border-sc-gold-dim focus:outline-none transition-colors"
             value={props.targetRole}
             onChange={(e) => {
               props.setTargetRole(e.target.value);
@@ -2175,7 +2175,7 @@ function SetupView(props: {
             Round
           </label>
           <select
-            className="w-full rounded-sm border border-sc-border bg-sc-surface px-4 py-3 text-sm text-sc-ink focus:border-sc-gold-dim focus:outline-none transition-colors disabled:opacity-40"
+            className="w-full rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-4 py-3 text-sm text-sc-ink focus:border-sc-gold-dim focus:outline-none transition-colors disabled:opacity-40"
             value={props.round}
             onChange={(e) => props.setRound(e.target.value as Round)}
             disabled={drillActive}
@@ -2198,7 +2198,7 @@ function SetupView(props: {
               type="number"
               min={1}
               max={30}
-              className="w-full rounded-sm border border-sc-border bg-sc-surface px-4 py-3 text-sm text-sc-ink focus:border-sc-gold-dim focus:outline-none transition-colors"
+              className="w-full rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-4 py-3 text-sm text-sc-ink focus:border-sc-gold-dim focus:outline-none transition-colors"
               value={props.questionCount}
               onChange={(e) => props.setQuestionCount(Number(e.target.value))}
             />
@@ -2208,7 +2208,7 @@ function SetupView(props: {
               Difficulty
             </label>
             <select
-              className="w-full rounded-sm border border-sc-border bg-sc-surface px-4 py-3 text-sm text-sc-ink focus:border-sc-gold-dim focus:outline-none transition-colors"
+              className="w-full rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-4 py-3 text-sm text-sc-ink focus:border-sc-gold-dim focus:outline-none transition-colors"
               value={props.difficulty}
               onChange={(e) =>
                 props.setDifficulty(e.target.value as Difficulty)
@@ -2385,7 +2385,7 @@ function WarmupView(props: {
         </>
       ) : (
         <textarea
-          className="w-full rounded-sm border border-sc-border bg-sc-surface px-4 py-3 text-sm text-sc-ink placeholder:text-sc-dim focus:border-sc-gold-dim focus:outline-none transition-colors resize-none leading-relaxed font-sans"
+          className="w-full rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-4 py-3 text-sm text-sc-ink placeholder:text-sc-dim focus:border-sc-gold-dim focus:outline-none transition-colors resize-none leading-relaxed font-sans"
           rows={5}
           value={props.transcript}
           onChange={(e) => props.onTypeAnswer(e.target.value)}
@@ -2559,7 +2559,7 @@ function QuestionView(props: {
               )}
 
               {props.transcript && !props.browserRecording ? (
-                <div className="rounded-sm border border-sc-border bg-sc-surface">
+                <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm">
                   <div className="px-4 pt-3 pb-1 flex items-center justify-between">
                     <span className="font-mono text-xs tracking-widest text-sc-dim uppercase">
                       Your answer
@@ -2595,7 +2595,7 @@ function QuestionView(props: {
           )}
         </>
       ) : (
-        <div className="rounded-sm border border-sc-border bg-sc-surface">
+        <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm">
           {/* Feedback header */}
           <div className="px-4 py-3 border-b border-sc-line flex items-center justify-between">
             <span className="font-mono text-xs tracking-widest text-sc-dim uppercase">
@@ -2610,7 +2610,7 @@ function QuestionView(props: {
                 <button
                   type="button"
                   onClick={props.onRetry}
-                  className="rounded-sm border border-sc-border bg-sc-raised px-2.5 py-1.5 text-xs font-mono text-sc-muted hover:border-sc-gold-dim hover:text-sc-gold transition-all"
+                  className="rounded-sc border border-sc-border bg-sc-raised shadow-sc-sm px-2.5 py-1.5 text-xs font-mono text-sc-muted hover:border-sc-gold-dim hover:text-sc-gold transition-all"
                   title="Re-record the same question after seeing the sample answer"
                 >
                   ↻ Retry
@@ -2707,7 +2707,7 @@ function ReportView(props: {
 
       {/* Per-question score grid */}
       {props.items.length > 1 && (
-        <div className="rounded-sm border border-sc-border bg-sc-surface overflow-hidden">
+        <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm overflow-hidden">
           <div className="px-4 py-2.5 border-b border-sc-line">
             <span className="font-mono text-[10px] tracking-widest text-sc-dim uppercase">
               Per-question breakdown
@@ -2796,7 +2796,7 @@ function ReportView(props: {
       )}
 
       {/* AI report */}
-      <div className="rounded-sm border border-sc-border bg-sc-surface">
+      <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm">
         <div className="px-4 py-3 border-b border-sc-line flex items-center justify-between">
           <span className="font-mono text-xs tracking-widest text-sc-dim uppercase">
             Session debrief
@@ -2832,7 +2832,7 @@ function ReportView(props: {
 
       {/* Patterns */}
       {props.patternCounts.length > 0 ? (
-        <div className="rounded-sm border border-sc-border bg-sc-surface">
+        <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm">
           <div className="px-4 py-3 border-b border-sc-line">
             <span className="font-mono text-xs tracking-widest text-sc-dim uppercase">
               Repeated patterns
@@ -2842,7 +2842,7 @@ function ReportView(props: {
             {props.patternCounts.map(([p, idx]) => (
               <span
                 key={p}
-                className="inline-flex items-center gap-1.5 rounded-sm border border-sc-border bg-sc-raised px-2.5 py-1 font-mono text-xs text-sc-muted"
+                className="inline-flex items-center gap-1.5 rounded-sc border border-sc-border bg-sc-raised shadow-sc-sm px-2.5 py-1 font-mono text-xs text-sc-muted"
                 title={`Q${idx.map(String).join(", Q")}`}
               >
                 <span className="text-sc-red">●</span>
@@ -2853,7 +2853,7 @@ function ReportView(props: {
           </div>
         </div>
       ) : (
-        <div className="rounded-sm border border-sc-border bg-sc-surface px-4 py-3">
+        <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-4 py-3">
           <span className="font-mono text-xs text-sc-dim">
             No repeated patterns — clean session.
           </span>
@@ -2861,7 +2861,7 @@ function ReportView(props: {
       )}
 
       {/* All Q&A accordion */}
-      <details className="rounded-sm border border-sc-border bg-sc-surface group">
+      <details className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm group">
         <summary className="flex items-center justify-between px-4 py-3 cursor-pointer list-none">
           <span className="font-mono text-xs tracking-widest text-sc-dim uppercase">
             All questions &amp; feedback
@@ -2968,7 +2968,7 @@ function ReportView(props: {
 
         {/* Lowest axis → specific drill */}
         {lowestAxis === "english" && (
-          <div className="rounded-sm border border-sc-border bg-sc-surface px-4 py-3 flex items-center justify-between gap-4">
+          <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-4 py-3 flex items-center justify-between gap-4">
             <div className="min-w-0">
               <p className="text-sm font-semibold text-sc-ink">English was your weakest axis</p>
               <p className="font-mono text-xs text-sc-dim mt-0.5">
@@ -2977,7 +2977,7 @@ function ReportView(props: {
             </div>
             <Link
               href="/stagecraft/patterns"
-              className="shrink-0 rounded-sm border border-sc-border bg-sc-raised px-3 py-1.5 font-mono text-xs text-sc-dim hover:text-sc-gold hover:border-sc-gold-dim transition-colors"
+              className="shrink-0 rounded-sc border border-sc-border bg-sc-raised shadow-sc-sm px-3 py-1.5 font-mono text-xs text-sc-dim hover:text-sc-gold hover:border-sc-gold-dim transition-colors"
             >
               Patterns →
             </Link>
@@ -2985,7 +2985,7 @@ function ReportView(props: {
         )}
 
         {lowestAxis === "delivery" && (
-          <div className="rounded-sm border border-sc-border bg-sc-surface px-4 py-3 flex items-center justify-between gap-4">
+          <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-4 py-3 flex items-center justify-between gap-4">
             <div className="min-w-0">
               <p className="text-sm font-semibold text-sc-ink">Delivery is trailing your content</p>
               <p className="font-mono text-xs text-sc-dim mt-0.5">
@@ -2994,7 +2994,7 @@ function ReportView(props: {
             </div>
             <Link
               href="/stagecraft/drill"
-              className="shrink-0 rounded-sm border border-sc-border bg-sc-raised px-3 py-1.5 font-mono text-xs text-sc-dim hover:text-sc-gold hover:border-sc-gold-dim transition-colors"
+              className="shrink-0 rounded-sc border border-sc-border bg-sc-raised shadow-sc-sm px-3 py-1.5 font-mono text-xs text-sc-dim hover:text-sc-gold hover:border-sc-gold-dim transition-colors"
             >
               Drill →
             </Link>
@@ -3023,7 +3023,7 @@ function ReportView(props: {
 
         {/* Weakest question → re-drill */}
         {weakestItem && props.items.length >= 3 && (
-          <div className="rounded-sm border border-sc-border bg-sc-surface px-4 py-3 flex items-center justify-between gap-4">
+          <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-4 py-3 flex items-center justify-between gap-4">
             <div className="min-w-0">
               <p className="text-sm font-semibold text-sc-ink">
                 Q{weakestItem.index} was your toughest
@@ -3034,7 +3034,7 @@ function ReportView(props: {
             </div>
             <Link
               href={`/stagecraft/drill?q=${encodeURIComponent(weakestItem.question)}`}
-              className="shrink-0 rounded-sm border border-sc-border bg-sc-raised px-3 py-1.5 font-mono text-xs text-sc-dim hover:text-sc-gold hover:border-sc-gold-dim transition-colors"
+              className="shrink-0 rounded-sc border border-sc-border bg-sc-raised shadow-sc-sm px-3 py-1.5 font-mono text-xs text-sc-dim hover:text-sc-gold hover:border-sc-gold-dim transition-colors"
             >
               Re-drill →
             </Link>
@@ -3053,7 +3053,7 @@ function ReportView(props: {
         </button>
         <Link
           href="/stagecraft/checklist"
-          className="rounded-sm border border-sc-border bg-sc-surface px-5 py-3.5 font-mono text-xs text-sc-dim hover:text-sc-gold hover:border-sc-gold-dim transition-colors flex items-center"
+          className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-5 py-3.5 font-mono text-xs text-sc-dim hover:text-sc-gold hover:border-sc-gold-dim transition-colors flex items-center"
         >
           Checklist →
         </Link>
@@ -3304,7 +3304,7 @@ function AnswerModeToggle({
 }) {
   return (
     <div className="flex justify-center">
-      <div className="inline-flex items-center gap-0.5 rounded-sm border border-sc-border bg-sc-surface p-0.5">
+      <div className="inline-flex items-center gap-0.5 rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm p-0.5">
         <button
           type="button"
           onClick={() => onChange("voice")}
@@ -3401,7 +3401,7 @@ function TypeAnswerBox({
       : null;
 
   return (
-    <div className="rounded-sm border border-sc-border bg-sc-surface overflow-hidden">
+    <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm overflow-hidden">
       <textarea
         className="w-full bg-transparent px-4 py-3 text-sm text-sc-ink placeholder:text-sc-dim focus:outline-none resize-none leading-relaxed font-sans"
         rows={7}
@@ -3484,7 +3484,7 @@ function StreamingFeedbackRenderer({ raw }: { raw: string }) {
   return (
     <div className="space-y-4">
       {/* Grammar fix */}
-      <div className="rounded-sm border border-sc-border bg-sc-raised overflow-hidden">
+      <div className="rounded-sc border border-sc-border bg-sc-raised shadow-sc-sm overflow-hidden">
         <div className="flex items-center gap-2 px-3 py-2 border-b border-sc-line">
           <span className="w-1 h-3 rounded-full bg-sc-gold shrink-0" />
           <span className="font-mono text-xs tracking-widest text-sc-dim uppercase">
@@ -3535,7 +3535,7 @@ function StreamingFeedbackRenderer({ raw }: { raw: string }) {
 
       {/* Delivery tip */}
       {p.deliveryTip !== undefined && (
-        <div className="rounded-sm border border-sc-border bg-sc-raised px-3 py-3">
+        <div className="rounded-sc border border-sc-border bg-sc-raised shadow-sc-sm px-3 py-3">
           <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase mb-1.5">
             Delivery tip
           </p>
@@ -3593,7 +3593,7 @@ function GrammarFixSection({ sections }: { sections: FeedbackSections }) {
     sections.grammarFix.toLowerCase().startsWith("grammar is clean");
 
   return (
-    <div className="rounded-sm border border-sc-border bg-sc-raised overflow-hidden">
+    <div className="rounded-sc border border-sc-border bg-sc-raised shadow-sc-sm overflow-hidden">
       <div className="flex items-center gap-2 px-3 py-2 border-b border-sc-line">
         <span className="w-1 h-3 rounded-full bg-sc-gold shrink-0" />
         <span className="font-mono text-xs tracking-widest text-sc-dim uppercase">
@@ -3734,7 +3734,7 @@ function AnnotatedTranscript({ transcript }: { transcript: string }) {
     <details
       open={open}
       onToggle={(e) => setOpen((e.target as HTMLDetailsElement).open)}
-      className="rounded-sm border border-sc-border bg-sc-raised overflow-hidden"
+      className="rounded-sc border border-sc-border bg-sc-raised shadow-sc-sm overflow-hidden"
     >
       <summary className="flex items-center justify-between px-3 py-2 cursor-pointer list-none select-none">
         <div className="flex items-center gap-2">
@@ -3969,7 +3969,7 @@ function SampleAnswerSection({
 
 function DeliveryTipSection({ sections }: { sections: FeedbackSections }) {
   return (
-    <div className="flex items-start gap-3 px-3 py-2.5 rounded-sm border border-sc-border bg-sc-raised">
+    <div className="flex items-start gap-3 px-3 py-2.5 rounded-sc border border-sc-border bg-sc-raised shadow-sc-sm">
       <span className="font-mono text-xs tracking-widest text-sc-dim uppercase shrink-0 mt-0.5">
         Tip
       </span>
@@ -4002,7 +4002,7 @@ function ScoreSection({ sections }: { sections: FeedbackSections }) {
     .trim();
 
   return (
-    <div className="rounded-sm border border-sc-border bg-sc-raised overflow-hidden">
+    <div className="rounded-sc border border-sc-border bg-sc-raised shadow-sc-sm overflow-hidden">
       <div className="flex items-center gap-2 px-3 py-2 border-b border-sc-line">
         <span className="w-1 h-3 rounded-full bg-sc-muted shrink-0" />
         <span className="font-mono text-xs tracking-widest text-sc-dim uppercase">

@@ -170,7 +170,7 @@ function AttemptRow({ attempt }: { attempt: Attempt }) {
   const anchorsHit = Object.values(attempt.anchors).filter(Boolean).length;
 
   return (
-    <div className="rounded-sm border border-sc-border bg-sc-surface overflow-hidden">
+    <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm overflow-hidden">
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
@@ -564,7 +564,7 @@ export default function IntroForgePage() {
         </div>
 
         {/* ── Input area ── */}
-        <div className="rounded-sm border border-sc-border bg-sc-surface overflow-hidden focus-within:border-sc-gold-dim transition-colors">
+        <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm overflow-hidden focus-within:border-sc-gold-dim transition-colors">
           {/* Mode tabs */}
           <div className="flex border-b border-sc-line">
             {(["voice", "type"] as InputMode[]).map((m) => (
@@ -655,7 +655,7 @@ export default function IntroForgePage() {
                     type="button"
                     onClick={startRecording}
                     disabled={isGrading}
-                    className="flex items-center gap-1.5 rounded-sm border border-sc-border bg-sc-raised px-3 py-2 font-mono text-xs text-sc-dim hover:border-sc-gold-dim hover:text-sc-gold transition-colors disabled:opacity-40"
+                    className="flex items-center gap-1.5 rounded-sc border border-sc-border bg-sc-raised shadow-sc-sm px-3 py-2 font-mono text-xs text-sc-dim hover:border-sc-gold-dim hover:text-sc-gold transition-colors disabled:opacity-40"
                   >
                     <span className="text-sc-red">⏺</span>
                     <span>{speechSupported ? "Whisper" : "Record"}</span>
@@ -711,7 +711,7 @@ export default function IntroForgePage() {
 
           {/* Streaming coaching preview */}
           {isGrading && streamText && (
-            <div className="rounded-sm border border-sc-border bg-sc-raised px-4 py-3">
+            <div className="rounded-sc border border-sc-border bg-sc-raised shadow-sc-sm px-4 py-3">
               <p className="font-mono text-xs text-sc-gold mb-1.5 animate-pulse">
                 Coaching…
               </p>
@@ -793,7 +793,7 @@ export default function IntroForgePage() {
               </Link>
               <Link
                 href="/stagecraft/drill"
-                className="rounded-sm border border-sc-border bg-sc-surface px-5 py-2.5 font-mono text-xs text-sc-dim hover:text-sc-gold hover:border-sc-gold-dim transition-colors"
+                className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-5 py-2.5 font-mono text-xs text-sc-dim hover:text-sc-gold hover:border-sc-gold-dim transition-colors"
               >
                 Next priority drill →
               </Link>

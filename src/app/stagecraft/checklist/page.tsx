@@ -569,7 +569,7 @@ export default function ChecklistPage() {
 
             {/* Bottom callout */}
             <div className="border-t border-sc-border pt-6 space-y-3">
-              <div className="rounded-sm border border-sc-border bg-sc-surface px-4 py-4">
+              <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-4 py-4">
                 <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase mb-2">
                   On the morning of the interview
                 </p>
@@ -602,13 +602,13 @@ export default function ChecklistPage() {
                 </Link>
                 <Link
                   href="/stagecraft/companies/kohler-india"
-                  className="rounded-sm border border-sc-border bg-sc-surface px-5 py-2.5 font-mono text-xs text-sc-dim hover:text-sc-gold hover:border-sc-gold-dim transition-colors"
+                  className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-5 py-2.5 font-mono text-xs text-sc-dim hover:text-sc-gold hover:border-sc-gold-dim transition-colors"
                 >
                   Kohler brief →
                 </Link>
                 <Link
                   href="/stagecraft/memorize"
-                  className="rounded-sm border border-sc-border bg-sc-surface px-5 py-2.5 font-mono text-xs text-sc-dim hover:text-sc-gold hover:border-sc-gold-dim transition-colors"
+                  className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-5 py-2.5 font-mono text-xs text-sc-dim hover:text-sc-gold hover:border-sc-gold-dim transition-colors"
                 >
                   Memorize queue →
                 </Link>

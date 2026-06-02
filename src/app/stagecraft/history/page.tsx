@@ -260,7 +260,7 @@ function KohlerCard({ value }: { value: number | null }) {
 
 function SummaryCard({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-sm border border-sc-border bg-sc-surface px-4 py-3">
+    <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-4 py-3">
       <p className="font-mono text-xs tracking-widest text-sc-dim uppercase mb-1">
         {label}
       </p>
@@ -290,7 +290,7 @@ function TrendChart({ sessions }: { sessions: SessionSummary[] }) {
     }));
 
   return (
-    <div className="rounded-sm border border-sc-border bg-sc-surface">
+    <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm">
       <div className="px-4 py-3 border-b border-sc-line">
         <span className="font-mono text-xs tracking-widest text-sc-dim uppercase">
           Score trends — last {chartData.length} sessions
@@ -384,7 +384,7 @@ function ChartTooltip({
 }) {
   if (!active || !payload?.length) return null;
   return (
-    <div className="rounded-sm border border-sc-border bg-sc-raised px-3 py-2 font-mono text-xs space-y-0.5">
+    <div className="rounded-sc border border-sc-border bg-sc-raised shadow-sc-sm px-3 py-2 font-mono text-xs space-y-0.5">
       <p className="text-sc-muted mb-1">{label}</p>
       {payload.map((p) => (
         <p key={p.name} style={{ color: p.color }}>
@@ -425,7 +425,7 @@ function RoundBreakdown({ sessions }: { sessions: SessionSummary[] }) {
   const weakest = rounds[0];
 
   return (
-    <div className="rounded-sm border border-sc-border bg-sc-surface overflow-hidden">
+    <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm overflow-hidden">
       <div className="px-4 py-3 border-b border-sc-line">
         <span className="font-mono text-[10px] tracking-widest text-sc-dim uppercase">
           Performance by round
@@ -585,7 +585,7 @@ function PatternBoard({
   const hasTrends = sessions.length >= 4;
 
   return (
-    <div className="rounded-sm border border-sc-border bg-sc-surface">
+    <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm">
       <div className="px-4 py-3 border-b border-sc-line flex items-center justify-between">
         <span className="font-mono text-xs tracking-widest text-sc-dim uppercase">
           Grammar patterns — all time
@@ -714,7 +714,7 @@ function SessionRow({
   const uniquePatterns = [...new Set(s.patterns)].slice(0, 5);
 
   return (
-    <div className="rounded-sm border border-sc-border bg-sc-surface">
+    <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm">
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
@@ -755,7 +755,7 @@ function SessionRow({
               {uniquePatterns.map((p) => (
                 <span
                   key={p}
-                  className="rounded-sm border border-sc-border bg-sc-raised px-2 py-0.5 font-mono text-xs text-sc-muted"
+                  className="rounded-sc border border-sc-border bg-sc-raised shadow-sc-sm px-2 py-0.5 font-mono text-xs text-sc-muted"
                 >
                   {p}
                 </span>
@@ -780,7 +780,7 @@ function SessionRow({
             </Link>
             <Link
               href="/stagecraft"
-              className="inline-block rounded-sm border border-sc-border bg-sc-raised px-3 py-1.5 font-mono text-xs text-sc-muted hover:border-sc-gold-dim hover:text-sc-gold transition-colors"
+              className="inline-block rounded-sc border border-sc-border bg-sc-raised shadow-sc-sm px-3 py-1.5 font-mono text-xs text-sc-muted hover:border-sc-gold-dim hover:text-sc-gold transition-colors"
             >
               New session →
             </Link>

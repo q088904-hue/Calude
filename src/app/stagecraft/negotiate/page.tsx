@@ -454,7 +454,7 @@ export default function NegotiatePage() {
             ))}
           </div>
           {/* Band + notes */}
-          <div className="rounded-sm border border-sc-border bg-sc-surface px-4 py-3 space-y-1">
+          <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-4 py-3 space-y-1">
             <p className="font-mono text-xs text-sc-gold">{activeMarket.band}</p>
             <p className="font-mono text-xs text-sc-dim leading-relaxed">{activeMarket.notes}</p>
           </div>
@@ -463,7 +463,7 @@ export default function NegotiatePage() {
         {/* ── Scenario selector ── */}
         <div className="space-y-2">
           <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase">Scenario</p>
-          <div className="rounded-sm border border-sc-border bg-sc-surface divide-y divide-sc-line overflow-hidden">
+          <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm divide-y divide-sc-line overflow-hidden">
             {SCENARIOS.map((s) => {
               const sAttempts = attempts.filter((a) => a.scenarioId === s.id);
               const sHeld = sAttempts.filter((a) => a.blocks.verdictKind === "held").length;
@@ -567,7 +567,7 @@ export default function NegotiatePage() {
               <div className="space-y-3">
                 {/* Transcript display */}
                 {(transcript || interimText) && (
-                  <div className="rounded-sm border border-sc-border bg-sc-surface px-4 py-3">
+                  <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-4 py-3">
                     <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase mb-1.5">
                       {browserRecording ? "Listening…" : "Your response"}
                     </p>
@@ -621,7 +621,7 @@ export default function NegotiatePage() {
                       {!browserRecording && recorderState === "idle" && (
                         <button
                           onClick={startRecording}
-                          className="flex items-center gap-2 rounded-sm border border-sc-border bg-sc-surface px-4 py-3 font-mono text-sm text-sc-dim hover:border-sc-gold-dim hover:text-sc-gold transition-colors"
+                          className="flex items-center gap-2 rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-4 py-3 font-mono text-sm text-sc-dim hover:border-sc-gold-dim hover:text-sc-gold transition-colors"
                         >
                           <span>⏺</span>
                           <span>{speechSupported ? "Record (Whisper)" : "Record"}</span>
@@ -679,7 +679,7 @@ export default function NegotiatePage() {
                   onChange={(e) => setTranscript(e.target.value)}
                   placeholder="Type what you would say on the call…"
                   rows={4}
-                  className="w-full rounded-sm border border-sc-border bg-sc-surface px-4 py-3 text-sm text-sc-ink placeholder:text-sc-dim focus:border-sc-gold-dim focus:outline-none transition-colors resize-none leading-relaxed"
+                  className="w-full rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-4 py-3 text-sm text-sc-ink placeholder:text-sc-dim focus:border-sc-gold-dim focus:outline-none transition-colors resize-none leading-relaxed"
                 />
                 <button
                   disabled={!transcript.trim()}
@@ -700,7 +700,7 @@ export default function NegotiatePage() {
 
         {/* ── Streaming ── */}
         {feedbackStreaming && (
-          <div className="rounded-sm border border-sc-border bg-sc-surface px-4 py-3 font-mono text-xs text-sc-dim animate-pulse">
+          <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-4 py-3 font-mono text-xs text-sc-dim animate-pulse">
             Analysing…
           </div>
         )}
@@ -739,7 +739,7 @@ export default function NegotiatePage() {
             {/* Try again */}
             <button
               onClick={retry}
-              className="w-full rounded-sm border border-sc-border bg-sc-surface px-4 py-3 font-mono text-sm text-sc-dim hover:border-sc-gold-dim hover:text-sc-gold transition-colors"
+              className="w-full rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-4 py-3 font-mono text-sm text-sc-dim hover:border-sc-gold-dim hover:text-sc-gold transition-colors"
             >
               Try again ↩
             </button>
@@ -760,7 +760,7 @@ export default function NegotiatePage() {
                 }[a.blocks.verdictKind];
                 const scenLabel = SCENARIOS.find((s) => s.id === a.scenarioId)?.label ?? a.scenarioId;
                 return (
-                  <div key={a.n} className="flex items-center gap-3 rounded-sm border border-sc-border bg-sc-surface px-3 py-2">
+                  <div key={a.n} className="flex items-center gap-3 rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-3 py-2">
                     <span className="font-mono text-[10px] text-sc-dim w-5 text-right shrink-0">#{a.n}</span>
                     <span className={`font-mono text-xs font-bold shrink-0 ${col}`}>{sym}</span>
                     <span className="font-mono text-[10px] text-sc-dim shrink-0 hidden sm:inline">{scenLabel}</span>

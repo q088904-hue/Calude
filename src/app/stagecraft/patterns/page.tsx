@@ -240,7 +240,7 @@ function PatternRow({
   const sparkRates = pattern.allSessionRates.map((s) => s.rate);
 
   return (
-    <div className="rounded-sm border border-sc-border bg-sc-surface overflow-hidden">
+    <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm overflow-hidden">
       {/* Main row */}
       <button
         type="button"
@@ -395,7 +395,7 @@ function PatternRow({
                 {pattern.recentExamples.map((ex, i) => (
                   <div
                     key={i}
-                    className="rounded-sm border border-sc-border bg-sc-raised px-3 py-2.5 flex items-start gap-3"
+                    className="rounded-sc border border-sc-border bg-sc-raised shadow-sc-sm px-3 py-2.5 flex items-start gap-3"
                   >
                     <div className="flex-1 min-w-0">
                       <p className="text-sm text-sc-ink leading-snug">

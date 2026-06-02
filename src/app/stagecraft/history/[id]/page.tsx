@@ -96,7 +96,7 @@ function QACard({ item, n }: { item: QAItem; n: number }) {
         : "text-sc-red";
 
   return (
-    <div className="rounded-sm border border-sc-border bg-sc-surface overflow-hidden">
+    <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm overflow-hidden">
       {/* ── Card header (always visible) ── */}
       <div className="px-4 py-4 space-y-3">
         {/* Question row */}
@@ -127,7 +127,7 @@ function QACard({ item, n }: { item: QAItem; n: number }) {
             {[...new Set(item.patterns)].map((p) => (
               <span
                 key={p}
-                className="rounded-sm border border-sc-border bg-sc-raised px-2 py-0.5 font-mono text-xs text-sc-muted"
+                className="rounded-sc border border-sc-border bg-sc-raised shadow-sc-sm px-2 py-0.5 font-mono text-xs text-sc-muted"
               >
                 {p}
               </span>
@@ -332,7 +332,7 @@ export default function SessionDetailPage({
 
             {/* ── AI session report (if exists) ── */}
             {record.report && (
-              <div className="rounded-sm border border-sc-border bg-sc-surface">
+              <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm">
                 <button
                   type="button"
                   onClick={() => setReportOpen((v) => !v)}
@@ -365,7 +365,7 @@ export default function SessionDetailPage({
             <div className="flex gap-3 pt-2 border-t border-sc-border">
               <Link
                 href="/stagecraft/history"
-                className="rounded-sm border border-sc-border bg-sc-surface px-4 py-2.5 font-mono text-xs text-sc-dim hover:text-sc-ink hover:border-sc-gold-dim transition-colors"
+                className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-4 py-2.5 font-mono text-xs text-sc-dim hover:text-sc-ink hover:border-sc-gold-dim transition-colors"
               >
                 ← All sessions
               </Link>
@@ -377,7 +377,7 @@ export default function SessionDetailPage({
               </Link>
               <Link
                 href="/stagecraft/drill"
-                className="rounded-sm border border-sc-border bg-sc-surface px-4 py-2.5 font-mono text-xs text-sc-dim hover:text-sc-ink hover:border-sc-gold-dim transition-colors"
+                className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-4 py-2.5 font-mono text-xs text-sc-dim hover:text-sc-ink hover:border-sc-gold-dim transition-colors"
               >
                 Drill →
               </Link>

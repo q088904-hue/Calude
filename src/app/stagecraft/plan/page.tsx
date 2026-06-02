@@ -222,7 +222,7 @@ function PlanPageInner() {
           <div className="space-y-6">
             {/* Streaming preview */}
             {planRaw ? (
-              <div className="rounded-sm border border-sc-border bg-sc-surface px-5 py-5">
+              <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-5 py-5">
                 <p className="font-mono text-xs text-sc-gold mb-3 animate-pulse">
                   Writing your plan…
                 </p>
@@ -268,7 +268,7 @@ function PlanPageInner() {
         {state === "done" && sections.length > 0 && (
           <>
             {/* Company context strip */}
-            <div className="flex items-center gap-3 rounded-sm border border-sc-border bg-sc-surface px-4 py-3">
+            <div className="flex items-center gap-3 rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-4 py-3">
               <span className="font-mono text-xs text-sc-gold">◆</span>
               <p className="font-mono text-xs text-sc-muted">
                 {activePack.shortName} · Creative Director
@@ -324,7 +324,7 @@ function PlanPageInner() {
             </div>
 
             {/* How to use this */}
-            <div className="rounded-sm border border-sc-border bg-sc-surface px-4 py-4 space-y-2">
+            <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-4 py-4 space-y-2">
               <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase">
                 How to use this
               </p>
@@ -377,7 +377,7 @@ function PlanPageInner() {
               </Link>
               <Link
                 href={`/stagecraft/companies/${activePack.id}`}
-                className="rounded-sm border border-sc-border bg-sc-surface px-5 py-2.5 font-mono text-xs text-sc-dim hover:text-sc-gold hover:border-sc-gold-dim transition-colors"
+                className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-5 py-2.5 font-mono text-xs text-sc-dim hover:text-sc-gold hover:border-sc-gold-dim transition-colors"
               >
                 Full company prep →
               </Link>
@@ -386,7 +386,7 @@ function PlanPageInner() {
                   setState("select");
                   setPlanRaw("");
                 }}
-                className="rounded-sm border border-sc-border bg-sc-surface px-5 py-2.5 font-mono text-xs text-sc-dim hover:text-sc-gold hover:border-sc-gold-dim transition-colors"
+                className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-5 py-2.5 font-mono text-xs text-sc-dim hover:text-sc-gold hover:border-sc-gold-dim transition-colors"
               >
                 Try another company
               </button>
