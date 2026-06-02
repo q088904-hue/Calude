@@ -151,7 +151,7 @@ function AttemptRow({ attempt }: { attempt: Attempt }) {
   }).sort(([, a], [, b]) => a - b)[0];
 
   return (
-    <div className="rounded-sm border border-sc-border bg-sc-surface overflow-hidden">
+    <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm overflow-hidden">
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
@@ -294,7 +294,7 @@ function StoryCard({
               {story.tags.map((t) => (
                 <span
                   key={t}
-                  className="rounded-sm border border-sc-border bg-sc-raised px-1.5 py-0.5 font-mono text-[10px] text-sc-dim"
+                  className="rounded-sc border border-sc-border bg-sc-raised shadow-sc-sm px-1.5 py-0.5 font-mono text-[10px] text-sc-dim"
                 >
                   {t}
                 </span>
@@ -750,7 +750,7 @@ export default function StarDrillPage() {
         {activeStoryIdx !== null && activeStory && (
           <>
             {/* Story context toggle */}
-            <div className="rounded-sm border border-sc-border bg-sc-surface overflow-hidden">
+            <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm overflow-hidden">
               <button
                 type="button"
                 onClick={() => setShowReference((v) => !v)}
@@ -796,7 +796,7 @@ export default function StarDrillPage() {
             )}
 
             {/* Input area */}
-            <div className="rounded-sm border border-sc-border bg-sc-surface overflow-hidden focus-within:border-sc-gold-dim transition-colors">
+            <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm overflow-hidden focus-within:border-sc-gold-dim transition-colors">
               {/* Mode tabs */}
               <div className="flex border-b border-sc-line">
                 {(["voice", "type"] as const).map((m) => (
@@ -909,7 +909,7 @@ export default function StarDrillPage() {
                           type="button"
                           onClick={startRecording}
                           disabled={isGrading}
-                          className="flex items-center gap-1.5 rounded-sm border border-sc-border bg-sc-raised px-3 py-2 font-mono text-xs text-sc-dim hover:border-sc-gold-dim hover:text-sc-gold transition-colors disabled:opacity-40"
+                          className="flex items-center gap-1.5 rounded-sc border border-sc-border bg-sc-raised shadow-sc-sm px-3 py-2 font-mono text-xs text-sc-dim hover:border-sc-gold-dim hover:text-sc-gold transition-colors disabled:opacity-40"
                         >
                           <span className="text-sc-red">⏺</span>
                           <span>{speechSupported ? "Record with Whisper" : "Record"}</span>
@@ -964,7 +964,7 @@ export default function StarDrillPage() {
 
               {/* Stream preview */}
               {isGrading && streamText && (
-                <div className="rounded-sm border border-sc-border bg-sc-raised px-4 py-3">
+                <div className="rounded-sc border border-sc-border bg-sc-raised shadow-sc-sm px-4 py-3">
                   <p className="font-mono text-xs text-sc-gold mb-1.5 animate-pulse">
                     Coaching…
                   </p>

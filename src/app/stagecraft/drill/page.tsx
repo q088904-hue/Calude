@@ -535,7 +535,7 @@ function DrillPage() {
         </div>
 
         {/* ── Mastery tracker ── */}
-        <div className="rounded-sm border border-sc-border bg-sc-surface px-5 py-4">
+        <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-5 py-4">
           <div className="flex items-center gap-5">
             {/* Three rings */}
             <div className="flex gap-2.5">
@@ -660,7 +660,7 @@ function DrillPage() {
                     )}
                     {/* Live transcript while speaking */}
                     {(transcript || interimTranscript) && (
-                      <div className="rounded-sm border border-sc-border bg-sc-surface px-4 py-3 text-sm text-sc-ink leading-relaxed min-h-[3rem]">
+                      <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-4 py-3 text-sm text-sc-ink leading-relaxed min-h-[3rem]">
                         {transcript}
                         {interimTranscript && (
                           <span className="text-sc-muted/60 italic"> …{interimTranscript}</span>
@@ -694,7 +694,7 @@ function DrillPage() {
                         </div>
                         <button
                           onClick={startRecording}
-                          className="w-full rounded-sm border border-sc-border bg-sc-surface px-4 py-2.5 font-mono text-xs text-sc-dim hover:border-sc-gold-dim hover:text-sc-gold transition-colors"
+                          className="w-full rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-4 py-2.5 font-mono text-xs text-sc-dim hover:border-sc-gold-dim hover:text-sc-gold transition-colors"
                         >
                           Record with Whisper (higher accuracy)
                         </button>
@@ -707,7 +707,7 @@ function DrillPage() {
                 {!speechSupported && recorderState === "idle" && (
                   <button
                     onClick={startRecording}
-                    className="w-full rounded-sm border border-sc-border bg-sc-surface px-4 py-4 font-mono text-sm text-sc-dim hover:border-sc-gold-dim hover:text-sc-gold transition-colors"
+                    className="w-full rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-4 py-4 font-mono text-sm text-sc-dim hover:border-sc-gold-dim hover:text-sc-gold transition-colors"
                   >
                     Tap to record your answer
                   </button>
@@ -721,7 +721,7 @@ function DrillPage() {
                   </button>
                 )}
                 {recorderState === "uploading" && (
-                  <div className="w-full rounded-sm border border-sc-border bg-sc-surface px-4 py-4 font-mono text-sm text-sc-dim animate-pulse">
+                  <div className="w-full rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-4 py-4 font-mono text-sm text-sc-dim animate-pulse">
                     Transcribing…
                   </div>
                 )}
@@ -731,7 +731,7 @@ function DrillPage() {
                       <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase mb-1.5">
                         Your answer
                       </p>
-                      <div className="rounded-sm border border-sc-border bg-sc-surface px-4 py-3 text-sm text-sc-ink leading-relaxed">
+                      <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-4 py-3 text-sm text-sc-ink leading-relaxed">
                         {transcript}
                       </div>
                     </div>
@@ -765,7 +765,7 @@ function DrillPage() {
                   onChange={(e) => setTranscript(e.target.value)}
                   placeholder="Type your answer here…"
                   rows={5}
-                  className="w-full rounded-sm border border-sc-border bg-sc-surface px-4 py-3 text-sm text-sc-ink placeholder:text-sc-dim focus:border-sc-gold-dim focus:outline-none transition-colors resize-none leading-relaxed"
+                  className="w-full rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-4 py-3 text-sm text-sc-ink placeholder:text-sc-dim focus:border-sc-gold-dim focus:outline-none transition-colors resize-none leading-relaxed"
                 />
                 <button
                   disabled={!transcript.trim()}
@@ -787,7 +787,7 @@ function DrillPage() {
 
         {/* ── Streaming indicator ── */}
         {feedbackStreaming && (
-          <div className="rounded-sm border border-sc-border bg-sc-surface px-4 py-3 font-mono text-xs text-sc-dim animate-pulse">
+          <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-4 py-3 font-mono text-xs text-sc-dim animate-pulse">
             Coaching…
           </div>
         )}
@@ -892,7 +892,7 @@ function DrillPage() {
             ) : (
               <button
                 onClick={retry}
-                className="w-full rounded-sm border border-sc-border bg-sc-surface px-4 py-3 font-mono text-sm text-sc-dim hover:border-sc-gold-dim hover:text-sc-gold transition-colors"
+                className="w-full rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-4 py-3 font-mono text-sm text-sc-dim hover:border-sc-gold-dim hover:text-sc-gold transition-colors"
               >
                 Try again ↩
               </button>
@@ -910,7 +910,7 @@ function DrillPage() {
               {[...attempts].reverse().map((a) => (
                 <div
                   key={a.n}
-                  className="flex items-center gap-3 rounded-sm border border-sc-border bg-sc-surface px-3 py-2"
+                  className="flex items-center gap-3 rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-3 py-2"
                 >
                   <span className="font-mono text-[10px] text-sc-dim w-5 text-right shrink-0">
                     #{a.n}

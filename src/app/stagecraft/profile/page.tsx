@@ -167,7 +167,7 @@ export default function ProfilePage() {
             type="button"
             onClick={reset}
             disabled={saving || loading}
-            className="rounded-sm border border-sc-border bg-sc-surface px-3 py-1.5 text-xs font-mono text-sc-dim hover:border-sc-red/40 hover:text-sc-red transition-colors disabled:opacity-30"
+            className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-3 py-1.5 text-xs font-mono text-sc-dim hover:border-sc-red/40 hover:text-sc-red transition-colors disabled:opacity-30"
           >
             Restore defaults
           </button>
@@ -419,7 +419,7 @@ function StoryCard({
   const [open, setOpen] = useState(index === 0);
 
   return (
-    <div className="rounded-sm border border-sc-border bg-sc-surface overflow-hidden">
+    <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm overflow-hidden">
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}

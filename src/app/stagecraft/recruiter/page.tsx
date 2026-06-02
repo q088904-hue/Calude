@@ -207,7 +207,7 @@ export default function RecruiterPage() {
             )}
             <button
               onClick={reset}
-              className="rounded-sm border border-sc-border bg-sc-surface px-3 py-1.5 font-mono text-xs text-sc-dim hover:text-sc-gold hover:border-sc-gold-dim transition-colors"
+              className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-3 py-1.5 font-mono text-xs text-sc-dim hover:text-sc-gold hover:border-sc-gold-dim transition-colors"
             >
               New message
             </button>
@@ -251,7 +251,7 @@ export default function RecruiterPage() {
                   load example ↻
                 </button>
               </div>
-              <div className="rounded-sm border border-sc-border bg-sc-surface overflow-hidden focus-within:border-sc-gold-dim transition-colors">
+              <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm overflow-hidden focus-within:border-sc-gold-dim transition-colors">
                 <textarea
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
@@ -319,7 +319,7 @@ export default function RecruiterPage() {
             )}
 
             {/* Fit notes */}
-            <div className="rounded-sm border border-sc-border bg-sc-surface px-4 py-4 space-y-2">
+            <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-4 py-4 space-y-2">
               <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase">
                 Fit read
               </p>
@@ -382,20 +382,20 @@ export default function RecruiterPage() {
                 {result.detectedCompany && (
                   <Link
                     href={`/stagecraft/companies/${resolveCompanyId(result.detectedCompany)}`}
-                    className="rounded-sm border border-sc-border bg-sc-surface px-5 py-2.5 font-mono text-xs text-sc-dim hover:text-sc-gold hover:border-sc-gold-dim transition-colors"
+                    className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-5 py-2.5 font-mono text-xs text-sc-dim hover:text-sc-gold hover:border-sc-gold-dim transition-colors"
                   >
                     Company prep →
                   </Link>
                 )}
                 <Link
                   href="/stagecraft/negotiate"
-                  className="rounded-sm border border-sc-border bg-sc-surface px-5 py-2.5 font-mono text-xs text-sc-dim hover:text-sc-gold hover:border-sc-gold-dim transition-colors"
+                  className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-5 py-2.5 font-mono text-xs text-sc-dim hover:text-sc-gold hover:border-sc-gold-dim transition-colors"
                 >
                   Negotiate simulator →
                 </Link>
                 <button
                   onClick={reset}
-                  className="rounded-sm border border-sc-border bg-sc-surface px-5 py-2.5 font-mono text-xs text-sc-dim hover:text-sc-gold hover:border-sc-gold-dim transition-colors"
+                  className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-5 py-2.5 font-mono text-xs text-sc-dim hover:text-sc-gold hover:border-sc-gold-dim transition-colors"
                 >
                   Another message
                 </button>

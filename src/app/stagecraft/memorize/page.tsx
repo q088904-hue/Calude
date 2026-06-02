@@ -163,7 +163,7 @@ function RecallCard({
       </div>
 
       {/* Question card */}
-      <div className="rounded-sm border border-sc-border bg-sc-surface px-5 py-5 space-y-2">
+      <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-5 py-5 space-y-2">
         <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase">
           Question
         </p>
@@ -204,7 +204,7 @@ function RecallCard({
           <div className="grid grid-cols-2 gap-3">
             <button
               onClick={onAgain}
-              className="rounded-sm border border-sc-border bg-sc-surface px-4 py-3 text-sm font-semibold text-sc-muted hover:border-sc-gold-dim hover:text-sc-gold transition-all"
+              className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-4 py-3 text-sm font-semibold text-sc-muted hover:border-sc-gold-dim hover:text-sc-gold transition-all"
             >
               ↻ Again
             </button>
@@ -261,7 +261,7 @@ function RecallDone({ count, onRestart }: { count: number; onRestart: () => void
         </button>
         <Link
           href="/stagecraft"
-          className="rounded-sm border border-sc-border bg-sc-surface px-6 py-3 font-mono text-xs text-sc-dim hover:text-sc-gold hover:border-sc-gold-dim transition-colors"
+          className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-6 py-3 font-mono text-xs text-sc-dim hover:text-sc-gold hover:border-sc-gold-dim transition-colors"
         >
           Full session →
         </Link>
@@ -402,7 +402,7 @@ export default function MemorizePage() {
           {mode === "recall" && (
             <button
               onClick={() => setMode("list")}
-              className="rounded-sm border border-sc-border bg-sc-surface px-3 py-1.5 font-mono text-xs text-sc-dim hover:text-sc-gold hover:border-sc-gold-dim transition-colors"
+              className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-3 py-1.5 font-mono text-xs text-sc-dim hover:text-sc-gold hover:border-sc-gold-dim transition-colors"
             >
               List view
             </button>
@@ -464,7 +464,7 @@ export default function MemorizePage() {
                 {items.map((m, i) => (
                   <li
                     key={m.id}
-                    className="rounded-sm border border-sc-border bg-sc-surface hover:border-sc-gold-dim/40 transition-colors overflow-hidden"
+                    className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm hover:border-sc-gold-dim/40 transition-colors overflow-hidden"
                   >
                     {/* Card header */}
                     <div className="px-4 py-3 border-b border-sc-line flex items-center justify-between">
@@ -500,14 +500,14 @@ export default function MemorizePage() {
                       <div className="flex items-center gap-2 shrink-0">
                         <Link
                           href={`/stagecraft?drill=${encodeURIComponent(m.question)}`}
-                          className="rounded-sm border border-sc-border bg-sc-raised px-2.5 py-1 text-xs font-mono text-sc-muted hover:border-sc-gold-dim hover:text-sc-gold transition-all"
+                          className="rounded-sc border border-sc-border bg-sc-raised shadow-sc-sm px-2.5 py-1 text-xs font-mono text-sc-muted hover:border-sc-gold-dim hover:text-sc-gold transition-all"
                         >
                           Drill →
                         </Link>
                         <button
                           type="button"
                           onClick={() => void remove(m.id)}
-                          className="rounded-sm border border-sc-border bg-sc-raised px-2.5 py-1 text-xs font-mono text-sc-dim hover:border-sc-red/40 hover:text-sc-red transition-all"
+                          className="rounded-sc border border-sc-border bg-sc-raised shadow-sc-sm px-2.5 py-1 text-xs font-mono text-sc-dim hover:border-sc-red/40 hover:text-sc-red transition-all"
                         >
                           Remove
                         </button>
