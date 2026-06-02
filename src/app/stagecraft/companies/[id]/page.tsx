@@ -361,7 +361,7 @@ export default function CompanyDeepDivePage({
             <div className="flex flex-wrap items-center gap-2">
               {roundSteps.map((step, i) => (
                 <div key={i} className="flex items-center gap-2">
-                  <span className="rounded-sm border border-sc-border bg-sc-surface px-3 py-1.5 font-mono text-xs text-sc-muted">
+                  <span className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-3 py-1.5 font-mono text-xs text-sc-muted">
                     {step}
                   </span>
                   {i < roundSteps.length - 1 && (
@@ -396,7 +396,7 @@ export default function CompanyDeepDivePage({
 
         {/* ── Brand brief ── */}
         <ScrollReveal delay={160}>
-        <div className="rounded-sm border border-sc-border bg-sc-surface overflow-hidden">
+        <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm overflow-hidden">
           <button
             type="button"
             onClick={() => setBriefOpen((v) => !v)}
@@ -462,7 +462,7 @@ export default function CompanyDeepDivePage({
             {questions.map((q, i) => (
               <div
                 key={i}
-                className="rounded-sm border border-sc-border bg-sc-surface overflow-hidden"
+                className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm overflow-hidden"
               >
                 <div className="px-4 py-3.5 space-y-2.5">
                   <div className="flex items-center gap-2">
@@ -531,7 +531,7 @@ export default function CompanyDeepDivePage({
             </Link>
             <Link
               href="/stagecraft/portfolio"
-              className="rounded-sm border border-sc-border bg-sc-surface px-5 py-2.5 font-mono text-xs text-sc-dim hover:text-sc-gold hover:border-sc-gold-dim transition-colors"
+              className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-5 py-2.5 font-mono text-xs text-sc-dim hover:text-sc-gold hover:border-sc-gold-dim transition-colors"
             >
               Portfolio defence →
             </Link>
@@ -550,7 +550,7 @@ export default function CompanyDeepDivePage({
               <Link
                 key={p.id}
                 href={`/stagecraft/companies/${p.id}`}
-                className="rounded-sm border border-sc-border bg-sc-surface px-3 py-1.5 font-mono text-xs text-sc-dim hover:border-sc-gold-dim hover:text-sc-gold transition-colors"
+                className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-3 py-1.5 font-mono text-xs text-sc-dim hover:border-sc-gold-dim hover:text-sc-gold transition-colors"
               >
                 {p.shortName}
               </Link>

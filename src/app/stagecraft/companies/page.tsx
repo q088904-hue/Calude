@@ -68,7 +68,7 @@ export default function CompaniesPage() {
               <Link
                 key={pack.id}
                 href={`/stagecraft/companies/${pack.id}`}
-                className="block rounded-sm border border-sc-border bg-sc-surface hover:border-sc-gold-dim hover:bg-sc-raised transition-all group"
+                className="block rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm hover:border-sc-gold-dim hover:bg-sc-raised transition-all group"
               >
                 <div className="px-5 py-4 flex items-start gap-4">
                   <div className="flex-1 min-w-0">
@@ -87,7 +87,7 @@ export default function CompaniesPage() {
                       {pack.watchOuts.slice(0, 2).map((w, i) => (
                         <span
                           key={i}
-                          className="rounded-sm border border-sc-border bg-sc-raised px-2 py-0.5 font-mono text-[10px] text-sc-dim"
+                          className="rounded-sc border border-sc-border bg-sc-raised shadow-sc-sm px-2 py-0.5 font-mono text-[10px] text-sc-dim"
                         >
                           {w.length > 40 ? w.slice(0, 40) + "…" : w}
                         </span>

@@ -20,7 +20,9 @@ export function GalleryHoverCarousel({ items }: { items: GalleryItem[] }) {
           href={it.href}
           onMouseEnter={() => setActive(idx)}
           onFocus={() => setActive(idx)}
-          className="relative rounded-sm border border-sc-border bg-sc-surface overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] focus:outline-none focus-visible:ring-2 focus-visible:ring-sc-gold"
+          className={`relative rounded-sc border border-sc-border bg-sc-surface overflow-hidden transition-all duration-300 ease-sc focus:outline-none focus-visible:ring-2 focus-visible:ring-sc-gold ${
+            active === idx ? "shadow-sc-md" : "shadow-sc-sm"
+          }`}
           style={{ flex: active === idx ? "5 1 0%" : "1 1 0%" }}
         >
           <div className="absolute inset-0 flex flex-col justify-end p-5">

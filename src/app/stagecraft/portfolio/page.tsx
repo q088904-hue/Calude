@@ -124,7 +124,7 @@ function ChallengeResultCard({
   const difficultyLabel = n === 1 ? "Opening probe" : n === 2 ? "Pressure test" : "Hardest challenge";
 
   return (
-    <div className="rounded-sm border border-sc-border bg-sc-surface overflow-hidden">
+    <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm overflow-hidden">
       <div className="px-4 py-4 space-y-3">
         {/* Challenge header */}
         <div className="flex items-start gap-3">
@@ -587,7 +587,7 @@ In your evaluation:
                   example prompt ↻
                 </button>
               </div>
-              <div className="rounded-sm border border-sc-border bg-sc-surface overflow-hidden focus-within:border-sc-gold-dim transition-colors">
+              <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm overflow-hidden focus-within:border-sc-gold-dim transition-colors">
                 <textarea
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
@@ -787,7 +787,7 @@ In your evaluation:
                           type="button"
                           onClick={startRecording}
                           disabled={isGrading}
-                          className="flex items-center gap-1.5 rounded-sm border border-sc-border bg-sc-surface px-3 py-2 font-mono text-xs text-sc-dim hover:border-sc-gold-dim hover:text-sc-gold transition-colors disabled:opacity-40"
+                          className="flex items-center gap-1.5 rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-3 py-2 font-mono text-xs text-sc-dim hover:border-sc-gold-dim hover:text-sc-gold transition-colors disabled:opacity-40"
                         >
                           <span>⏺</span>
                           <span>{speechSupported ? "Record with Whisper" : "Record"}</span>
@@ -823,7 +823,7 @@ In your evaluation:
 
                 {/* Streaming feedback while grading */}
                 {isGrading && gradingFeedback && (
-                  <div className="rounded-sm border border-sc-border bg-sc-raised px-3 py-3">
+                  <div className="rounded-sc border border-sc-border bg-sc-raised shadow-sc-sm px-3 py-3">
                     <p className="font-mono text-xs text-sc-gold mb-1.5 animate-pulse">
                       Coaching…
                     </p>
@@ -851,7 +851,7 @@ In your evaluation:
             {challenges.slice(currentIndex + 1).map((c, i) => (
               <div
                 key={i}
-                className="rounded-sm border border-sc-border bg-sc-surface px-4 py-4 opacity-30"
+                className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-4 py-4 opacity-30"
               >
                 <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase mb-2">
                   {currentIndex + i + 1 === 1
@@ -868,7 +868,7 @@ In your evaluation:
         {stage === "done" && (
           <>
             {/* Summary */}
-            <div className="rounded-sm border border-sc-border bg-sc-surface px-5 py-5 space-y-3">
+            <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-5 py-5 space-y-3">
               <p className="font-mono text-[10px] tracking-widest text-sc-gold uppercase">
                 Defence complete
               </p>
@@ -944,13 +944,13 @@ In your evaluation:
               </button>
               <Link
                 href="/stagecraft"
-                className="rounded-sm border border-sc-border bg-sc-surface px-5 py-2.5 font-mono text-xs text-sc-dim hover:text-sc-gold hover:border-sc-gold-dim transition-colors"
+                className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-5 py-2.5 font-mono text-xs text-sc-dim hover:text-sc-gold hover:border-sc-gold-dim transition-colors"
               >
                 Back to practice
               </Link>
               <Link
                 href="/stagecraft/drill"
-                className="rounded-sm border border-sc-border bg-sc-surface px-5 py-2.5 font-mono text-xs text-sc-dim hover:text-sc-gold hover:border-sc-gold-dim transition-colors"
+                className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-5 py-2.5 font-mono text-xs text-sc-dim hover:text-sc-gold hover:border-sc-gold-dim transition-colors"
               >
                 Drill weak answers
               </Link>
