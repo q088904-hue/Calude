@@ -150,7 +150,7 @@ function Sparkline({
 }) {
   if (rates.length < 2) {
     return (
-      <span className="font-mono text-[10px] text-sc-dim w-20 inline-block text-center">
+      <span className="font-mono text-xs text-sc-dim w-20 inline-block text-center">
         —
       </span>
     );
@@ -265,7 +265,7 @@ function PatternRow({
         {/* Frequency bar */}
         <div className="flex items-center gap-2 w-24 shrink-0 hidden md:flex">
           <FreqBar rate={latestRate} max={maxRate} />
-          <span className="font-mono text-[10px] text-sc-dim w-8 text-right">
+          <span className="font-mono text-xs text-sc-dim w-8 text-right">
             {Math.round(latestRate * 100)}%
           </span>
         </div>
@@ -298,7 +298,7 @@ function PatternRow({
             if (!tip) return null;
             return (
               <div className="rounded-sm border border-sc-gold-dim bg-sc-gold-bg px-4 py-3 space-y-1.5">
-                <p className="font-mono text-[10px] tracking-widest text-sc-gold uppercase">
+                <p className="font-mono text-xs tracking-widest text-sc-gold uppercase">
                   How to fix this
                 </p>
                 <p className="text-sm text-sc-ink leading-relaxed">{tip.fix}</p>
@@ -314,7 +314,7 @@ function PatternRow({
           {/* Stats row */}
           <div className="flex flex-wrap gap-4">
             <div>
-              <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase mb-1">
+              <p className="font-mono text-xs tracking-widest text-sc-dim uppercase mb-1">
                 Total occurrences
               </p>
               <p className="font-display text-xl font-semibold text-sc-ink">
@@ -322,7 +322,7 @@ function PatternRow({
               </p>
             </div>
             <div>
-              <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase mb-1">
+              <p className="font-mono text-xs tracking-widest text-sc-dim uppercase mb-1">
                 Questions affected
               </p>
               <p className="font-display text-xl font-semibold text-sc-ink">
@@ -330,7 +330,7 @@ function PatternRow({
               </p>
             </div>
             <div>
-              <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase mb-1">
+              <p className="font-mono text-xs tracking-widest text-sc-dim uppercase mb-1">
                 Sessions with this
               </p>
               <p className="font-display text-xl font-semibold text-sc-ink">
@@ -338,7 +338,7 @@ function PatternRow({
               </p>
             </div>
             <div>
-              <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase mb-1">
+              <p className="font-mono text-xs tracking-widest text-sc-dim uppercase mb-1">
                 Trend
               </p>
               <p
@@ -352,7 +352,7 @@ function PatternRow({
           {/* Session-by-session rate */}
           {pattern.sessions.length > 0 && (
             <div>
-              <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase mb-2">
+              <p className="font-mono text-xs tracking-widest text-sc-dim uppercase mb-2">
                 Rate per session (occurrences / questions)
               </p>
               <div className="space-y-1.5">
@@ -388,7 +388,7 @@ function PatternRow({
           {/* Recent examples */}
           {pattern.recentExamples.length > 0 && (
             <div>
-              <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase mb-2">
+              <p className="font-mono text-xs tracking-widest text-sc-dim uppercase mb-2">
                 Recent questions where this appeared
               </p>
               <div className="space-y-2">
@@ -401,14 +401,14 @@ function PatternRow({
                       <p className="text-sm text-sc-ink leading-snug">
                         {ex.question}
                       </p>
-                      <p className="font-mono text-[10px] text-sc-dim mt-1">
+                      <p className="font-mono text-xs text-sc-dim mt-1">
                         {formatDate(ex.startedAt)} ·{" "}
                         {ROUND_SHORT[ex.round] ?? ex.round}
                       </p>
                     </div>
                     <Link
                       href={`/stagecraft/history/${ex.sessionId}`}
-                      className="shrink-0 font-mono text-[10px] text-sc-dim hover:text-sc-gold transition-colors"
+                      className="shrink-0 font-mono text-xs text-sc-dim hover:text-sc-gold transition-colors"
                     >
                       review →
                     </Link>
@@ -461,7 +461,7 @@ export default function PatternsPage() {
       <StagecraftHeader label="Patterns">
         {/* Trend legend */}
         {data && data.patterns.length > 0 && data.hasEnoughData && (
-          <div className="flex items-center gap-3 font-mono text-[10px]">
+          <div className="flex items-center gap-3 font-mono text-xs">
             <span className="text-sc-green">↓ {improving}</span>
             <span className="text-sc-gold">→ {stable}</span>
             <span className="text-sc-red">↑ {worsening}</span>
@@ -539,13 +539,13 @@ export default function PatternsPage() {
 
             {/* Table header */}
             <div className="hidden sm:flex items-center gap-4 px-4 pb-1 border-b border-sc-border">
-              <span className="font-mono text-[10px] tracking-widest text-sc-dim uppercase w-5 shrink-0 text-right">#</span>
-              <span className="font-mono text-[10px] tracking-widest text-sc-dim uppercase flex-1">Pattern</span>
-              <span className="font-mono text-[10px] tracking-widest text-sc-dim uppercase w-8 shrink-0 text-right hidden sm:block">Total</span>
-              <span className="font-mono text-[10px] tracking-widest text-sc-dim uppercase w-24 shrink-0 hidden md:block">Latest rate</span>
-              <span className="font-mono text-[10px] tracking-widest text-sc-dim uppercase w-20 shrink-0 hidden sm:block">Trend</span>
-              <span className="font-mono text-[10px] tracking-widest text-sc-dim uppercase w-8 shrink-0"></span>
-              <span className="font-mono text-[10px] tracking-widest text-sc-dim uppercase w-8 shrink-0"></span>
+              <span className="font-mono text-xs tracking-widest text-sc-dim uppercase w-5 shrink-0 text-right">#</span>
+              <span className="font-mono text-xs tracking-widest text-sc-dim uppercase flex-1">Pattern</span>
+              <span className="font-mono text-xs tracking-widest text-sc-dim uppercase w-8 shrink-0 text-right hidden sm:block">Total</span>
+              <span className="font-mono text-xs tracking-widest text-sc-dim uppercase w-24 shrink-0 hidden md:block">Latest rate</span>
+              <span className="font-mono text-xs tracking-widest text-sc-dim uppercase w-20 shrink-0 hidden sm:block">Trend</span>
+              <span className="font-mono text-xs tracking-widest text-sc-dim uppercase w-8 shrink-0"></span>
+              <span className="font-mono text-xs tracking-widest text-sc-dim uppercase w-8 shrink-0"></span>
             </div>
 
             {/* Pattern rows */}
@@ -571,7 +571,7 @@ export default function PatternsPage() {
               return (
                 <ScrollReveal delay={80}>
                   <div className="rounded-sm border border-sc-gold-dim bg-sc-gold-bg px-4 py-4">
-                    <p className="font-mono text-[10px] tracking-widest text-sc-gold uppercase mb-1.5">
+                    <p className="font-mono text-xs tracking-widest text-sc-gold uppercase mb-1.5">
                       Focus drill
                     </p>
                     <p className="text-sm text-sc-ink">

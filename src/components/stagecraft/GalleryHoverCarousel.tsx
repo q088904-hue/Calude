@@ -26,7 +26,7 @@ export function GalleryHoverCarousel({ items }: { items: GalleryItem[] }) {
           style={{ flex: active === idx ? "5 1 0%" : "1 1 0%" }}
         >
           <div className="absolute inset-0 flex flex-col justify-end p-5">
-            <span className="font-mono text-[10px] tracking-widest text-sc-gold uppercase">
+            <span className="font-mono text-xs tracking-widest text-sc-gold uppercase">
               {it.subtitle}
             </span>
             <span

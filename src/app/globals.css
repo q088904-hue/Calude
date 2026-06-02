@@ -386,6 +386,15 @@
    executive interview practice agent.
    ============================================ */
 
+/* ============================================
+   STAGECRAFT — TYPE SCALE
+   Hierarchy (smallest to largest):
+   · text-xs     12px — labels, chips, metadata (FLOOR — 10px is prohibited)
+   · text-sm     14px — primary body text in dense surfaces
+   · text-base   16px — comfortable reading body
+   · font-fraunces (Geist display) — headlines
+   ============================================ */
+
 /* Stagecraft palette — light (default). twenty.com-style: clean near-white
    surfaces, light-gray borders, soft elevation; gold kept as the brand accent. */
 :root {

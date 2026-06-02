@@ -164,7 +164,7 @@ function RecallCard({
 
       {/* Question card */}
       <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-5 py-5 space-y-2">
-        <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase">
+        <p className="font-mono text-xs tracking-widest text-sc-dim uppercase">
           Question
         </p>
         <p className="text-lg font-semibold text-sc-ink leading-snug">
@@ -188,7 +188,7 @@ function RecallCard({
           {/* Answer */}
           <div className="rounded-sm border border-sc-gold-dim bg-sc-gold-bg overflow-hidden">
             <div className="flex items-center justify-between px-4 py-2.5 border-b border-sc-gold-dim/40">
-              <p className="font-mono text-[10px] tracking-widest text-sc-gold uppercase">
+              <p className="font-mono text-xs tracking-widest text-sc-gold uppercase">
                 Sample answer — compare &amp; close the gap
               </p>
               <ListenButton text={item.answer} />
@@ -215,7 +215,7 @@ function RecallCard({
               ✓ Nailed it
             </button>
           </div>
-          <p className="font-mono text-[10px] text-sc-dim text-center">
+          <p className="font-mono text-xs text-sc-dim text-center">
             "Again" moves this card to the end. "Nailed it" marks it reviewed.
           </p>
         </div>
@@ -225,7 +225,7 @@ function RecallCard({
       <div className="flex justify-center">
         <Link
           href={`/stagecraft?drill=${encodeURIComponent(item.question)}`}
-          className="font-mono text-[10px] text-sc-dim hover:text-sc-gold transition-colors"
+          className="font-mono text-xs text-sc-dim hover:text-sc-gold transition-colors"
         >
           Drill this question in a full session →
         </Link>
@@ -483,12 +483,12 @@ export default function MemorizePage() {
                             · {m.reviewCount}× reviewed
                           </span>
                         ) : (
-                          <span className="font-mono text-[10px] text-sc-red shrink-0">
+                          <span className="font-mono text-xs text-sc-red shrink-0">
                             · not yet recalled
                           </span>
                         )}
                         {m.lastReviewedAt && (
-                          <span className="font-mono text-[10px] text-sc-dim truncate">
+                          <span className="font-mono text-xs text-sc-dim truncate">
                             · last{" "}
                             {new Date(m.lastReviewedAt).toLocaleDateString(
                               "en-US",
@@ -516,7 +516,7 @@ export default function MemorizePage() {
 
                     {/* Question */}
                     <div className="px-4 pt-3 pb-2">
-                      <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase mb-1">
+                      <p className="font-mono text-xs tracking-widest text-sc-dim uppercase mb-1">
                         Question
                       </p>
                       <p className="text-sm font-semibold text-sc-ink leading-snug">
@@ -528,7 +528,7 @@ export default function MemorizePage() {
                     <div className="border-t border-sc-line mx-4 mt-2" />
                     <div className="px-4 pt-3 pb-4">
                       <div className="flex items-center justify-between mb-2">
-                        <p className="font-mono text-[10px] tracking-widest text-sc-gold uppercase">
+                        <p className="font-mono text-xs tracking-widest text-sc-gold uppercase">
                           Sample answer
                         </p>
                         <ListenButton text={m.answer} />

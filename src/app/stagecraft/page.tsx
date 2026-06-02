@@ -829,7 +829,7 @@ function StagecraftInner() {
                 setInterviewerVoice((v) => !v);
               }}
               title={interviewerVoice ? "Interviewer voice on — click to mute" : "Click to hear questions read aloud"}
-              className={`flex items-center gap-1.5 rounded-sm border px-2.5 py-1 font-mono text-[10px] transition-all ${
+              className={`flex items-center gap-1.5 rounded-sm border px-2.5 py-1 font-mono text-xs transition-all ${
                 interviewerVoice
                   ? "border-sc-gold bg-sc-gold-bg text-sc-gold"
                   : "border-sc-border bg-sc-surface text-sc-dim hover:border-sc-gold-dim hover:text-sc-gold"
@@ -1078,7 +1078,7 @@ function StagecraftInner() {
 function TimeNav() {
   return (
     <div className="mb-6 sc-entry sc-e2">
-      <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase mb-2">
+      <p className="font-mono text-xs tracking-widest text-sc-dim uppercase mb-2">
         How much time?
       </p>
       <div className="grid grid-cols-3 gap-2">
@@ -1120,7 +1120,7 @@ function TimeNav() {
               {time}
             </span>
             <span className="text-xs font-medium text-sc-ink">{label}</span>
-            <span className="font-mono text-[10px] text-sc-dim">{desc}</span>
+            <span className="font-mono text-xs text-sc-dim">{desc}</span>
           </Link>
         ))}
       </div>
@@ -1716,13 +1716,13 @@ function DailyBriefPanel({
   return (
     <div className="mt-5 rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm overflow-hidden sc-entry sc-e1b">
       <div className="px-4 py-2.5 border-b border-sc-line flex items-center justify-between">
-        <p className="font-mono text-[10px] tracking-widest text-sc-gold uppercase">
+        <p className="font-mono text-xs tracking-widest text-sc-gold uppercase">
           Today&apos;s brief
         </p>
         <button
           type="button"
           onClick={() => setDismissed(true)}
-          className="font-mono text-[10px] text-sc-dim hover:text-sc-muted transition-colors"
+          className="font-mono text-xs text-sc-dim hover:text-sc-muted transition-colors"
         >
           dismiss
         </button>
@@ -1858,7 +1858,7 @@ function CountdownStrip({
       {/* Sprint panel — final 3 days */}
       {days <= 3 && (
         <div className="mt-3 rounded-sm border border-sc-red/25 bg-sc-red/[0.04] px-4 py-3 space-y-2">
-          <p className="font-mono text-[10px] tracking-widest text-sc-red uppercase mb-2">
+          <p className="font-mono text-xs tracking-widest text-sc-red uppercase mb-2">
             {days === 0 ? "Interview day — stay sharp" : `${days}-day sprint`}
           </p>
           {sprintActions.map((a) => (
@@ -1872,7 +1872,7 @@ function CountdownStrip({
                 <p className="text-sm font-semibold text-sc-ink group-hover:text-sc-gold transition-colors leading-snug">
                   {a.label}
                 </p>
-                <p className="font-mono text-[10px] text-sc-dim leading-snug">
+                <p className="font-mono text-xs text-sc-dim leading-snug">
                   {a.desc}
                 </p>
               </div>
@@ -2134,7 +2134,7 @@ function SetupView(props: {
             if (!pack) return null;
             return (
               <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-4 py-3 space-y-2 mb-3">
-                <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase">
+                <p className="font-mono text-xs tracking-widest text-sc-dim uppercase">
                   Prep context · {pack.rounds}
                 </p>
                 <ul className="space-y-1">
@@ -2533,11 +2533,11 @@ function QuestionView(props: {
                         {srMm}:{srSs}
                       </span>
                       {srTimerHint ? (
-                        <span className={`font-mono text-[10px] ${srTimerColor}`}>
+                        <span className={`font-mono text-xs ${srTimerColor}`}>
                           {srTimerHint}
                         </span>
                       ) : (
-                        <span className="font-mono text-[10px] text-sc-dim animate-pulse">
+                        <span className="font-mono text-xs text-sc-dim animate-pulse">
                           listening…
                         </span>
                       )}
@@ -2709,7 +2709,7 @@ function ReportView(props: {
       {props.items.length > 1 && (
         <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm overflow-hidden">
           <div className="px-4 py-2.5 border-b border-sc-line">
-            <span className="font-mono text-[10px] tracking-widest text-sc-dim uppercase">
+            <span className="font-mono text-xs tracking-widest text-sc-dim uppercase">
               Per-question breakdown
             </span>
           </div>
@@ -2725,7 +2725,7 @@ function ReportView(props: {
                 <div key={it.index} className="space-y-1">
                   <div className="flex items-center gap-2">
                     <span
-                      className={`font-mono text-[10px] shrink-0 w-5 text-right ${isWorst ? "text-sc-red" : "text-sc-dim"}`}
+                      className={`font-mono text-xs shrink-0 w-5 text-right ${isWorst ? "text-sc-red" : "text-sc-dim"}`}
                     >
                       Q{it.index}
                     </span>
@@ -2770,14 +2770,14 @@ function ReportView(props: {
                     {isWorst && (
                       <Link
                         href={`/stagecraft/drill?q=${encodeURIComponent(it.question)}`}
-                        className="font-mono text-[10px] text-sc-dim hover:text-sc-gold transition-colors shrink-0"
+                        className="font-mono text-xs text-sc-dim hover:text-sc-gold transition-colors shrink-0"
                       >
                         re-drill →
                       </Link>
                     )}
                   </div>
                   {/* Question label — truncated */}
-                  <p className="font-mono text-[10px] text-sc-dim/60 truncate pl-7">
+                  <p className="font-mono text-xs text-sc-dim/60 truncate pl-7">
                     {it.question}
                   </p>
                 </div>
@@ -2911,14 +2911,14 @@ function ReportView(props: {
                   <div className="space-y-2 pt-1">
                     {sec.grammarFix && (
                       <div>
-                        <p className="font-mono text-[10px] text-sc-dim uppercase tracking-wider mb-1">Grammar fix</p>
+                        <p className="font-mono text-xs text-sc-dim uppercase tracking-wider mb-1">Grammar fix</p>
                         <p className="font-mono text-xs text-sc-muted leading-relaxed whitespace-pre-wrap">
                           {renderWithPatternTags(sec.grammarFix)}
                         </p>
                         {sec.patternTags.length > 0 && (
                           <div className="flex flex-wrap gap-1 mt-1.5">
                             {[...new Set(sec.patternTags)].map((tag) => (
-                              <span key={tag} className="rounded-sm border border-sc-red/30 bg-sc-red/10 px-1.5 py-0.5 font-mono text-[10px] text-sc-red">
+                              <span key={tag} className="rounded-sm border border-sc-red/30 bg-sc-red/10 px-1.5 py-0.5 font-mono text-xs text-sc-red">
                                 {tag}
                               </span>
                             ))}
@@ -2928,13 +2928,13 @@ function ReportView(props: {
                     )}
                     {sec.sampleAnswer && (
                       <div>
-                        <p className="font-mono text-[10px] text-sc-gold uppercase tracking-wider mb-1">Sample answer</p>
+                        <p className="font-mono text-xs text-sc-gold uppercase tracking-wider mb-1">Sample answer</p>
                         <p className="text-sm text-sc-ink leading-relaxed">{renderSampleAnswer(sec.sampleAnswer)}</p>
                       </div>
                     )}
                     {sec.deliveryTip && (
                       <div>
-                        <p className="font-mono text-[10px] text-sc-dim uppercase tracking-wider mb-1">Delivery tip</p>
+                        <p className="font-mono text-xs text-sc-dim uppercase tracking-wider mb-1">Delivery tip</p>
                         <p className="text-xs text-sc-muted leading-relaxed">{sec.deliveryTip}</p>
                       </div>
                     )}
@@ -2947,7 +2947,7 @@ function ReportView(props: {
                 {/* Re-drill link */}
                 <Link
                   href={`/stagecraft/drill?q=${encodeURIComponent(it.question)}`}
-                  className="inline-block font-mono text-[10px] text-sc-dim hover:text-sc-gold transition-colors"
+                  className="inline-block font-mono text-xs text-sc-dim hover:text-sc-gold transition-colors"
                 >
                   Re-drill this question →
                 </Link>
@@ -2962,7 +2962,7 @@ function ReportView(props: {
 
       {/* Action cards — contextual next steps based on scores */}
       <div className="space-y-2">
-        <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase">
+        <p className="font-mono text-xs tracking-widest text-sc-dim uppercase">
           What to do next
         </p>
 
@@ -3246,13 +3246,13 @@ function MicButton(props: {
             {mm}:{ss}
           </span>
           {timerLabel && (
-            <span className={`font-mono text-[10px] ${timerColor}`}>
+            <span className={`font-mono text-xs ${timerColor}`}>
               {timerLabel}
             </span>
           )}
         </div>
 
-        <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase">
+        <p className="font-mono text-xs tracking-widest text-sc-dim uppercase">
           Tap to stop
         </p>
       </div>
@@ -3418,7 +3418,7 @@ function TypeAnswerBox({
           {qualitySignals.map(({ ok, label }) => (
             <span
               key={label}
-              className={`inline-flex items-center gap-1 rounded-sm px-2 py-0.5 font-mono text-[10px] transition-all ${
+              className={`inline-flex items-center gap-1 rounded-sm px-2 py-0.5 font-mono text-xs transition-all ${
                 ok
                   ? "border border-sc-green/30 bg-sc-green-bg text-sc-green"
                   : "border border-sc-border bg-sc-raised text-sc-dim"
@@ -3536,7 +3536,7 @@ function StreamingFeedbackRenderer({ raw }: { raw: string }) {
       {/* Delivery tip */}
       {p.deliveryTip !== undefined && (
         <div className="rounded-sc border border-sc-border bg-sc-raised shadow-sc-sm px-3 py-3">
-          <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase mb-1.5">
+          <p className="font-mono text-xs tracking-widest text-sc-dim uppercase mb-1.5">
             Delivery tip
           </p>
           <p className="text-sm text-sc-muted leading-relaxed">
@@ -3700,7 +3700,7 @@ function renderAnnotatedSentence(
         c.filler ? (
           <mark
             key={i}
-            className="rounded-sm border border-sc-red/40 bg-sc-red/10 px-1 py-0 font-mono text-[11px] text-sc-red not-italic mx-0.5"
+            className="rounded-sm border border-sc-red/40 bg-sc-red/10 px-1 py-0 font-mono text-xs text-sc-red not-italic mx-0.5"
             title={`Filler — remove "${c.label}"`}
           >
             {c.text}
@@ -3745,14 +3745,14 @@ function AnnotatedTranscript({ transcript }: { transcript: string }) {
         </div>
         <div className="flex items-center gap-2">
           {flagCount > 0 && (
-            <span className="font-mono text-[10px] text-sc-red">
+            <span className="font-mono text-xs text-sc-red">
               {flagCount} flag{flagCount !== 1 ? "s" : ""}
             </span>
           )}
           {flagCount === 0 && (
-            <span className="font-mono text-[10px] text-sc-green">clean</span>
+            <span className="font-mono text-xs text-sc-green">clean</span>
           )}
-          <span className="font-mono text-[10px] text-sc-dim">
+          <span className="font-mono text-xs text-sc-dim">
             {wordCount}w · {open ? "collapse" : "expand"}
           </span>
         </div>
@@ -3761,13 +3761,13 @@ function AnnotatedTranscript({ transcript }: { transcript: string }) {
       <div className="border-t border-sc-line px-3 pt-3 pb-4 space-y-3">
         {/* Legend */}
         <div className="flex flex-wrap gap-3">
-          <span className="flex items-center gap-1.5 font-mono text-[10px] text-sc-dim">
-            <mark className="rounded-sm border border-sc-red/40 bg-sc-red/10 px-1 font-mono text-[10px] text-sc-red not-italic">
+          <span className="flex items-center gap-1.5 font-mono text-xs text-sc-dim">
+            <mark className="rounded-sm border border-sc-red/40 bg-sc-red/10 px-1 font-mono text-xs text-sc-red not-italic">
               word
             </mark>
             filler word
           </span>
-          <span className="flex items-center gap-1.5 font-mono text-[10px] text-sc-dim">
+          <span className="flex items-center gap-1.5 font-mono text-xs text-sc-dim">
             <span className="inline-block w-6 h-px border-b-2 border-sc-gold/40" />
             run-on sentence (&gt;{RUN_ON_THRESHOLD} words)
           </span>
@@ -3791,12 +3791,12 @@ function AnnotatedTranscript({ transcript }: { transcript: string }) {
         {(runOnCount > 0 || fillerCount > 0) && (
           <div className="flex flex-wrap gap-2 pt-1 border-t border-sc-line">
             {runOnCount > 0 && (
-              <span className="rounded-sm border border-sc-gold-dim bg-sc-gold-bg px-2 py-0.5 font-mono text-[10px] text-sc-gold">
+              <span className="rounded-sm border border-sc-gold-dim bg-sc-gold-bg px-2 py-0.5 font-mono text-xs text-sc-gold">
                 {runOnCount} run-on{runOnCount !== 1 ? "s" : ""} — use full stops
               </span>
             )}
             {fillerCount > 0 && (
-              <span className="rounded-sm border border-sc-red/30 bg-sc-red/10 px-2 py-0.5 font-mono text-[10px] text-sc-red">
+              <span className="rounded-sm border border-sc-red/30 bg-sc-red/10 px-2 py-0.5 font-mono text-xs text-sc-red">
                 {fillerCount} filler{fillerCount !== 1 ? "s" : ""} — cut entirely
               </span>
             )}
@@ -4093,7 +4093,7 @@ function MemorizePanel({ items }: { items: QAItem[] }) {
     <div className="rounded-sm border border-sc-gold-dim bg-sc-gold-bg overflow-hidden">
       <div className="px-4 py-2.5 border-b border-sc-gold-dim/40 flex items-center gap-2">
         <span className="text-sc-gold text-xs">♥</span>
-        <span className="font-mono text-[10px] tracking-widest text-sc-gold uppercase">
+        <span className="font-mono text-xs tracking-widest text-sc-gold uppercase">
           Memorize tonight — {candidates.length} answer{candidates.length !== 1 ? "s" : ""}
         </span>
       </div>
@@ -4110,7 +4110,7 @@ function MemorizePanel({ items }: { items: QAItem[] }) {
                 type="button"
                 onClick={() => void handleSave(item.index, item.question, sample)}
                 disabled={saved.has(item.index) || saving === item.index}
-                className={`flex items-center gap-1 rounded-sm border px-2 py-1 font-mono text-[10px] transition-all shrink-0 ${
+                className={`flex items-center gap-1 rounded-sm border px-2 py-1 font-mono text-xs transition-all shrink-0 ${
                   saved.has(item.index)
                     ? "border-sc-green/40 bg-sc-green-bg text-sc-green"
                     : "border-sc-gold-dim text-sc-gold hover:bg-sc-gold/10 disabled:opacity-50"
@@ -4131,7 +4131,7 @@ function MemorizePanel({ items }: { items: QAItem[] }) {
       <div className="px-4 py-2.5 border-t border-sc-gold-dim/40">
         <Link
           href="/stagecraft/memorize"
-          className="font-mono text-[10px] text-sc-gold hover:text-sc-gold/80 transition-colors"
+          className="font-mono text-xs text-sc-gold hover:text-sc-gold/80 transition-colors"
         >
           Open memorize queue →
         </Link>
@@ -4187,7 +4187,7 @@ function SessionScoreStrip({ items }: { items: QAItem[] }) {
   return (
     <div className="border-b border-sc-border bg-sc-raised px-6 py-2.5">
       <div className="max-w-2xl mx-auto flex items-center gap-5 flex-wrap">
-        <span className="font-mono text-[10px] tracking-widest text-sc-dim uppercase shrink-0">
+        <span className="font-mono text-xs tracking-widest text-sc-dim uppercase shrink-0">
           Session · {n}Q
         </span>
         <div className="flex items-center gap-4">
@@ -4199,14 +4199,14 @@ function SessionScoreStrip({ items }: { items: QAItem[] }) {
             ] as const
           ).map(({ label, value, title }) => (
             <span key={label} className="flex items-baseline gap-0.5" title={title}>
-              <span className="font-mono text-[10px] text-sc-dim">{label}</span>
+              <span className="font-mono text-xs text-sc-dim">{label}</span>
               <span className={`font-mono text-sm font-semibold tabular-nums ${scoreColor(value)}`}>
                 {value}
               </span>
             </span>
           ))}
           <span className="flex items-baseline gap-0.5 border-l border-sc-border pl-4" title="Composite">
-            <span className="font-mono text-[10px] text-sc-dim">avg</span>
+            <span className="font-mono text-xs text-sc-dim">avg</span>
             <span className={`font-mono text-sm font-semibold tabular-nums ${scoreColor(composite)}`}>
               {composite}
             </span>
@@ -4214,12 +4214,12 @@ function SessionScoreStrip({ items }: { items: QAItem[] }) {
         </div>
         {recurring.length > 0 && (
           <div className="flex items-center gap-2 ml-auto">
-            <span className="font-mono text-[10px] text-sc-dim uppercase tracking-wider shrink-0">Recurring:</span>
+            <span className="font-mono text-xs text-sc-dim uppercase tracking-wider shrink-0">Recurring:</span>
             <div className="flex flex-wrap gap-1.5">
               {recurring.map(([tag, count]) => (
                 <span
                   key={tag}
-                  className="rounded-sm border border-sc-red/30 bg-sc-red/10 px-1.5 py-0.5 font-mono text-[10px] text-sc-red"
+                  className="rounded-sm border border-sc-red/30 bg-sc-red/10 px-1.5 py-0.5 font-mono text-xs text-sc-red"
                   title={`Flagged ${count}× this session`}
                 >
                   [{tag}] ×{count}

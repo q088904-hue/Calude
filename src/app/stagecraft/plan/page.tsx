@@ -179,7 +179,7 @@ function PlanPageInner() {
         {/* ── Company selector (only in select/generating state) ── */}
         {state !== "done" && (
           <div className="space-y-2">
-            <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase">
+            <p className="font-mono text-xs tracking-widest text-sc-dim uppercase">
               Target company
             </p>
             <div className="space-y-2">
@@ -202,7 +202,7 @@ function PlanPageInner() {
                     >
                       {pack.shortName}
                     </p>
-                    <p className="font-mono text-[10px] text-sc-dim mt-0.5">
+                    <p className="font-mono text-xs text-sc-dim mt-0.5">
                       {pack.label.split("—")[1]?.trim() ?? pack.label}
                     </p>
                   </div>
@@ -278,7 +278,7 @@ function PlanPageInner() {
                   setState("select");
                   setPlanRaw("");
                 }}
-                className="ml-auto font-mono text-[10px] text-sc-dim hover:text-sc-gold transition-colors"
+                className="ml-auto font-mono text-xs text-sc-dim hover:text-sc-gold transition-colors"
               >
                 Regenerate
               </button>
@@ -301,7 +301,7 @@ function PlanPageInner() {
                         {i < 3 ? `${(i + 1) * 30}` : "∞"}
                       </span>
                       <div className="flex-1 min-w-0">
-                        <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase mb-0.5">
+                        <p className="font-mono text-xs tracking-widest text-sc-dim uppercase mb-0.5">
                           {i === 0
                             ? "Day 1–30"
                             : i === 1
@@ -325,7 +325,7 @@ function PlanPageInner() {
 
             {/* How to use this */}
             <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-4 py-4 space-y-2">
-              <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase">
+              <p className="font-mono text-xs tracking-widest text-sc-dim uppercase">
                 How to use this
               </p>
               <ol className="space-y-1.5 text-sm text-sc-muted leading-relaxed">
@@ -352,7 +352,7 @@ function PlanPageInner() {
 
             {/* Watch-outs for this company */}
             <div className="rounded-sm border border-sc-red/30 bg-sc-red/5 px-4 py-4 space-y-2">
-              <p className="font-mono text-[10px] tracking-widest text-sc-red uppercase">
+              <p className="font-mono text-xs tracking-widest text-sc-red uppercase">
                 Watch-outs when answering for {activePack.shortName}
               </p>
               <ul className="space-y-1.5">
@@ -394,7 +394,7 @@ function PlanPageInner() {
 
             {/* Raw text (collapsed) — for copy-paste */}
             <details className="border-t border-sc-border pt-4">
-              <summary className="font-mono text-[10px] tracking-widest text-sc-dim uppercase cursor-pointer hover:text-sc-gold transition-colors">
+              <summary className="font-mono text-xs tracking-widest text-sc-dim uppercase cursor-pointer hover:text-sc-gold transition-colors">
                 Copy raw text
               </summary>
               <pre className="mt-3 text-xs text-sc-dim leading-relaxed whitespace-pre-wrap font-mono overflow-auto">

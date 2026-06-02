@@ -104,7 +104,7 @@ function ScoreChip({ label, value }: { label: string; value: number }) {
     <span
       className={`inline-flex items-center gap-1 rounded-sm border px-2 py-0.5 font-mono text-xs ${cls}`}
     >
-      <span className="opacity-50 text-[10px] uppercase tracking-wider">{label}</span>
+      <span className="opacity-50 text-xs uppercase tracking-wider">{label}</span>
       <span className="font-bold tabular-nums">{value}/10</span>
     </span>
   );
@@ -129,7 +129,7 @@ function ChallengeResultCard({
         {/* Challenge header */}
         <div className="flex items-start gap-3">
           <div className="shrink-0 mt-0.5">
-            <span className="font-mono text-[10px] tracking-widest text-sc-gold uppercase">
+            <span className="font-mono text-xs tracking-widest text-sc-gold uppercase">
               {difficultyLabel}
             </span>
           </div>
@@ -151,7 +151,7 @@ function ChallengeResultCard({
 
         {/* What you said */}
         <div>
-          <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase mb-1.5">
+          <p className="font-mono text-xs tracking-widest text-sc-dim uppercase mb-1.5">
             Your defence
           </p>
           <p className="text-sm text-sc-muted leading-relaxed">{result.answer}</p>
@@ -160,7 +160,7 @@ function ChallengeResultCard({
         {/* Better answer — always visible */}
         {result.sections?.sampleAnswer && (
           <div>
-            <p className="font-mono text-[10px] tracking-widest text-sc-gold uppercase mb-1.5">
+            <p className="font-mono text-xs tracking-widest text-sc-gold uppercase mb-1.5">
               Stronger defence
             </p>
             <p className="text-sm text-sc-ink leading-relaxed">
@@ -185,7 +185,7 @@ function ChallengeResultCard({
             <div className="border-t border-sc-line px-4 py-4 space-y-4 bg-sc-raised">
               {result.sections.grammarFix && (
                 <div>
-                  <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase mb-2">
+                  <p className="font-mono text-xs tracking-widest text-sc-dim uppercase mb-2">
                     Language fix
                   </p>
                   <p className="text-sm text-sc-muted leading-relaxed whitespace-pre-wrap">
@@ -195,7 +195,7 @@ function ChallengeResultCard({
               )}
               {result.sections.deliveryTip && (
                 <div>
-                  <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase mb-1.5">
+                  <p className="font-mono text-xs tracking-widest text-sc-dim uppercase mb-1.5">
                     Delivery tip
                   </p>
                   <p className="text-sm text-sc-muted leading-relaxed">
@@ -574,7 +574,7 @@ In your evaluation:
             {/* Portfolio description */}
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase">
+                <p className="font-mono text-xs tracking-widest text-sc-dim uppercase">
                   Describe the piece
                 </p>
                 <button
@@ -582,7 +582,7 @@ In your evaluation:
                   onClick={() =>
                     setPromptIdx((i) => (i + 1) % PORTFOLIO_PROMPT_IDEAS.length)
                   }
-                  className="font-mono text-[10px] text-sc-dim hover:text-sc-gold transition-colors"
+                  className="font-mono text-xs text-sc-dim hover:text-sc-gold transition-colors"
                 >
                   example prompt ↻
                 </button>
@@ -597,7 +597,7 @@ In your evaluation:
                 />
                 <div className="px-4 pb-2 flex justify-end">
                   <span
-                    className={`font-mono text-[10px] ${
+                    className={`font-mono text-xs ${
                       description.length < 40
                         ? "text-sc-dim"
                         : description.length > 400
@@ -610,7 +610,7 @@ In your evaluation:
                   </span>
                 </div>
               </div>
-              <p className="font-mono text-[10px] text-sc-dim leading-relaxed">
+              <p className="font-mono text-xs text-sc-dim leading-relaxed">
                 Include: what you made, the creative decisions, what it achieved.
                 40–300 words is ideal. Be specific — vague briefs get generic challenges.
               </p>
@@ -618,7 +618,7 @@ In your evaluation:
 
             {/* Critic selector */}
             <div className="space-y-2">
-              <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase">
+              <p className="font-mono text-xs tracking-widest text-sc-dim uppercase">
                 Choose your critic
               </p>
               <div className="space-y-2">
@@ -698,7 +698,7 @@ In your evaluation:
             <div className="rounded-sm border border-sc-gold-dim bg-sc-surface overflow-hidden">
               {/* Challenge header */}
               <div className="px-4 py-3 border-b border-sc-line bg-sc-gold-bg flex items-center justify-between">
-                <span className="font-mono text-[10px] tracking-widest text-sc-gold uppercase">
+                <span className="font-mono text-xs tracking-widest text-sc-gold uppercase">
                   {currentIndex === 0
                     ? "Opening probe"
                     : currentIndex === 1
@@ -767,17 +767,17 @@ In your evaluation:
                           {String(Math.floor(srSeconds / 60)).padStart(1, "0")}:{String(srSeconds % 60).padStart(2, "0")}
                         </span>
                         {srSeconds >= 90 ? (
-                          <span className="font-mono text-[10px] text-sc-red">— wrap up</span>
+                          <span className="font-mono text-xs text-sc-red">— wrap up</span>
                         ) : srSeconds >= 60 ? (
-                          <span className="font-mono text-[10px] text-sc-gold">— start closing</span>
+                          <span className="font-mono text-xs text-sc-gold">— start closing</span>
                         ) : (
-                          <span className="font-mono text-[10px] text-sc-dim animate-pulse">listening…</span>
+                          <span className="font-mono text-xs text-sc-dim animate-pulse">listening…</span>
                         )}
                       </div>
                     )}
 
                     {speechSupported && !browserRecording && recState !== "uploading" && (
-                      <span className="font-mono text-[10px] text-sc-border">or</span>
+                      <span className="font-mono text-xs text-sc-border">or</span>
                     )}
 
                     {/* Whisper */}
@@ -809,15 +809,15 @@ In your evaluation:
                     )}
 
                     {recState === "transcribed" && !browserRecording && (
-                      <span className="font-mono text-[10px] text-sc-green">✓ Transcribed</span>
+                      <span className="font-mono text-xs text-sc-green">✓ Transcribed</span>
                     )}
                     {recError && (
-                      <span className="font-mono text-[10px] text-sc-red">{recError}</span>
+                      <span className="font-mono text-xs text-sc-red">{recError}</span>
                     )}
                   </div>
 
                   {interimText && (
-                    <p className="font-mono text-[10px] text-sc-muted italic">{interimText}…</p>
+                    <p className="font-mono text-xs text-sc-muted italic">{interimText}…</p>
                   )}
                 </div>
 
@@ -853,7 +853,7 @@ In your evaluation:
                 key={i}
                 className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-4 py-4 opacity-30"
               >
-                <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase mb-2">
+                <p className="font-mono text-xs tracking-widest text-sc-dim uppercase mb-2">
                   {currentIndex + i + 1 === 1
                     ? "Pressure test"
                     : "Hardest challenge"}
@@ -869,7 +869,7 @@ In your evaluation:
           <>
             {/* Summary */}
             <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-5 py-5 space-y-3">
-              <p className="font-mono text-[10px] tracking-widest text-sc-gold uppercase">
+              <p className="font-mono text-xs tracking-widest text-sc-gold uppercase">
                 Defence complete
               </p>
               <div className="flex items-center justify-between">
@@ -906,7 +906,7 @@ In your evaluation:
                               : "text-sc-red border-sc-red/30 bg-sc-red/5"
                         }`}
                       >
-                        <span className="opacity-50 text-[10px]">
+                        <span className="opacity-50 text-xs">
                           {i === 0 ? "Open" : i === 1 ? "Press" : "Hard"}
                         </span>
                         <span className="font-bold tabular-nums">{c}</span>

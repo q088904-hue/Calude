@@ -115,7 +115,7 @@ function StarComponentBar({
   return (
     <div className="flex items-center gap-2">
       <span
-        className={`font-mono text-[10px] uppercase tracking-wider w-16 shrink-0 ${
+        className={`font-mono text-xs uppercase tracking-wider w-16 shrink-0 ${
           highlight ? "text-sc-red" : "text-sc-dim"
         }`}
       >
@@ -186,7 +186,7 @@ function AttemptRow({ attempt }: { attempt: Attempt }) {
           ))}
         </div>
         {weakComponent && weakComponent[1] < 7 && (
-          <span className="font-mono text-[10px] text-sc-red shrink-0">
+          <span className="font-mono text-xs text-sc-red shrink-0">
             weak {weakComponent[0]}
           </span>
         )}
@@ -213,7 +213,7 @@ function AttemptRow({ attempt }: { attempt: Attempt }) {
           </div>
 
           {/* Timing */}
-          <p className={`font-mono text-[10px] ${
+          <p className={`font-mono text-xs ${
             attempt.star.timing === "good"
               ? "text-sc-green"
               : "text-sc-gold"
@@ -227,7 +227,7 @@ function AttemptRow({ attempt }: { attempt: Attempt }) {
 
           {/* What you said */}
           <div>
-            <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase mb-1.5">
+            <p className="font-mono text-xs tracking-widest text-sc-dim uppercase mb-1.5">
               What you said
             </p>
             <p className="text-sm text-sc-muted leading-relaxed">{attempt.answer}</p>
@@ -236,7 +236,7 @@ function AttemptRow({ attempt }: { attempt: Attempt }) {
           {/* Sample answer */}
           {attempt.sampleAnswer && (
             <div>
-              <p className="font-mono text-[10px] tracking-widest text-sc-gold uppercase mb-1.5">
+              <p className="font-mono text-xs tracking-widest text-sc-gold uppercase mb-1.5">
                 Tighter version — memorize this
               </p>
               <p className="text-sm text-sc-ink leading-relaxed">
@@ -284,7 +284,7 @@ function StoryCard({
               {story.title}
             </p>
             {mastered && (
-              <span className="font-mono text-[10px] text-sc-green border border-sc-green/40 rounded-sm px-1.5 py-0.5">
+              <span className="font-mono text-xs text-sc-green border border-sc-green/40 rounded-sm px-1.5 py-0.5">
                 ✓ Mastered
               </span>
             )}
@@ -294,7 +294,7 @@ function StoryCard({
               {story.tags.map((t) => (
                 <span
                   key={t}
-                  className="rounded-sc border border-sc-border bg-sc-raised shadow-sc-sm px-1.5 py-0.5 font-mono text-[10px] text-sc-dim"
+                  className="rounded-sc border border-sc-border bg-sc-raised shadow-sc-sm px-1.5 py-0.5 font-mono text-xs text-sc-dim"
                 >
                   {t}
                 </span>
@@ -302,7 +302,7 @@ function StoryCard({
             </div>
           )}
           {best && (
-            <p className="font-mono text-[10px] text-sc-dim mt-2">
+            <p className="font-mono text-xs text-sc-dim mt-2">
               Best: {best.composite} · {attempts.length} attempt{attempts.length !== 1 ? "s" : ""}
             </p>
           )}
@@ -637,7 +637,7 @@ export default function StarDrillPage() {
         {/* Mastery progress or streak */}
         {activeStoryIdx !== null && (
           <div className="flex items-center gap-2">
-            <span className="font-mono text-[10px] text-sc-dim uppercase tracking-wider">
+            <span className="font-mono text-xs text-sc-dim uppercase tracking-wider">
               Mastery
             </span>
             <div className="flex gap-1">
@@ -652,7 +652,7 @@ export default function StarDrillPage() {
                 />
               ))}
             </div>
-            <span className="font-mono text-[10px] text-sc-dim">8.5+</span>
+            <span className="font-mono text-xs text-sc-dim">8.5+</span>
           </div>
         )}
       </header>
@@ -677,7 +677,7 @@ export default function StarDrillPage() {
 
             {/* Result reminder */}
             <div className="rounded-sm border border-sc-gold-dim bg-sc-gold-bg px-4 py-3.5">
-              <p className="font-mono text-[10px] tracking-widest text-sc-gold uppercase mb-1.5">
+              <p className="font-mono text-xs tracking-widest text-sc-gold uppercase mb-1.5">
                 The Result rule
               </p>
               <p className="text-sm text-sc-ink leading-relaxed">
@@ -772,7 +772,7 @@ export default function StarDrillPage() {
                     { label: "Result ⚡", value: activeStory.result },
                   ].map(({ label, value }) => (
                     <div key={label}>
-                      <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase mb-1">
+                      <p className="font-mono text-xs tracking-widest text-sc-dim uppercase mb-1">
                         {label}
                       </p>
                       <p className="text-sm text-sc-muted leading-relaxed">{value}</p>
@@ -830,11 +830,11 @@ export default function StarDrillPage() {
                 className="w-full bg-transparent px-4 pt-4 pb-2 text-sm text-sc-ink placeholder:text-sc-dim focus:outline-none resize-none leading-relaxed disabled:opacity-50"
               />
               <div className="px-4 pb-3 flex items-center justify-end gap-3">
-                <span className="font-mono text-[10px] text-sc-dim">
+                <span className="font-mono text-xs text-sc-dim">
                   {wordCount} words
                 </span>
                 <span
-                  className={`font-mono text-[10px] ${
+                  className={`font-mono text-xs ${
                     wordCount === 0
                       ? "text-sc-dim"
                       : wordCount < 60
@@ -888,18 +888,18 @@ export default function StarDrillPage() {
                           {String(Math.floor(srSeconds / 60)).padStart(1, "0")}:{String(srSeconds % 60).padStart(2, "0")}
                         </span>
                         {srSeconds >= 90 ? (
-                          <span className="font-mono text-[10px] text-sc-red">— too long</span>
+                          <span className="font-mono text-xs text-sc-red">— too long</span>
                         ) : srSeconds >= 60 ? (
-                          <span className="font-mono text-[10px] text-sc-gold">— start closing</span>
+                          <span className="font-mono text-xs text-sc-gold">— start closing</span>
                         ) : (
-                          <span className="font-mono text-[10px] text-sc-dim animate-pulse">listening…</span>
+                          <span className="font-mono text-xs text-sc-dim animate-pulse">listening…</span>
                         )}
                       </div>
                     )}
 
                     {/* Divider */}
                     {speechSupported && recState !== "uploading" && !browserRecording && (
-                      <span className="font-mono text-[10px] text-sc-border">or</span>
+                      <span className="font-mono text-xs text-sc-border">or</span>
                     )}
 
                     {/* Whisper fallback */}
@@ -931,16 +931,16 @@ export default function StarDrillPage() {
                     )}
 
                     {recState === "transcribed" && !browserRecording && (
-                      <span className="font-mono text-[10px] text-sc-green">✓ Transcribed</span>
+                      <span className="font-mono text-xs text-sc-green">✓ Transcribed</span>
                     )}
                     {recError && (
-                      <span className="font-mono text-[10px] text-sc-red">{recError}</span>
+                      <span className="font-mono text-xs text-sc-red">{recError}</span>
                     )}
                   </div>
 
                   {/* Interim transcript preview */}
                   {interimText && (
-                    <p className="font-mono text-[10px] text-sc-muted italic leading-relaxed">
+                    <p className="font-mono text-xs text-sc-muted italic leading-relaxed">
                       {interimText}…
                     </p>
                   )}
@@ -990,11 +990,11 @@ export default function StarDrillPage() {
                   }`}
                 >
                   <div className="flex items-center justify-between">
-                    <span className="font-mono text-[10px] tracking-widest text-sc-gold uppercase">
+                    <span className="font-mono text-xs tracking-widest text-sc-gold uppercase">
                       Best version (#{best.n} · {best.composite})
                     </span>
                     <span
-                      className={`font-mono text-[10px] ${
+                      className={`font-mono text-xs ${
                         best.star.result >= 8 ? "text-sc-green" : "text-sc-red"
                       }`}
                     >
@@ -1011,7 +1011,7 @@ export default function StarDrillPage() {
             {/* Attempt log */}
             {storyAttempts.length > 0 && (
               <div className="space-y-2">
-                <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase">
+                <p className="font-mono text-xs tracking-widest text-sc-dim uppercase">
                   Attempts ({storyAttempts.length})
                 </p>
                 {[...storyAttempts].reverse().map((a) => (

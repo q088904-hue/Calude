@@ -80,7 +80,7 @@ function CopyButton({ text }: { text: string }) {
     <button
       type="button"
       onClick={copy}
-      className={`font-mono text-[10px] transition-colors ${
+      className={`font-mono text-xs transition-colors ${
         copied ? "text-sc-green" : "text-sc-dim hover:text-sc-gold"
       }`}
     >
@@ -128,19 +128,19 @@ function QuestionRow({
       <div className="border-t border-sc-line px-4 py-2.5 flex items-center gap-4">
         <Link
           href={`/stagecraft/drill?q=${encodeURIComponent(q.question)}`}
-          className="font-mono text-[10px] text-sc-dim hover:text-sc-gold transition-colors"
+          className="font-mono text-xs text-sc-dim hover:text-sc-gold transition-colors"
         >
           Drill this →
         </Link>
         <Link
           href={`/stagecraft/debrief?question=${encodeURIComponent(q.question)}`}
-          className="font-mono text-[10px] text-sc-dim hover:text-sc-gold transition-colors"
+          className="font-mono text-xs text-sc-dim hover:text-sc-gold transition-colors"
         >
           Add to debrief →
         </Link>
         <Link
           href={`/stagecraft?drill=${encodeURIComponent(q.question)}`}
-          className="font-mono text-[10px] text-sc-dim hover:text-sc-gold transition-colors"
+          className="font-mono text-xs text-sc-dim hover:text-sc-gold transition-colors"
         >
           Practice session →
         </Link>
@@ -235,7 +235,7 @@ export default function RecruiterPage() {
 
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase">
+                <p className="font-mono text-xs tracking-widest text-sc-dim uppercase">
                   Recruiter message or JD
                 </p>
                 <button
@@ -246,7 +246,7 @@ export default function RecruiterPage() {
                       (i) => (i + 1) % PLACEHOLDER_EXAMPLES.length,
                     );
                   }}
-                  className="font-mono text-[10px] text-sc-dim hover:text-sc-gold transition-colors"
+                  className="font-mono text-xs text-sc-dim hover:text-sc-gold transition-colors"
                 >
                   load example ↻
                 </button>
@@ -261,12 +261,12 @@ export default function RecruiterPage() {
                   className="w-full bg-transparent px-4 pt-4 pb-3 text-sm text-sc-ink placeholder:text-sc-dim focus:outline-none resize-none leading-relaxed disabled:opacity-50"
                 />
                 <div className="px-4 pb-3 flex justify-end">
-                  <span className="font-mono text-[10px] text-sc-dim">
+                  <span className="font-mono text-xs text-sc-dim">
                     {message.trim().split(/\s+/).filter(Boolean).length} words
                   </span>
                 </div>
               </div>
-              <p className="font-mono text-[10px] text-sc-dim leading-relaxed">
+              <p className="font-mono text-xs text-sc-dim leading-relaxed">
                 Paste the full message — more context = better questions.
                 Job descriptions work too.
               </p>
@@ -320,7 +320,7 @@ export default function RecruiterPage() {
 
             {/* Fit notes */}
             <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-4 py-4 space-y-2">
-              <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase">
+              <p className="font-mono text-xs tracking-widest text-sc-dim uppercase">
                 Fit read
               </p>
               <p className="text-sm text-sc-ink leading-relaxed">
@@ -331,7 +331,7 @@ export default function RecruiterPage() {
             {/* Drafted reply */}
             <div className="rounded-sm border border-sc-gold-dim bg-sc-gold-bg overflow-hidden">
               <div className="px-4 py-3 border-b border-sc-gold-dim/40 flex items-center justify-between">
-                <p className="font-mono text-[10px] tracking-widest text-sc-gold uppercase">
+                <p className="font-mono text-xs tracking-widest text-sc-gold uppercase">
                   Your reply — in your voice
                 </p>
                 <CopyButton text={result.reply} />
@@ -342,7 +342,7 @@ export default function RecruiterPage() {
                 </p>
               </div>
               <div className="border-t border-sc-gold-dim/30 px-4 py-2.5">
-                <p className="font-mono text-[10px] text-sc-dim">
+                <p className="font-mono text-xs text-sc-dim">
                   Edit before sending — add your name and adjust the timing
                   if needed. Keep it under 60 words.
                 </p>
@@ -352,10 +352,10 @@ export default function RecruiterPage() {
             {/* First-call questions */}
             <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase">
+                <p className="font-mono text-xs tracking-widest text-sc-dim uppercase">
                   5 questions to prepare — first call
                 </p>
-                <span className="font-mono text-[10px] text-sc-red">
+                <span className="font-mono text-xs text-sc-red">
                   Q4–5 are the hardest
                 </span>
               </div>
@@ -369,7 +369,7 @@ export default function RecruiterPage() {
 
             {/* Quick actions */}
             <div className="border-t border-sc-border pt-6 space-y-3">
-              <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase">
+              <p className="font-mono text-xs tracking-widest text-sc-dim uppercase">
                 Prep now
               </p>
               <div className="flex flex-wrap gap-3">

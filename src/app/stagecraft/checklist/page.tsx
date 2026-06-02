@@ -359,7 +359,7 @@ function StatusChip({ status }: { status: ItemStatus }) {
   };
   return (
     <span
-      className={`inline-flex items-center rounded-sm border px-2 py-0.5 font-mono text-[10px] uppercase tracking-wide shrink-0 ${styles[status]}`}
+      className={`inline-flex items-center rounded-sm border px-2 py-0.5 font-mono text-xs uppercase tracking-wide shrink-0 ${styles[status]}`}
     >
       {labels[status]}
     </span>
@@ -473,7 +473,7 @@ export default function ChecklistPage() {
                 style={{ width: `${readyPct}%` }}
               />
             </div>
-            <p className="font-mono text-[10px] text-sc-dim">
+            <p className="font-mono text-xs text-sc-dim">
               {readyCount} of {totalCount} locked in
               {readyPct < 70 ? " — more work needed before this interview" : readyPct < 90 ? " — almost there" : " — strong position"}
             </p>
@@ -500,7 +500,7 @@ export default function ChecklistPage() {
               return (
                 <div key={cat} className="space-y-2">
                   <p
-                    className={`font-mono text-[10px] tracking-widest uppercase ${CATEGORY_COLORS[cat]}`}
+                    className={`font-mono text-xs tracking-widest uppercase ${CATEGORY_COLORS[cat]}`}
                   >
                     {CATEGORY_LABELS[cat]}
                   </p>
@@ -530,7 +530,7 @@ export default function ChecklistPage() {
 
                         {/* Status detail */}
                         <p
-                          className={`font-mono text-[10px] leading-relaxed ${
+                          className={`font-mono text-xs leading-relaxed ${
                             item.derived.status === "ready"
                               ? "text-sc-green"
                               : item.derived.status === "needs-work"
@@ -547,14 +547,14 @@ export default function ChecklistPage() {
                         <div className="border-t border-sc-line px-4 py-2.5 flex items-center gap-4">
                           <Link
                             href={item.toolHref}
-                            className="font-mono text-[10px] text-sc-gold hover:brightness-110 transition-colors font-medium"
+                            className="font-mono text-xs text-sc-gold hover:brightness-110 transition-colors font-medium"
                           >
                             {item.toolLabel} →
                           </Link>
                           {item.drillHref !== item.toolHref && (
                             <Link
                               href={item.drillHref}
-                              className="font-mono text-[10px] text-sc-dim hover:text-sc-gold transition-colors"
+                              className="font-mono text-xs text-sc-dim hover:text-sc-gold transition-colors"
                             >
                               Drill →
                             </Link>
@@ -570,7 +570,7 @@ export default function ChecklistPage() {
             {/* Bottom callout */}
             <div className="border-t border-sc-border pt-6 space-y-3">
               <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-4 py-4">
-                <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase mb-2">
+                <p className="font-mono text-xs tracking-widest text-sc-dim uppercase mb-2">
                   On the morning of the interview
                 </p>
                 <ol className="space-y-1.5 text-sm text-sc-muted leading-relaxed">

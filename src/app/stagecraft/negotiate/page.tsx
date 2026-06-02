@@ -180,7 +180,7 @@ function CoachBlock({
 }) {
   return (
     <div className="space-y-1.5">
-      <p className={`font-mono text-[10px] tracking-widest uppercase ${labelColor}`}>
+      <p className={`font-mono text-xs tracking-widest uppercase ${labelColor}`}>
         {label}
       </p>
       <div className={`rounded-sm border ${border} ${bg} px-4 py-3 text-sm text-sc-ink leading-relaxed`}>
@@ -437,7 +437,7 @@ export default function NegotiatePage() {
 
         {/* ── Market selector ── */}
         <div className="space-y-2">
-          <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase">Market</p>
+          <p className="font-mono text-xs tracking-widest text-sc-dim uppercase">Market</p>
           <div className="flex gap-2 flex-wrap">
             {MARKETS.map((m) => (
               <button
@@ -462,7 +462,7 @@ export default function NegotiatePage() {
 
         {/* ── Scenario selector ── */}
         <div className="space-y-2">
-          <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase">Scenario</p>
+          <p className="font-mono text-xs tracking-widest text-sc-dim uppercase">Scenario</p>
           <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm divide-y divide-sc-line overflow-hidden">
             {SCENARIOS.map((s) => {
               const sAttempts = attempts.filter((a) => a.scenarioId === s.id);
@@ -501,7 +501,7 @@ export default function NegotiatePage() {
 
         {/* ── Active scenario context ── */}
         <div className={`rounded-sm border p-5 ${scenario.risk ? "border-sc-red/30 bg-sc-red/5" : "border-sc-border bg-sc-surface"}`}>
-          <p className={`font-mono text-[10px] tracking-widest uppercase mb-2 ${scenario.risk ? "text-sc-red" : "text-sc-dim"}`}>
+          <p className={`font-mono text-xs tracking-widest uppercase mb-2 ${scenario.risk ? "text-sc-red" : "text-sc-dim"}`}>
             {scenario.tag}
           </p>
           <p className="text-lg font-medium leading-snug text-sc-ink mb-3">
@@ -568,7 +568,7 @@ export default function NegotiatePage() {
                 {/* Transcript display */}
                 {(transcript || interimText) && (
                   <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-4 py-3">
-                    <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase mb-1.5">
+                    <p className="font-mono text-xs tracking-widest text-sc-dim uppercase mb-1.5">
                       {browserRecording ? "Listening…" : "Your response"}
                     </p>
                     <p className="text-sm text-sc-ink leading-relaxed">
@@ -644,7 +644,7 @@ export default function NegotiatePage() {
                     </div>
 
                     {interimText && !transcript && (
-                      <p className="font-mono text-[10px] text-sc-muted italic">
+                      <p className="font-mono text-xs text-sc-muted italic">
                         {interimText}…
                       </p>
                     )}
@@ -749,7 +749,7 @@ export default function NegotiatePage() {
         {/* ── Attempt history ── */}
         {attempts.length > 1 && (
           <div className="space-y-2">
-            <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase">This session</p>
+            <p className="font-mono text-xs tracking-widest text-sc-dim uppercase">This session</p>
             <div className="space-y-1.5">
               {[...attempts].reverse().slice(0, 8).map((a) => {
                 const sym = { held: "✓", partial: "~", caved: "✗" }[a.blocks.verdictKind];
@@ -761,9 +761,9 @@ export default function NegotiatePage() {
                 const scenLabel = SCENARIOS.find((s) => s.id === a.scenarioId)?.label ?? a.scenarioId;
                 return (
                   <div key={a.n} className="flex items-center gap-3 rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-3 py-2">
-                    <span className="font-mono text-[10px] text-sc-dim w-5 text-right shrink-0">#{a.n}</span>
+                    <span className="font-mono text-xs text-sc-dim w-5 text-right shrink-0">#{a.n}</span>
                     <span className={`font-mono text-xs font-bold shrink-0 ${col}`}>{sym}</span>
-                    <span className="font-mono text-[10px] text-sc-dim shrink-0 hidden sm:inline">{scenLabel}</span>
+                    <span className="font-mono text-xs text-sc-dim shrink-0 hidden sm:inline">{scenLabel}</span>
                     <p className="flex-1 text-xs text-sc-muted truncate min-w-0">{a.transcript}</p>
                   </div>
                 );

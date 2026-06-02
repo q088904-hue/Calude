@@ -21,7 +21,7 @@ export function SuggestedAnswer({
         type="button"
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
-        className="font-mono text-[11px] tracking-widest uppercase text-sc-dim hover:text-sc-gold transition-colors"
+        className="font-mono text-xs tracking-widest uppercase text-sc-dim hover:text-sc-gold transition-colors"
       >
         {open ? "Hide suggested answer ▴" : "Show a suggested answer ▾"}
       </button>
