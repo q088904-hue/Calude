@@ -49,6 +49,7 @@ import {
 } from "@/lib/stagecraft/speechRecognition";
 import { GooeyText } from "@/components/stagecraft/GooeyText";
 import { NavDropdown } from "@/components/stagecraft/NavDropdown";
+import { OnboardingProgress } from "@/components/stagecraft/OnboardingProgress";
 import { ScrollReveal } from "@/components/stagecraft/ScrollReveal";
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
 
@@ -1866,6 +1867,11 @@ function SetupView(props: {
         {/* AI daily brief — generates once per day, cached in localStorage */}
         <DailyBriefPanel history={history} interviewConfig={interviewConfig} />
       </div>
+
+      {/* ── Onboarding progress — self-hides once all milestones met ─ */}
+      <ScrollReveal delay={0}>
+        <OnboardingProgress />
+      </ScrollReveal>
 
       {/* ── Time-based nav ───────────────────────────────────────── */}
       <ScrollReveal delay={0}>
