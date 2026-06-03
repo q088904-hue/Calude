@@ -39,8 +39,12 @@ export async function POST(request: NextRequest) {
     return Response.json(defaultProfile);
   }
 
-  // Merge over the default so partial saves don't lose fields
-  const merged: Profile = { ...defaultProfile, ...body } as Profile;
+  // Merge over the CURRENT profile so partial saves preserve prior edits.
+  // (getProfile returns the saved file when present, else the hardcoded
+  // default — so the first save still seeds correctly.) Merging over
+  // defaultProfile would silently reset every field absent from the body.
+  const current = await getProfile();
+  const merged: Profile = { ...current, ...body } as Profile;
   await saveProfile(merged);
   return Response.json(merged);
 }
