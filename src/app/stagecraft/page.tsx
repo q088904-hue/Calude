@@ -793,7 +793,7 @@ function StagecraftInner() {
         <div className="flex items-center gap-3 shrink-0">
           <Link
             href="/"
-            className="font-mono text-xs text-sc-dim hover:text-sc-muted transition-colors"
+            className="font-mono text-xs text-sc-dim hover:text-sc-muted transition-colors min-h-[36px] inline-flex items-center"
           >
             ← Home
           </Link>
