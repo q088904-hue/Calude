@@ -50,6 +50,7 @@ import {
 import { GooeyText } from "@/components/stagecraft/GooeyText";
 import { NavDropdown } from "@/components/stagecraft/NavDropdown";
 import { OnboardingProgress } from "@/components/stagecraft/OnboardingProgress";
+import { computeCountdown } from "@/lib/stagecraft/countdown";
 import { ScrollReveal } from "@/components/stagecraft/ScrollReveal";
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
 
@@ -1689,19 +1690,11 @@ function CountdownStrip({
   date: string;
   company?: string;
 }) {
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  // Parse the ISO date without timezone shift
-  const [y, m, d] = date.split("-").map(Number);
-  const target = new Date(y, m - 1, d);
-  const days = Math.round(
-    (target.getTime() - today.getTime()) / (1000 * 60 * 60 * 24),
-  );
+  // Day math + label sourced from the shared util (single source of truth);
+  // pacing + sprint logic below are unchanged.
+  const { days, label: daysLabel } = computeCountdown(date);
 
   if (days < 0) return null; // past — don't linger
-
-  const daysLabel =
-    days === 0 ? "Today" : days === 1 ? "1 day left" : `${days} days left`;
 
   const urgencyColor =
     days === 0
