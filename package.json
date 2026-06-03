@@ -8,7 +8,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "check-answers": "node --experimental-strip-types scripts/check-suggested-answers.mjs"
+    "check-answers": "node --experimental-strip-types scripts/check-suggested-answers.mjs",
+    "stagecraft:migrate:dry": "node scripts/stagecraft-migrate-to-supabase.mjs --dry-run",
+    "stagecraft:migrate": "node scripts/stagecraft-migrate-to-supabase.mjs",
+    "stagecraft:verify": "node scripts/stagecraft-migrate-to-supabase.mjs --verify"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.95.1",
