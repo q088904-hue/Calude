@@ -1790,6 +1790,57 @@ function CountdownStrip({
   );
 }
 
+/** Fetches first-run state once. null = unknown (still loading). */
+function useFirstRun(): boolean | null {
+  const [isFirstRun, setIsFirstRun] = useState<boolean | null>(null);
+  useEffect(() => {
+    fetch("/api/stagecraft/state", { cache: "no-store" })
+      .then((r) => r.json() as Promise<{ isFirstRun: boolean }>)
+      .then((s) => setIsFirstRun(Boolean(s.isFirstRun)))
+      .catch(() => setIsFirstRun(false));
+  }, []);
+  return isFirstRun;
+}
+
+/** Focused first-run hero — one job: get the user into a graded answer fast. */
+function FirstRunHero() {
+  return (
+    <section className="sc-entry sc-e1">
+      <div className="flex items-center gap-2 mb-4">
+        <span className="inline-block w-4 h-px bg-sc-gold" />
+        <p className="font-mono text-xs tracking-widest text-sc-gold uppercase">
+          Welcome
+        </p>
+      </div>
+      <h1 className="font-fraunces text-4xl font-semibold text-sc-ink leading-tight tracking-tight">
+        Prepare for the room.
+      </h1>
+      <p className="mt-3 text-sm text-sc-muted leading-relaxed max-w-prose">
+        Practice a real interview question and get scored in 60 seconds. No
+        setup required.
+      </p>
+      <div className="mt-6 flex flex-wrap items-center gap-3">
+        <Link
+          href="/stagecraft/quickfire"
+          className="rounded-sc bg-sc-gold px-5 py-3 text-sm font-semibold text-sc-void hover:brightness-110 transition-all min-h-[44px] inline-flex items-center gap-2"
+        >
+          <span aria-hidden>▶</span> Try a 60-second Quick Fire
+        </Link>
+        <Link
+          href="/stagecraft/profile/setup"
+          className="rounded-sc border border-sc-border bg-sc-surface px-5 py-3 text-sm font-mono text-sc-muted hover:border-sc-gold-dim hover:text-sc-gold transition-colors min-h-[44px] inline-flex items-center"
+        >
+          Set up your profile
+        </Link>
+      </div>
+      <p className="mt-6 font-mono text-xs text-sc-dim leading-relaxed max-w-prose">
+        What you&apos;ll get: a model answer in your voice, an honest score, and
+        the patterns to fix.
+      </p>
+    </section>
+  );
+}
+
 function SetupView(props: {
   targetRole: string;
   setTargetRole: (v: string) => void;
@@ -1808,6 +1859,7 @@ function SetupView(props: {
   onStart: () => void;
 }) {
   const drillActive = props.drillQuestion.trim().length > 0;
+  const firstRun = useFirstRun();
   const history = useLastSession();
   const interviewConfig = useInterviewConfig();
   const last = history?.sessions[0] ?? null;
@@ -1827,6 +1879,11 @@ function SetupView(props: {
     props.setQuestionCount(rec.questionCount);
     props.setDrillQuestion(""); // clear any active drill
   };
+
+  // First-run users get a focused activation hero instead of the dense hub.
+  if (firstRun === true) {
+    return <FirstRunHero />;
+  }
 
   return (
     <section>
