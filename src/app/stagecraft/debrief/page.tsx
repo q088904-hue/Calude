@@ -543,8 +543,9 @@ export default function DebriefPage() {
               </div>
 
               <div className="space-y-1.5">
-                <p className="font-mono text-xs tracking-widest text-sc-dim uppercase">Interview date</p>
+                <label htmlFor="sc-debrief-date" className="font-mono text-xs tracking-widest text-sc-dim uppercase block">Interview date</label>
                 <input
+                  id="sc-debrief-date"
                   type="date"
                   value={date}
                   onChange={(e) => setDate(e.target.value)}
@@ -566,6 +567,7 @@ export default function DebriefPage() {
                     <div className="flex items-center gap-3">
                       <span className="font-mono text-xs text-sc-gold w-5">Q{i + 1}</span>
                       <select
+                        aria-label={`Round type for question ${i + 1}`}
                         value={pair.round}
                         onChange={(e) => updatePair(pair.id, "round", e.target.value)}
                         className="bg-transparent font-mono text-xs text-sc-dim border-none focus:outline-none cursor-pointer hover:text-sc-ink transition-colors"
@@ -591,6 +593,7 @@ export default function DebriefPage() {
                       What they asked
                     </p>
                     <textarea
+                      aria-label={`Question ${i + 1} — what they asked`}
                       value={pair.question}
                       onChange={(e) => updatePair(pair.id, "question", e.target.value)}
                       placeholder="Paste or type the question as best you remember it…"
@@ -643,6 +646,7 @@ export default function DebriefPage() {
                       </p>
                     )}
                     <textarea
+                      aria-label={`Answer ${i + 1} — what you said`}
                       value={pair.answer}
                       onChange={(e) => updatePair(pair.id, "answer", e.target.value)}
                       placeholder="Write what you said — don't polish it, write it as you said it…"

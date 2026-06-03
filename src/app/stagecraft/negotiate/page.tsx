@@ -675,6 +675,7 @@ export default function NegotiatePage() {
             {answerMode === "type" && (
               <div className="space-y-3">
                 <textarea
+                  aria-label="Type your negotiation response"
                   value={transcript}
                   onChange={(e) => setTranscript(e.target.value)}
                   placeholder="Type what you would say on the call…"

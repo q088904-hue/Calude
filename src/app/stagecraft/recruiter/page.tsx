@@ -253,6 +253,7 @@ export default function RecruiterPage() {
               </div>
               <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm overflow-hidden focus-within:border-sc-gold-dim transition-colors">
                 <textarea
+                  aria-label="Paste the recruiter message or job description"
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder={PLACEHOLDER_EXAMPLES[0]}
