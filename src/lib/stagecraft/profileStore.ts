@@ -27,3 +27,13 @@ export async function saveProfile(p: Profile): Promise<void> {
   await fs.mkdir(DATA_DIR, { recursive: true });
   await fs.writeFile(PROFILE_FILE, JSON.stringify(p, null, 2), "utf8");
 }
+
+/** True once the user has saved a profile (i.e. not just the hardcoded default). */
+export async function profileFileExists(): Promise<boolean> {
+  try {
+    await fs.access(PROFILE_FILE);
+    return true;
+  } catch {
+    return false;
+  }
+}
