@@ -2,75 +2,30 @@
 // GET → returns per-session summaries + all-time aggregates
 // Computed server-side so the client doesn't have to crunch full session JSON.
 
-import { listSessions } from "@/lib/stagecraft/sessionStore";
-import type { SessionRecord } from "@/lib/stagecraft/types";
+import { listSessionSummaries } from "@/lib/stagecraft/sessionStore";
+import type { SessionSummary } from "@/lib/stagecraft/sessionSummary";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-export interface SessionSummary {
-  id: string;
-  startedAt: string;
-  endedAt?: string;
-  role: string;
-  round: string;
-  difficulty: string;
-  questionCount: number; // answered (not configured)
-  avgContent: number;
-  avgEnglish: number;
-  avgDelivery: number;
-  composite: number; // 0.4*content + 0.3*english + 0.3*delivery
-  patterns: string[]; // every pattern tag across all items (with dupes)
-}
+// Re-exported so existing page imports (`from ".../history/route"`) keep working.
+export type { SessionSummary };
 
 export interface HistoryPayload {
   sessions: SessionSummary[];      // newest first, all sessions with ≥1 item
   allPatterns: { tag: string; count: number }[]; // sorted by count desc
   kohlerReadiness: number | null;  // rolling 5-session composite (null if <3 sessions)
   totalQuestions: number;
+  total: number;                   // total summarised sessions (for paginated callers)
 }
 
-function summarise(s: SessionRecord): SessionSummary | null {
-  if (s.items.length === 0) return null;
-  const n = s.items.length;
-  const sum = s.items.reduce(
-    (a, it) => {
-      a.c += it.scores.content;
-      a.e += it.scores.english;
-      a.d += it.scores.delivery;
-      return a;
-    },
-    { c: 0, e: 0, d: 0 },
-  );
-  const ac = +(sum.c / n).toFixed(1);
-  const ae = +(sum.e / n).toFixed(1);
-  const ad = +(sum.d / n).toFixed(1);
-  const composite = +(ac * 0.4 + ae * 0.3 + ad * 0.3).toFixed(1);
-  const patterns = s.items.flatMap((it) => it.patterns ?? []);
-  return {
-    id: s.id,
-    startedAt: s.startedAt,
-    endedAt: s.endedAt,
-    role: s.config.targetRole,
-    round: s.config.round,
-    difficulty: s.config.difficulty,
-    questionCount: n,
-    avgContent: ac,
-    avgEnglish: ae,
-    avgDelivery: ad,
-    composite,
-    patterns,
-  };
-}
+export async function GET(request: Request) {
+  // Read amplification mitigation: pull precomputed summaries (never `items`).
+  // Returns newest-first, empty shells already excluded.
+  const summaries = await listSessionSummaries();
 
-export async function GET() {
-  const all = await listSessions();
-
-  // Newest first, skip empty shells (sessions that were created but never answered)
-  const summaries: SessionSummary[] = all
-    .map(summarise)
-    .filter((s): s is SessionSummary => s !== null)
-    .sort((a, b) => (a.startedAt < b.startedAt ? 1 : -1));
+  // Aggregates always span the FULL set so charts/readiness stay accurate even
+  // when a caller paginates the session list below.
 
   // All-time pattern frequency
   const patternMap = new Map<string, number>();
@@ -94,11 +49,21 @@ export async function GET() {
 
   const totalQuestions = summaries.reduce((a, s) => a + s.questionCount, 0);
 
+  // Opt-in pagination of the session LIST only (aggregates above stay full-set).
+  // No params → identical payload to before (all sessions returned).
+  const params = new URL(request.url).searchParams;
+  const rawLimit = params.get("limit");
+  const limit = rawLimit !== null ? Math.max(0, Number(rawLimit) || 0) : null;
+  const offset = Math.max(0, Number(params.get("offset")) || 0);
+  const sessions =
+    limit !== null ? summaries.slice(offset, offset + limit) : summaries;
+
   const payload: HistoryPayload = {
-    sessions: summaries,
+    sessions,
     allPatterns,
     kohlerReadiness,
     totalQuestions,
+    total: summaries.length,
   };
 
   return Response.json(payload);

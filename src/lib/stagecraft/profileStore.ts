@@ -7,11 +7,14 @@ import { promises as fs } from "node:fs";
 import path from "node:path";
 import { profile as defaultProfile } from "./profile";
 import type { Profile } from "./types";
+import { isSupabaseBackend } from "./storeBackend";
+import * as supa from "./supabaseStore";
 
 const DATA_DIR = path.join(process.cwd(), ".stagecraft");
 const PROFILE_FILE = path.join(DATA_DIR, "profile.json");
 
 export async function getProfile(): Promise<Profile> {
+  if (isSupabaseBackend()) return supa.getProfile();
   try {
     const raw = await fs.readFile(PROFILE_FILE, "utf8");
     const parsed = JSON.parse(raw) as Profile;
@@ -24,12 +27,14 @@ export async function getProfile(): Promise<Profile> {
 }
 
 export async function saveProfile(p: Profile): Promise<void> {
+  if (isSupabaseBackend()) return supa.saveProfile(p);
   await fs.mkdir(DATA_DIR, { recursive: true });
   await fs.writeFile(PROFILE_FILE, JSON.stringify(p, null, 2), "utf8");
 }
 
 /** True once the user has saved a profile (i.e. not just the hardcoded default). */
 export async function profileFileExists(): Promise<boolean> {
+  if (isSupabaseBackend()) return supa.profileExists();
   try {
     await fs.access(PROFILE_FILE);
     return true;

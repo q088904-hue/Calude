@@ -4,6 +4,8 @@
 
 import { promises as fs } from "node:fs";
 import * as path from "node:path";
+import { isSupabaseBackend } from "./storeBackend";
+import * as supa from "./supabaseStore";
 
 export interface StagecraftConfig {
   /** ISO date string, e.g. "2026-06-20" */
@@ -15,6 +17,7 @@ export interface StagecraftConfig {
 const CONFIG_PATH = path.join(process.cwd(), ".stagecraft", "config.json");
 
 export async function getConfig(): Promise<StagecraftConfig> {
+  if (isSupabaseBackend()) return supa.getConfig();
   try {
     const raw = await fs.readFile(CONFIG_PATH, "utf8");
     return JSON.parse(raw) as StagecraftConfig;
@@ -24,6 +27,7 @@ export async function getConfig(): Promise<StagecraftConfig> {
 }
 
 export async function saveConfig(c: StagecraftConfig): Promise<void> {
+  if (isSupabaseBackend()) return supa.saveConfig(c);
   await fs.mkdir(path.dirname(CONFIG_PATH), { recursive: true });
   await fs.writeFile(CONFIG_PATH, JSON.stringify(c, null, 2), "utf8");
 }

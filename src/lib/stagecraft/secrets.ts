@@ -10,6 +10,22 @@ const SECRETS_PATH = path.join(process.cwd(), ".stagecraft", "secrets.json");
 
 export type SecretName = "ANTHROPIC_API_KEY" | "OPENAI_API_KEY";
 
+/**
+ * True when the filesystem is ephemeral / read-only and the secrets.json
+ * fallback would NOT persist — i.e. serverless deploys. In that case keys must
+ * be supplied via the server environment, and the paste-a-key UI is misleading,
+ * so it is hidden and the write endpoint refuses. `STAGECRAFT_STORE=supabase`
+ * is treated as serverless intent (belt-and-suspenders) alongside the explicit
+ * STAGECRAFT_SERVERLESS flag and Vercel's own marker.
+ */
+export function isServerless(): boolean {
+  return (
+    process.env.STAGECRAFT_SERVERLESS === "1" ||
+    process.env.VERCEL === "1" ||
+    process.env.STAGECRAFT_STORE === "supabase"
+  );
+}
+
 async function readFileSecrets(): Promise<Partial<Record<SecretName, string>>> {
   try {
     return JSON.parse(await fs.readFile(SECRETS_PATH, "utf8")) as Partial<
