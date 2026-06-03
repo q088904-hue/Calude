@@ -7,6 +7,7 @@
 // Streamed plain text, same pattern as /grade.
 
 import { NextRequest } from "next/server";
+import { requireStagecraftUser } from "@/lib/stagecraft/auth";
 import Anthropic from "@anthropic-ai/sdk";
 
 export const runtime = "nodejs";
@@ -77,6 +78,8 @@ NON-NEGOTIABLES:
 `.trim();
 
 export async function POST(request: NextRequest) {
+  const gate = await requireStagecraftUser();
+  if (gate instanceof Response) return gate;
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
     return Response.json(

@@ -2,6 +2,7 @@
 // POST /api/stagecraft/config → merge and save partial config
 
 import { NextRequest } from "next/server";
+import { requireStagecraftUser } from "@/lib/stagecraft/auth";
 import {
   getConfig,
   saveConfig,
@@ -17,6 +18,8 @@ export async function GET() {
 }
 
 export async function POST(request: NextRequest) {
+  const gate = await requireStagecraftUser();
+  if (gate instanceof Response) return gate;
   let body: Partial<StagecraftConfig>;
   try {
     body = (await request.json()) as Partial<StagecraftConfig>;

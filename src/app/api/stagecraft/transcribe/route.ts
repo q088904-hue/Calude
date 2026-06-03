@@ -3,6 +3,7 @@
 // Forwards to OpenAI Whisper and returns { text }.
 
 import { NextRequest } from "next/server";
+import { requireStagecraftUser } from "@/lib/stagecraft/auth";
 import { getOpenAIKey } from "@/lib/stagecraft/secrets";
 
 export const runtime = "nodejs"; // we need the server runtime for file forwarding
@@ -12,6 +13,8 @@ const OPENAI_TRANSCRIBE_URL = "https://api.openai.com/v1/audio/transcriptions";
 const WHISPER_MODEL = process.env.STAGECRAFT_WHISPER_MODEL ?? "whisper-1";
 
 export async function POST(request: NextRequest) {
+  const gate = await requireStagecraftUser();
+  if (gate instanceof Response) return gate;
   const apiKey = await getOpenAIKey();
   if (!apiKey) {
     return Response.json(

@@ -5,6 +5,7 @@
 // The key VALUE is never returned to the client.
 
 import { NextRequest } from "next/server";
+import { requireStagecraftUser } from "@/lib/stagecraft/auth";
 import {
   getSecretStatus,
   setSecret,
@@ -34,6 +35,8 @@ export async function GET() {
 }
 
 export async function POST(request: NextRequest) {
+  const gate = await requireStagecraftUser();
+  if (gate instanceof Response) return gate;
   if (isServerless()) {
     return Response.json({ error: SERVERLESS_MSG }, { status: 409 });
   }
@@ -57,6 +60,8 @@ export async function POST(request: NextRequest) {
 }
 
 export async function DELETE(request: NextRequest) {
+  const gate = await requireStagecraftUser();
+  if (gate instanceof Response) return gate;
   if (isServerless()) {
     return Response.json({ error: SERVERLESS_MSG }, { status: 409 });
   }

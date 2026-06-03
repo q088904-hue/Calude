@@ -5,6 +5,7 @@
 // POST { action: "bump", id }   -> increment review counter
 
 import { NextRequest } from "next/server";
+import { requireStagecraftUser } from "@/lib/stagecraft/auth";
 import {
   listMemorized,
   addMemorized,
@@ -32,6 +33,8 @@ type BumpBody = { action: "bump"; id: string };
 type Body = AddBody | RemoveBody | BumpBody;
 
 export async function POST(request: NextRequest) {
+  const gate = await requireStagecraftUser();
+  if (gate instanceof Response) return gate;
   let body: Body;
   try {
     body = (await request.json()) as Body;
