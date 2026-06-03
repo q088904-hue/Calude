@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
+import { CountdownChip } from "@/components/stagecraft/CountdownChip";
 
 export function StagecraftHeader({
   label,
@@ -49,6 +50,7 @@ export function StagecraftHeader({
         </span>
       </div>
       <div className="flex items-center gap-3">
+        <CountdownChip />
         {children}
         <AnimatedThemeToggler />
       </div>
