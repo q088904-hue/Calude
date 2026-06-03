@@ -48,6 +48,7 @@ import {
   type SRInstance,
 } from "@/lib/stagecraft/speechRecognition";
 import { GooeyText } from "@/components/stagecraft/GooeyText";
+import { NavDropdown } from "@/components/stagecraft/NavDropdown";
 import { ScrollReveal } from "@/components/stagecraft/ScrollReveal";
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
 
@@ -232,16 +233,6 @@ function StagecraftInner() {
   );
 
   // Memorize queue count — fetched once on mount for nav badge
-  const [memorizeCount, setMemorizeCount] = useState(0);
-  useEffect(() => {
-    fetch("/api/stagecraft/memorize", { cache: "no-store" })
-      .then(async (r) => {
-        if (!r.ok) return;
-        const list = await r.json() as Array<unknown>;
-        setMemorizeCount(Array.isArray(list) ? list.length : 0);
-      })
-      .catch(() => {/* silent */});
-  }, []);
 
   // Detect Web Speech support on mount
   useEffect(() => {
@@ -847,97 +838,8 @@ function StagecraftInner() {
             </button>
           )}
         </div>
-        <div className="flex items-center gap-2 overflow-x-auto [&::-webkit-scrollbar]:hidden [scrollbar-width:none] [-ms-overflow-style:none]">
-          <Link
-            href="/stagecraft/recruiter"
-            className="rounded border border-sc-border bg-sc-surface px-3 py-1.5 text-xs font-mono text-sc-muted hover:border-sc-gold-dim hover:text-sc-gold transition-colors"
-          >
-            Recruiter
-          </Link>
-          <Link
-            href="/stagecraft/checklist"
-            className="rounded border border-sc-border bg-sc-surface px-3 py-1.5 text-xs font-mono text-sc-muted hover:border-sc-gold-dim hover:text-sc-gold transition-colors"
-          >
-            Checklist
-          </Link>
-          <Link
-            href="/stagecraft/intro"
-            className="rounded border border-sc-border bg-sc-surface px-3 py-1.5 text-xs font-mono text-sc-muted hover:border-sc-gold-dim hover:text-sc-gold transition-colors"
-          >
-            Intro
-          </Link>
-          <Link
-            href="/stagecraft/star"
-            className="rounded border border-sc-border bg-sc-surface px-3 py-1.5 text-xs font-mono text-sc-muted hover:border-sc-gold-dim hover:text-sc-gold transition-colors"
-          >
-            STAR
-          </Link>
-          <Link
-            href="/stagecraft/drill"
-            className="rounded border border-sc-border bg-sc-surface px-3 py-1.5 text-xs font-mono text-sc-muted hover:border-sc-gold-dim hover:text-sc-gold transition-colors"
-          >
-            Drill
-          </Link>
-          <Link
-            href="/stagecraft/negotiate"
-            className="rounded border border-sc-border bg-sc-surface px-3 py-1.5 text-xs font-mono text-sc-muted hover:border-sc-gold-dim hover:text-sc-gold transition-colors"
-          >
-            Negotiate
-          </Link>
-          <Link
-            href="/stagecraft/debrief"
-            className="rounded border border-sc-border bg-sc-surface px-3 py-1.5 text-xs font-mono text-sc-muted hover:border-sc-gold-dim hover:text-sc-gold transition-colors"
-          >
-            Debrief
-          </Link>
-          <Link
-            href="/stagecraft/companies"
-            className="rounded border border-sc-border bg-sc-surface px-3 py-1.5 text-xs font-mono text-sc-muted hover:border-sc-gold-dim hover:text-sc-gold transition-colors"
-          >
-            Companies
-          </Link>
-          <Link
-            href="/stagecraft/plan"
-            className="rounded border border-sc-border bg-sc-surface px-3 py-1.5 text-xs font-mono text-sc-muted hover:border-sc-gold-dim hover:text-sc-gold transition-colors"
-          >
-            90-day
-          </Link>
-          <Link
-            href="/stagecraft/portfolio"
-            className="rounded border border-sc-border bg-sc-surface px-3 py-1.5 text-xs font-mono text-sc-muted hover:border-sc-gold-dim hover:text-sc-gold transition-colors"
-          >
-            Portfolio
-          </Link>
-          <Link
-            href="/stagecraft/profile"
-            className="rounded border border-sc-border bg-sc-surface px-3 py-1.5 text-xs font-mono text-sc-muted hover:border-sc-gold-dim hover:text-sc-gold transition-colors"
-          >
-            Profile
-          </Link>
-          <Link
-            href="/stagecraft/history"
-            className="rounded border border-sc-border bg-sc-surface px-3 py-1.5 text-xs font-mono text-sc-muted hover:border-sc-gold-dim hover:text-sc-gold transition-colors"
-          >
-            History
-          </Link>
-          <Link
-            href="/stagecraft/patterns"
-            className="rounded border border-sc-border bg-sc-surface px-3 py-1.5 text-xs font-mono text-sc-muted hover:border-sc-gold-dim hover:text-sc-gold transition-colors"
-          >
-            Patterns
-          </Link>
-          <Link
-            href="/stagecraft/memorize"
-            className="flex items-center gap-1.5 rounded border border-sc-border bg-sc-surface px-3 py-1.5 text-xs font-mono text-sc-muted hover:border-sc-gold-dim hover:text-sc-gold transition-colors"
-          >
-            <span className="text-sc-gold">♥</span>
-            <span>Memorize</span>
-            {memorizeCount > 0 && (
-              <span className="rounded-sm bg-sc-gold px-1 py-0.5 font-mono text-[9px] font-bold text-sc-void leading-none">
-                {memorizeCount}
-              </span>
-            )}
-          </Link>
+        <div className="flex items-center gap-3">
+          <NavDropdown />
           <AnimatedThemeToggler className="ml-2 shrink-0" />
         </div>
       </header>
