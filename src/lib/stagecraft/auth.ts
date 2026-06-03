@@ -1,34 +1,24 @@
 // Stagecraft identity + access control (Initiative 3.2).
-// Single source for the allowlist, the authenticated-user resolution, the
-// mutating-route guard, and the development auth bypass. Server-only.
+// Server-side resolution + the mutating-route guard. Pure/edge-safe primitives
+// (allowlist, dev bypass) live in authShared.ts and are re-exported here.
+// Server-only (imports getSupabaseServer → next/headers).
 
 import { getSupabaseServer } from "@/lib/supabase/server";
+import {
+  STAGECRAFT_ALLOWLIST,
+  DEV_USER_ID,
+  isAllowed,
+  devAuthEnabled,
+  type StagecraftUser,
+} from "./authShared";
 
-export interface StagecraftUser {
-  id: string;
-  email: string;
-}
-
-/** D1 — single permitted account. Lowercase comparison. */
-export const STAGECRAFT_ALLOWLIST = ["jsviju@gmail.com"];
-
-/** Stable synthetic id for the dev-bypass user (never used in production). */
-export const DEV_USER_ID = "00000000-0000-0000-0000-0000000000d5";
-
-export function isAllowed(email?: string | null): boolean {
-  return !!email && STAGECRAFT_ALLOWLIST.includes(email.toLowerCase());
-}
-
-/**
- * Dev-only auth bypass. Fail-closed: hard-gated on NODE_ENV so the bypass can
- * NEVER authenticate in production even if STAGECRAFT_DEV_AUTH leaks into the env.
- */
-export function devAuthEnabled(): boolean {
-  return (
-    process.env.NODE_ENV !== "production" &&
-    process.env.STAGECRAFT_DEV_AUTH === "1"
-  );
-}
+export {
+  STAGECRAFT_ALLOWLIST,
+  DEV_USER_ID,
+  isAllowed,
+  devAuthEnabled,
+  type StagecraftUser,
+};
 
 function devUser(): StagecraftUser {
   const email = process.env.STAGECRAFT_DEV_USER ?? STAGECRAFT_ALLOWLIST[0];
@@ -57,8 +47,5 @@ export async function resolveStagecraftUser(): Promise<StagecraftUser | null> {
 export async function requireStagecraftUser(): Promise<StagecraftUser | Response> {
   const user = await resolveStagecraftUser();
   if (user) return user;
-  return Response.json(
-    { error: "Authentication required." },
-    { status: 401 },
-  );
+  return Response.json({ error: "Authentication required." }, { status: 401 });
 }
