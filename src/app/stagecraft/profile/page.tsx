@@ -519,9 +519,9 @@ function Section({
       >
         <span className={`w-1 h-3 rounded-full shrink-0 ${accent ? "bg-sc-gold" : "bg-sc-muted"}`} />
         <div>
-          <span className="font-mono text-xs tracking-widest text-sc-dim uppercase">
+          <h2 className="font-mono text-xs tracking-widest text-sc-dim uppercase inline">
             {title}
-          </span>
+          </h2>
           <span className="font-mono text-xs text-sc-dim ml-2">— {label}</span>
         </div>
       </div>

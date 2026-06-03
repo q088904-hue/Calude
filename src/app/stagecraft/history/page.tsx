@@ -674,9 +674,9 @@ function PatternBoard({
 function SessionList({ sessions }: { sessions: SessionSummary[] }) {
   return (
     <div className="space-y-3">
-      <p className="font-mono text-xs tracking-widest text-sc-dim uppercase">
+      <h2 className="font-mono text-xs tracking-widest text-sc-dim uppercase">
         Past sessions
-      </p>
+      </h2>
       {sessions.map((s, i) => (
         <ScrollReveal key={s.id} delay={Math.min(i * 60, 600)}>
           <SessionRow session={s} index={i} />

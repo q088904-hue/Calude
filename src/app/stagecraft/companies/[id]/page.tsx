@@ -355,9 +355,9 @@ export default function CompanyDeepDivePage({
         {/* ── Round structure ── */}
         <ScrollReveal delay={0}>
           <div className="space-y-2">
-            <p className="font-mono text-xs tracking-widest text-sc-dim uppercase">
+            <h2 className="font-mono text-xs tracking-widest text-sc-dim uppercase">
               Interview structure
-            </p>
+            </h2>
             <div className="flex flex-wrap items-center gap-2">
               {roundSteps.map((step, i) => (
                 <div key={i} className="flex items-center gap-2">
@@ -377,9 +377,9 @@ export default function CompanyDeepDivePage({
         <ScrollReveal delay={80}>
         <div className="rounded-sm border border-sc-red/30 bg-sc-red/5 overflow-hidden">
           <div className="px-4 py-3 border-b border-sc-red/20">
-            <p className="font-mono text-xs tracking-widest text-sc-red uppercase">
+            <h2 className="font-mono text-xs tracking-widest text-sc-red uppercase">
               ⚠ Watch-outs — know these cold
-            </p>
+            </h2>
           </div>
           <div className="px-4 py-4 space-y-2">
             {pack.watchOuts.map((w, i) => (

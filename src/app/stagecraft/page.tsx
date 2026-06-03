@@ -1309,9 +1309,9 @@ function PriorityDrillsPanel({
     <div className="mb-8 sc-entry sc-e4">
       {/* Section header */}
       <div className="flex items-center gap-3 mb-3">
-        <p className="font-mono text-xs tracking-widest text-sc-muted uppercase">
+        <h2 className="font-mono text-xs tracking-widest text-sc-muted uppercase">
           Priority drills
-        </p>
+        </h2>
         <div className="flex-1 h-px bg-sc-border" />
       </div>
 
@@ -2962,9 +2962,9 @@ function ReportView(props: {
 
       {/* Action cards — contextual next steps based on scores */}
       <div className="space-y-2">
-        <p className="font-mono text-xs tracking-widest text-sc-dim uppercase">
+        <h2 className="font-mono text-xs tracking-widest text-sc-dim uppercase">
           What to do next
-        </p>
+        </h2>
 
         {/* Lowest axis → specific drill */}
         {lowestAxis === "english" && (
