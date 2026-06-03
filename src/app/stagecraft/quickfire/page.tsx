@@ -12,6 +12,7 @@ import { renderSampleAnswer } from "@/lib/stagecraft/feedbackRenderers";
 import type { Round } from "@/lib/stagecraft/types";
 import { getSRClass, type SREvent, type SRInstance } from "@/lib/stagecraft/speechRecognition";
 import { SuggestedAnswer } from "@/components/stagecraft/SuggestedAnswer";
+import { LoopErrorState, type LoopError } from "@/components/stagecraft/LoopErrorState";
 
 // ─── question bank ────────────────────────────────────────────────────────────
 
@@ -351,6 +352,7 @@ export default function QuickFirePage() {
   const [todayCount, setTodayCount] = useState(0);
   const [answer, setAnswer] = useState("");
   const [feedback, setFeedback] = useState("");
+  const [loopError, setLoopError] = useState<LoopError | null>(null);
   const [openBlock, setOpenBlock] = useState<string | null>("sample");
 
   // Memorize state
@@ -491,6 +493,7 @@ export default function QuickFirePage() {
     if (!answer.trim()) return;
     setStage("streaming");
     setFeedback("");
+    setLoopError(null);
     const newCount = bumpTodayCount();
     setTodayCount(newCount);
 
@@ -521,7 +524,11 @@ export default function QuickFirePage() {
       });
 
       if (!res.ok || !res.body) {
-        setFeedback("[Grade error — please try again.]");
+        const errBody = (await res.json().catch(() => ({}))) as {
+          code?: LoopError["code"];
+          error?: string;
+        };
+        setLoopError({ code: errBody.code ?? "UNKNOWN", message: errBody.error });
         setStage("done");
         return;
       }
@@ -648,6 +655,7 @@ export default function QuickFirePage() {
     recognitionRef.current?.stop();
     setRecording(false);
     setInterimTranscript("");
+    setLoopError(null);
     const { idx } = pickQuestion(currentIdx);
     setCurrentIdx(idx);
     setAnswer("");
@@ -862,6 +870,17 @@ export default function QuickFirePage() {
             </div>
           )}
         </div>
+
+        {/* Graceful failure — AI offline / transient. Falls back to the
+            deterministic suggested answer when no key is configured. */}
+        {loopError && (
+          <div ref={feedbackRef} className="sc-entry sc-e3 space-y-3">
+            <LoopErrorState error={loopError} onRetry={submit} />
+            {loopError.code === "NO_API_KEY" && (
+              <SuggestedAnswer question={current.question} defaultOpen />
+            )}
+          </div>
+        )}
 
         {/* Streaming / feedback */}
         {feedback && (

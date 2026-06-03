@@ -7,11 +7,13 @@ import { renderSampleAnswer } from "@/lib/stagecraft/feedbackRenderers";
 export function SuggestedAnswer({
   question,
   className = "",
+  defaultOpen = false,
 }: {
   question: string;
   className?: string;
+  defaultOpen?: boolean;
 }) {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(defaultOpen);
   const entry = getSuggestedAnswer(question);
   if (!entry) return null;
 
