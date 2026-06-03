@@ -633,19 +633,22 @@ function TextArea({
 // the value is never returned to the client — only connected/not-set status.
 
 type SecretKeyName = "ANTHROPIC_API_KEY" | "OPENAI_API_KEY";
+type SecretStatus = Record<SecretKeyName, boolean> & { writable: boolean };
 
 function AiConnectionRow({
   name,
   label,
   hint,
   connected,
+  writable,
   onSaved,
 }: {
   name: SecretKeyName;
   label: string;
   hint: string;
   connected: boolean;
-  onSaved: (status: Record<SecretKeyName, boolean>) => void;
+  writable: boolean;
+  onSaved: (status: SecretStatus) => void;
 }) {
   const inputId = `sc-secret-${name}`;
   const [value, setValue] = useState("");
@@ -661,7 +664,7 @@ function AiConnectionRow({
         body: JSON.stringify({ name, value }),
       });
       if (res.ok) {
-        onSaved((await res.json()) as Record<SecretKeyName, boolean>);
+        onSaved((await res.json()) as SecretStatus);
         setValue("");
       }
     } finally {
@@ -675,7 +678,7 @@ function AiConnectionRow({
       const res = await fetch(`/api/stagecraft/secrets?name=${name}`, {
         method: "DELETE",
       });
-      if (res.ok) onSaved((await res.json()) as Record<SecretKeyName, boolean>);
+      if (res.ok) onSaved((await res.json()) as SecretStatus);
     } finally {
       setBusy(false);
     }
@@ -696,64 +699,81 @@ function AiConnectionRow({
           {connected ? "● connected" : "○ not set"}
         </span>
       </div>
-      <div className="flex items-center gap-2">
-        <input
-          id={inputId}
-          type="password"
-          autoComplete="off"
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-          placeholder={connected ? "Replace key…" : "Paste API key…"}
-          className="flex-1 rounded-sm border border-sc-border bg-sc-bg px-3 py-2 text-sm text-sc-ink placeholder:text-sc-dim focus:border-sc-gold-dim focus:outline-none transition-colors"
-        />
-        <button
-          type="button"
-          onClick={save}
-          disabled={busy || !value.trim()}
-          className="rounded-sc border border-sc-gold-dim bg-sc-gold-bg px-3 py-2 text-xs font-mono text-sc-gold hover:bg-sc-gold/20 transition-colors disabled:opacity-40 min-h-[36px]"
-        >
-          Save
-        </button>
-        {connected && (
+      {writable ? (
+        <div className="flex items-center gap-2">
+          <input
+            id={inputId}
+            type="password"
+            autoComplete="off"
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+            placeholder={connected ? "Replace key…" : "Paste API key…"}
+            className="flex-1 rounded-sm border border-sc-border bg-sc-bg px-3 py-2 text-sm text-sc-ink placeholder:text-sc-dim focus:border-sc-gold-dim focus:outline-none transition-colors"
+          />
           <button
             type="button"
-            onClick={clear}
-            disabled={busy}
-            className="rounded-sc border border-sc-border bg-sc-surface px-3 py-2 text-xs font-mono text-sc-dim hover:text-sc-red transition-colors disabled:opacity-40 min-h-[36px]"
+            onClick={save}
+            disabled={busy || !value.trim()}
+            className="rounded-sc border border-sc-gold-dim bg-sc-gold-bg px-3 py-2 text-xs font-mono text-sc-gold hover:bg-sc-gold/20 transition-colors disabled:opacity-40 min-h-[36px]"
           >
-            Clear
+            Save
           </button>
-        )}
-      </div>
+          {connected && (
+            <button
+              type="button"
+              onClick={clear}
+              disabled={busy}
+              className="rounded-sc border border-sc-border bg-sc-surface px-3 py-2 text-xs font-mono text-sc-dim hover:text-sc-red transition-colors disabled:opacity-40 min-h-[36px]"
+            >
+              Clear
+            </button>
+          )}
+        </div>
+      ) : (
+        <p className="font-mono text-xs text-sc-muted leading-relaxed">
+          Configured via server environment.
+        </p>
+      )}
       <p className="font-mono text-xs text-sc-dim leading-relaxed">{hint}</p>
     </div>
   );
 }
 
 function AiConnectionSection() {
-  const [status, setStatus] = useState<Record<SecretKeyName, boolean> | null>(
-    null,
-  );
+  const [status, setStatus] = useState<SecretStatus | null>(null);
   useEffect(() => {
     fetch("/api/stagecraft/secrets", { cache: "no-store" })
-      .then((r) => r.json() as Promise<Record<SecretKeyName, boolean>>)
+      .then((r) => r.json() as Promise<SecretStatus>)
       .then(setStatus)
-      .catch(() => setStatus({ ANTHROPIC_API_KEY: false, OPENAI_API_KEY: false }));
+      .catch(() =>
+        setStatus({
+          ANTHROPIC_API_KEY: false,
+          OPENAI_API_KEY: false,
+          writable: true,
+        }),
+      );
   }, []);
+
+  // Default to writable (local dev) until the status loads.
+  const writable = status?.writable ?? true;
 
   return (
     <div id="ai-connection" className="scroll-mt-20">
-      <Section title="AI connection" label="Keys stay on your server">
+      <Section
+        title="AI connection"
+        label={writable ? "Keys stay on your server" : "Managed by server env"}
+      >
         <p className="text-xs text-sc-muted mb-1 leading-relaxed">
-          Stagecraft needs an Anthropic key for coaching and (optionally) an
-          OpenAI key for voice transcription. Keys are stored on your server and
-          never shown again — only connection status.
+          {writable
+            ? "Stagecraft needs an Anthropic key for coaching and (optionally) an OpenAI key for voice transcription. Keys are stored on your server and never shown again — only connection status."
+            : "This deployment reads API keys from the server environment. Set ANTHROPIC_API_KEY and (optionally) OPENAI_API_KEY in your hosting config. Connection status is shown below."}
         </p>
         <AiConnectionRow
           name="ANTHROPIC_API_KEY"
           label="Anthropic (coaching)"
           hint="Get one at console.anthropic.com → API Keys."
           connected={status?.ANTHROPIC_API_KEY ?? false}
+          writable={writable}
           onSaved={setStatus}
         />
         <AiConnectionRow
@@ -761,6 +781,7 @@ function AiConnectionSection() {
           label="OpenAI (voice, optional)"
           hint="Get one at platform.openai.com → API Keys."
           connected={status?.OPENAI_API_KEY ?? false}
+          writable={writable}
           onSaved={setStatus}
         />
       </Section>
