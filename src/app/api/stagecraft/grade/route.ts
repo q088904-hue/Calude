@@ -6,6 +6,7 @@ import { NextRequest } from "next/server";
 import Anthropic from "@anthropic-ai/sdk";
 import { buildSystemPrompt, buildUserMessage } from "@/lib/stagecraft/prompts";
 import { getProfile } from "@/lib/stagecraft/profileStore";
+import { getAnthropicKey } from "@/lib/stagecraft/secrets";
 import { listSessions } from "@/lib/stagecraft/sessionStore";
 import type { Round, FocusMode, Difficulty } from "@/lib/stagecraft/types";
 
@@ -65,11 +66,15 @@ interface Body {
 }
 
 export async function POST(request: NextRequest) {
-  const apiKey = process.env.ANTHROPIC_API_KEY;
+  const apiKey = await getAnthropicKey();
   if (!apiKey) {
     return Response.json(
-      { error: "ANTHROPIC_API_KEY is not set on the server." },
-      { status: 500 },
+      {
+        code: "NO_API_KEY",
+        error:
+          "AI coaching isn't connected. Add an Anthropic API key in Settings.",
+      },
+      { status: 409 },
     );
   }
 

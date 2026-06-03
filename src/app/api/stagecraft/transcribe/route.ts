@@ -3,6 +3,7 @@
 // Forwards to OpenAI Whisper and returns { text }.
 
 import { NextRequest } from "next/server";
+import { getOpenAIKey } from "@/lib/stagecraft/secrets";
 
 export const runtime = "nodejs"; // we need the server runtime for file forwarding
 export const dynamic = "force-dynamic";
@@ -11,11 +12,15 @@ const OPENAI_TRANSCRIBE_URL = "https://api.openai.com/v1/audio/transcriptions";
 const WHISPER_MODEL = process.env.STAGECRAFT_WHISPER_MODEL ?? "whisper-1";
 
 export async function POST(request: NextRequest) {
-  const apiKey = process.env.OPENAI_API_KEY;
+  const apiKey = await getOpenAIKey();
   if (!apiKey) {
     return Response.json(
-      { error: "OPENAI_API_KEY is not set on the server." },
-      { status: 500 },
+      {
+        code: "NO_API_KEY",
+        error:
+          "Voice transcription isn't connected. Add an OpenAI API key in Settings.",
+      },
+      { status: 409 },
     );
   }
 
