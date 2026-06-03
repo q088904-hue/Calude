@@ -289,7 +289,7 @@ const ROUND_COLORS: Record<string, string> = {
 function RoundBadge({ round }: { round: string }) {
   return (
     <span
-      className={`inline-flex items-center rounded-sm border px-2 py-0.5 font-mono text-[10px] uppercase tracking-wide ${
+      className={`inline-flex items-center rounded-sm border px-2 py-0.5 font-mono text-xs uppercase tracking-wide ${
         ROUND_COLORS[round] ?? "text-sc-dim border-sc-border"
       }`}
     >
@@ -355,9 +355,9 @@ export default function CompanyDeepDivePage({
         {/* ── Round structure ── */}
         <ScrollReveal delay={0}>
           <div className="space-y-2">
-            <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase">
+            <h2 className="font-mono text-xs tracking-widest text-sc-dim uppercase">
               Interview structure
-            </p>
+            </h2>
             <div className="flex flex-wrap items-center gap-2">
               {roundSteps.map((step, i) => (
                 <div key={i} className="flex items-center gap-2">
@@ -377,9 +377,9 @@ export default function CompanyDeepDivePage({
         <ScrollReveal delay={80}>
         <div className="rounded-sm border border-sc-red/30 bg-sc-red/5 overflow-hidden">
           <div className="px-4 py-3 border-b border-sc-red/20">
-            <p className="font-mono text-[10px] tracking-widest text-sc-red uppercase">
+            <h2 className="font-mono text-xs tracking-widest text-sc-red uppercase">
               ⚠ Watch-outs — know these cold
-            </p>
+            </h2>
           </div>
           <div className="px-4 py-4 space-y-2">
             {pack.watchOuts.map((w, i) => (
@@ -402,7 +402,7 @@ export default function CompanyDeepDivePage({
             onClick={() => setBriefOpen((v) => !v)}
             className="w-full px-4 py-3 flex items-center justify-between hover:bg-sc-raised transition-colors"
           >
-            <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase">
+            <p className="font-mono text-xs tracking-widest text-sc-dim uppercase">
               Brand brief — read this before your interview
             </p>
             <span className="font-mono text-xs text-sc-dim">
@@ -424,7 +424,7 @@ export default function CompanyDeepDivePage({
                     return (
                       <p
                         key={i}
-                        className="font-mono text-[10px] tracking-widest text-sc-gold uppercase mt-4 mb-1"
+                        className="font-mono text-xs tracking-widest text-sc-gold uppercase mt-4 mb-1"
                       >
                         {trimmed.replace(/:$/, "")}
                       </p>
@@ -451,7 +451,7 @@ export default function CompanyDeepDivePage({
         {questions.length > 0 && (
           <ScrollReveal delay={240}>
           <div className="space-y-3">
-            <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase">
+            <p className="font-mono text-xs tracking-widest text-sc-dim uppercase">
               Questions to prepare — specific to this company
             </p>
             <p className="font-mono text-xs text-sc-dim">
@@ -467,7 +467,7 @@ export default function CompanyDeepDivePage({
                 <div className="px-4 py-3.5 space-y-2.5">
                   <div className="flex items-center gap-2">
                     <RoundBadge round={q.round} />
-                    <span className="font-mono text-[10px] text-sc-dim">
+                    <span className="font-mono text-xs text-sc-dim">
                       Q{i + 1}
                     </span>
                   </div>
@@ -489,13 +489,13 @@ export default function CompanyDeepDivePage({
                 <div className="border-t border-sc-line px-4 py-2.5 flex items-center gap-4">
                   <Link
                     href={`/stagecraft/drill?q=${encodeURIComponent(q.question)}&company=${pack.id}`}
-                    className="font-mono text-[10px] text-sc-dim hover:text-sc-gold transition-colors"
+                    className="font-mono text-xs text-sc-dim hover:text-sc-gold transition-colors"
                   >
                     Drill this question →
                   </Link>
                   <Link
                     href={`/stagecraft/debrief?question=${encodeURIComponent(q.question)}`}
-                    className="font-mono text-[10px] text-sc-dim hover:text-sc-gold transition-colors"
+                    className="font-mono text-xs text-sc-dim hover:text-sc-gold transition-colors"
                   >
                     Add to debrief →
                   </Link>
@@ -509,7 +509,7 @@ export default function CompanyDeepDivePage({
         {/* ── CTA ── */}
         <ScrollReveal delay={320}>
         <div className="rounded-sm border border-sc-gold-dim bg-sc-gold-bg px-5 py-5 space-y-3">
-          <p className="font-mono text-[10px] tracking-widest text-sc-gold uppercase">
+          <p className="font-mono text-xs tracking-widest text-sc-gold uppercase">
             You are ready to practice
           </p>
           <p className="text-sm text-sc-ink leading-relaxed">
@@ -542,7 +542,7 @@ export default function CompanyDeepDivePage({
         {/* Other companies */}
         <ScrollReveal delay={400}>
         <div className="border-t border-sc-border pt-6 space-y-2">
-          <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase mb-3">
+          <p className="font-mono text-xs tracking-widest text-sc-dim uppercase mb-3">
             Other target companies
           </p>
           <div className="flex flex-wrap gap-2">

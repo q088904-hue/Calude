@@ -150,7 +150,7 @@ function AnchorPip({
         >
           {label}
         </p>
-        <p className="font-mono text-[10px] text-sc-dim leading-relaxed mt-0.5">
+        <p className="font-mono text-xs text-sc-dim leading-relaxed mt-0.5">
           {desc}
         </p>
       </div>
@@ -198,7 +198,7 @@ function AttemptRow({ attempt }: { attempt: Attempt }) {
             />
           ))}
         </div>
-        <span className="font-mono text-[10px] text-sc-dim">
+        <span className="font-mono text-xs text-sc-dim">
           {anchorsHit}/4 anchors
         </span>
         <span className="font-mono text-xs text-sc-dim">{open ? "▲" : "▼"}</span>
@@ -220,7 +220,7 @@ function AttemptRow({ attempt }: { attempt: Attempt }) {
 
           {/* What you said */}
           <div>
-            <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase mb-1.5">
+            <p className="font-mono text-xs tracking-widest text-sc-dim uppercase mb-1.5">
               What you said
             </p>
             <p className="text-sm text-sc-muted leading-relaxed">{attempt.answer}</p>
@@ -229,7 +229,7 @@ function AttemptRow({ attempt }: { attempt: Attempt }) {
           {/* Sample answer */}
           {attempt.sampleAnswer && (
             <div>
-              <p className="font-mono text-[10px] tracking-widest text-sc-gold uppercase mb-1.5">
+              <p className="font-mono text-xs tracking-widest text-sc-gold uppercase mb-1.5">
                 Nail this version
               </p>
               <p className="text-sm text-sc-ink leading-relaxed">
@@ -256,7 +256,7 @@ function AttemptRow({ attempt }: { attempt: Attempt }) {
                   key={l}
                   className={`inline-flex items-center gap-1 rounded-sm border px-2 py-0.5 font-mono text-xs ${cls}`}
                 >
-                  <span className="opacity-50 text-[10px] uppercase tracking-wider">{l}</span>
+                  <span className="opacity-50 text-xs uppercase tracking-wider">{l}</span>
                   <span className="font-bold tabular-nums">{v}/10</span>
                 </span>
               );
@@ -273,7 +273,7 @@ function AttemptRow({ attempt }: { attempt: Attempt }) {
 function MasteryRings({ streak }: { streak: number }) {
   return (
     <div className="flex items-center gap-2">
-      <span className="font-mono text-[10px] tracking-widest text-sc-dim uppercase">
+      <span className="font-mono text-xs tracking-widest text-sc-dim uppercase">
         Mastery
       </span>
       <div className="flex gap-1.5">
@@ -288,7 +288,7 @@ function MasteryRings({ streak }: { streak: number }) {
           />
         ))}
       </div>
-      <span className="font-mono text-[10px] text-sc-dim">
+      <span className="font-mono text-xs text-sc-dim">
         {streak}/3 consecutive ≥ 9
       </span>
     </div>
@@ -535,7 +535,7 @@ export default function IntroForgePage() {
 
         {/* ── Anchor panel (always visible) ── */}
         <div className="space-y-2">
-          <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase">
+          <p className="font-mono text-xs tracking-widest text-sc-dim uppercase">
             4 proof points — all must land
           </p>
           <div className="grid grid-cols-2 gap-1.5">
@@ -549,7 +549,7 @@ export default function IntroForgePage() {
             ))}
           </div>
           {latestAnchors && (
-            <p className="font-mono text-[10px] text-sc-dim">
+            <p className="font-mono text-xs text-sc-dim">
               Last attempt:{" "}
               {Object.values(latestAnchors).filter(Boolean).length}/4 anchors
               hit
@@ -601,11 +601,11 @@ export default function IntroForgePage() {
             />
             {/* Word count / timing */}
             <div className="px-4 pb-3 flex items-center gap-3 justify-end">
-              <span className="font-mono text-[10px] text-sc-dim">
+              <span className="font-mono text-xs text-sc-dim">
                 {wordCount} words
               </span>
               {wordCount > 0 && (
-                <span className={`font-mono text-[10px] ${timing.color}`}>
+                <span className={`font-mono text-xs ${timing.color}`}>
                   {timing.label}
                 </span>
               )}
@@ -640,11 +640,11 @@ export default function IntroForgePage() {
                       {String(Math.floor(srSeconds / 60)).padStart(1, "0")}:{String(srSeconds % 60).padStart(2, "0")}
                     </span>
                     {srSeconds >= 45 ? (
-                      <span className="font-mono text-[10px] text-sc-red">— too long, wrap up</span>
+                      <span className="font-mono text-xs text-sc-red">— too long, wrap up</span>
                     ) : srSeconds >= 30 ? (
-                      <span className="font-mono text-[10px] text-sc-gold">— start closing</span>
+                      <span className="font-mono text-xs text-sc-gold">— start closing</span>
                     ) : (
-                      <span className="font-mono text-[10px] text-sc-dim animate-pulse">listening…</span>
+                      <span className="font-mono text-xs text-sc-dim animate-pulse">listening…</span>
                     )}
                   </div>
                 )}
@@ -677,17 +677,17 @@ export default function IntroForgePage() {
                   </span>
                 )}
                 {recState === "transcribed" && (
-                  <span className="font-mono text-[10px] text-sc-green px-1">
+                  <span className="font-mono text-xs text-sc-green px-1">
                     ✓ Transcribed
                   </span>
                 )}
                 {recError && (
-                  <span className="font-mono text-[10px] text-sc-red">{recError}</span>
+                  <span className="font-mono text-xs text-sc-red">{recError}</span>
                 )}
               </div>
               {/* Interim transcript while speaking */}
               {interimText && (
-                <p className="font-mono text-[11px] text-sc-muted/60 italic leading-relaxed">
+                <p className="font-mono text-xs text-sc-muted/60 italic leading-relaxed">
                   …{interimText}
                 </p>
               )}
@@ -734,7 +734,7 @@ export default function IntroForgePage() {
             }`}
           >
             <div className="flex items-center justify-between">
-              <span className="font-mono text-[10px] tracking-widest text-sc-dim uppercase">
+              <span className="font-mono text-xs tracking-widest text-sc-dim uppercase">
                 Best attempt (#{ bestAttempt.n})
               </span>
               <span
@@ -751,7 +751,7 @@ export default function IntroForgePage() {
             </div>
             {bestAttempt.sampleAnswer && (
               <div>
-                <p className="font-mono text-[10px] tracking-widest text-sc-gold uppercase mb-1.5">
+                <p className="font-mono text-xs tracking-widest text-sc-gold uppercase mb-1.5">
                   Nail this version
                 </p>
                 <p className="text-sm text-sc-ink leading-relaxed">
@@ -765,7 +765,7 @@ export default function IntroForgePage() {
         {/* ── Attempt log ── */}
         {attempts.length > 0 && (
           <div className="space-y-2">
-            <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase">
+            <p className="font-mono text-xs tracking-widest text-sc-dim uppercase">
               All attempts ({attempts.length})
             </p>
             {[...attempts].reverse().map((a) => (

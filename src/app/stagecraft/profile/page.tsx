@@ -4,7 +4,7 @@
 // quality without touching source files.
 // Reads from /api/stagecraft/profile (GET) and saves back via POST.
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { cloneElement, isValidElement, useCallback, useEffect, useId, useRef, useState } from "react";
 import { StagecraftHeader } from "@/components/stagecraft/StagecraftHeader";
 import type { Profile, StarStory } from "@/lib/stagecraft/types";
 
@@ -313,6 +313,7 @@ export default function ProfilePage() {
                 onChange={(v) => patch("realNumbers", fromLines(v))}
                 rows={8}
                 mono
+                ariaLabel="Real numbers — one metric per line"
               />
             </Section>
 
@@ -348,10 +349,14 @@ export default function ProfilePage() {
               <div className="space-y-3">
                 {profile.voiceSamples.map((sample, i) => (
                   <div key={i}>
-                    <label className="font-mono text-xs text-sc-dim uppercase tracking-widest mb-1 block">
+                    <label
+                      htmlFor={`sc-voice-${i}`}
+                      className="font-mono text-xs text-sc-dim uppercase tracking-widest mb-1 block"
+                    >
                       Sample {i + 1}
                     </label>
                     <TextArea
+                      id={`sc-voice-${i}`}
                       value={sample}
                       onChange={(v) => {
                         const next = [...profile.voiceSamples];
@@ -377,6 +382,7 @@ export default function ProfilePage() {
                 onChange={(v) => patch("weakPatterns", fromLines(v))}
                 rows={6}
                 mono
+                ariaLabel="Known weak patterns — one per line"
               />
             </Section>
 
@@ -519,9 +525,9 @@ function Section({
       >
         <span className={`w-1 h-3 rounded-full shrink-0 ${accent ? "bg-sc-gold" : "bg-sc-muted"}`} />
         <div>
-          <span className="font-mono text-xs tracking-widest text-sc-dim uppercase">
+          <h2 className="font-mono text-xs tracking-widest text-sc-dim uppercase inline">
             {title}
-          </span>
+          </h2>
           <span className="font-mono text-xs text-sc-dim ml-2">— {label}</span>
         </div>
       </div>
@@ -539,17 +545,26 @@ function Field({
   hint?: string;
   children: React.ReactNode;
 }) {
+  // Derive a stable, unique id and wire it to the single form control child so
+  // the visible <label> is programmatically associated (WCAG 1.3.1 / 3.3.2).
+  const fieldId = useId();
+  const control = isValidElement(children)
+    ? cloneElement(children as React.ReactElement<{ id?: string }>, { id: fieldId })
+    : children;
   return (
     <div>
       <div className="flex items-baseline gap-2 mb-1.5">
-        <label className="font-mono text-xs tracking-widest text-sc-muted uppercase">
+        <label
+          htmlFor={fieldId}
+          className="font-mono text-xs tracking-widest text-sc-muted uppercase"
+        >
           {label}
         </label>
         {hint && (
           <span className="font-mono text-xs text-sc-dim">{hint}</span>
         )}
       </div>
-      {children}
+      {control}
     </div>
   );
 }
@@ -558,13 +573,16 @@ function TextInput({
   value,
   onChange,
   placeholder,
+  id,
 }: {
   value: string;
   onChange: (v: string) => void;
   placeholder?: string;
+  id?: string;
 }) {
   return (
     <input
+      id={id}
       type="text"
       className="w-full rounded-sm border border-sc-border bg-sc-bg px-3 py-2 text-sm text-sc-ink placeholder:text-sc-dim focus:border-sc-gold-dim focus:outline-none transition-colors"
       value={value}
@@ -580,15 +598,21 @@ function TextArea({
   rows = 3,
   mono,
   placeholder,
+  id,
+  ariaLabel,
 }: {
   value: string;
   onChange: (v: string) => void;
   rows?: number;
   mono?: boolean;
   placeholder?: string;
+  id?: string;
+  ariaLabel?: string;
 }) {
   return (
     <textarea
+      id={id}
+      aria-label={ariaLabel}
       className={`w-full rounded-sm border border-sc-border bg-sc-bg px-3 py-2 text-sm text-sc-ink placeholder:text-sc-dim focus:border-sc-gold-dim focus:outline-none transition-colors resize-none leading-relaxed ${
         mono ? "font-mono" : "font-sans"
       }`}

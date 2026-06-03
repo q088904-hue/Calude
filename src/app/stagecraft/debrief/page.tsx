@@ -99,7 +99,7 @@ function ScoreChip({ label, value }: { label: string; value: number }) {
         : "text-sc-red border-sc-red/30 bg-sc-red/5";
   return (
     <span className={`inline-flex items-center gap-1 rounded-sm border px-2 py-0.5 font-mono text-xs ${cls}`}>
-      <span className="opacity-50 text-[10px] uppercase tracking-wider">{label}</span>
+      <span className="opacity-50 text-xs uppercase tracking-wider">{label}</span>
       <span className="font-bold tabular-nums">{value}/10</span>
     </span>
   );
@@ -145,14 +145,14 @@ function GradedCard({ pair, n }: { pair: GradedPair; n: number }) {
 
         {/* What you said */}
         <div className="pl-8">
-          <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase mb-1.5">What you said</p>
+          <p className="font-mono text-xs tracking-widest text-sc-dim uppercase mb-1.5">What you said</p>
           <p className="text-sm text-sc-muted leading-relaxed">{pair.answer}</p>
         </div>
 
         {/* Sample answer — always visible */}
         {pair.sections?.sampleAnswer && (
           <div className="pl-8">
-            <p className="font-mono text-[10px] tracking-widest text-sc-gold uppercase mb-1.5">
+            <p className="font-mono text-xs tracking-widest text-sc-gold uppercase mb-1.5">
               Better answer — memorize this
             </p>
             <p className="text-sm text-sc-ink leading-relaxed">
@@ -176,11 +176,11 @@ function GradedCard({ pair, n }: { pair: GradedPair; n: number }) {
           {open && (
             <div className="border-t border-sc-line px-4 py-4 space-y-4 bg-sc-raised">
               <div>
-                <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase mb-2">Grammar fix</p>
+                <p className="font-mono text-xs tracking-widest text-sc-dim uppercase mb-2">Grammar fix</p>
                 <p className="text-sm text-sc-muted leading-relaxed whitespace-pre-wrap">{pair.sections.grammarFix}</p>
               </div>
               <div>
-                <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase mb-1.5">Delivery tip</p>
+                <p className="font-mono text-xs tracking-widest text-sc-dim uppercase mb-1.5">Delivery tip</p>
                 <p className="text-sm text-sc-muted leading-relaxed">{pair.sections.deliveryTip}</p>
               </div>
             </div>
@@ -514,7 +514,7 @@ export default function DebriefPage() {
             {/* Company + date */}
             <div className="space-y-4">
               <div className="space-y-2">
-                <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase">Company</p>
+                <p className="font-mono text-xs tracking-widest text-sc-dim uppercase">Company</p>
                 <div className="flex flex-wrap gap-2">
                   {COMPANY_PACKS.map((pack) => (
                     <button
@@ -543,8 +543,9 @@ export default function DebriefPage() {
               </div>
 
               <div className="space-y-1.5">
-                <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase">Interview date</p>
+                <label htmlFor="sc-debrief-date" className="font-mono text-xs tracking-widest text-sc-dim uppercase block">Interview date</label>
                 <input
+                  id="sc-debrief-date"
                   type="date"
                   value={date}
                   onChange={(e) => setDate(e.target.value)}
@@ -555,7 +556,7 @@ export default function DebriefPage() {
 
             {/* Q&A pairs */}
             <div className="space-y-4">
-              <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase">
+              <p className="font-mono text-xs tracking-widest text-sc-dim uppercase">
                 Questions &amp; answers ({pairs.length}/10)
               </p>
 
@@ -566,6 +567,7 @@ export default function DebriefPage() {
                     <div className="flex items-center gap-3">
                       <span className="font-mono text-xs text-sc-gold w-5">Q{i + 1}</span>
                       <select
+                        aria-label={`Round type for question ${i + 1}`}
                         value={pair.round}
                         onChange={(e) => updatePair(pair.id, "round", e.target.value)}
                         className="bg-transparent font-mono text-xs text-sc-dim border-none focus:outline-none cursor-pointer hover:text-sc-ink transition-colors"
@@ -587,10 +589,11 @@ export default function DebriefPage() {
 
                   {/* Question */}
                   <div className="px-4 pt-3 pb-2">
-                    <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase mb-1.5">
+                    <p className="font-mono text-xs tracking-widest text-sc-dim uppercase mb-1.5">
                       What they asked
                     </p>
                     <textarea
+                      aria-label={`Question ${i + 1} — what they asked`}
                       value={pair.question}
                       onChange={(e) => updatePair(pair.id, "question", e.target.value)}
                       placeholder="Paste or type the question as best you remember it…"
@@ -604,14 +607,14 @@ export default function DebriefPage() {
                   {/* Answer */}
                   <div className="px-4 pt-3 pb-4">
                     <div className="flex items-center justify-between mb-1.5">
-                      <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase">
+                      <p className="font-mono text-xs tracking-widest text-sc-dim uppercase">
                         What you said
                       </p>
                       {speechSupported && (
                         <button
                           type="button"
                           onClick={() => toggleSR(pair.id)}
-                          className={`flex items-center gap-1 rounded-sm border px-2 py-0.5 font-mono text-[10px] transition-all ${
+                          className={`flex items-center gap-1 rounded-sm border px-2 py-0.5 font-mono text-xs transition-all ${
                             activeRecordingId === pair.id
                               ? "border-sc-red bg-sc-red/10 text-sc-red"
                               : "border-sc-gold-dim bg-sc-gold-bg text-sc-gold hover:bg-sc-gold/20"
@@ -623,7 +626,7 @@ export default function DebriefPage() {
                     </div>
                     {activeRecordingId === pair.id && (
                       <div className="flex items-center gap-3 mb-1.5">
-                        <p className="font-mono text-[10px] text-sc-gold animate-pulse">
+                        <p className="font-mono text-xs text-sc-gold animate-pulse">
                           Listening… speak what you said in the interview
                         </p>
                         <span className={`font-mono text-xs font-semibold tabular-nums shrink-0 ${
@@ -643,6 +646,7 @@ export default function DebriefPage() {
                       </p>
                     )}
                     <textarea
+                      aria-label={`Answer ${i + 1} — what you said`}
                       value={pair.answer}
                       onChange={(e) => updatePair(pair.id, "answer", e.target.value)}
                       placeholder="Write what you said — don't polish it, write it as you said it…"
@@ -700,7 +704,7 @@ export default function DebriefPage() {
             )}
 
             {/* Results label */}
-            <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase">
+            <p className="font-mono text-xs tracking-widest text-sc-dim uppercase">
               {stage === "done" ? `${graded.length} answer${graded.length !== 1 ? "s" : ""} graded` : "Grading…"}
             </p>
 

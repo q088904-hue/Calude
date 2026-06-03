@@ -427,7 +427,7 @@ function RoundBreakdown({ sessions }: { sessions: SessionSummary[] }) {
   return (
     <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm overflow-hidden">
       <div className="px-4 py-3 border-b border-sc-line">
-        <span className="font-mono text-[10px] tracking-widest text-sc-dim uppercase">
+        <span className="font-mono text-xs tracking-widest text-sc-dim uppercase">
           Performance by round
         </span>
       </div>
@@ -475,14 +475,14 @@ function RoundBreakdown({ sessions }: { sessions: SessionSummary[] }) {
                   {r.avg}
                 </span>
                 {/* Session count */}
-                <span className="font-mono text-[10px] text-sc-dim w-12 shrink-0">
+                <span className="font-mono text-xs text-sc-dim w-12 shrink-0">
                   {r.sessions}s/{r.questions}q
                 </span>
                 {/* Weakest label + drill link */}
                 {isWeakest && (
                   <Link
                     href={`/stagecraft?round=${encodeURIComponent(r.round)}`}
-                    className="font-mono text-[10px] text-sc-red hover:text-sc-red/80 border border-sc-red/30 rounded-sm px-1.5 py-0.5 transition-colors shrink-0"
+                    className="font-mono text-xs text-sc-red hover:text-sc-red/80 border border-sc-red/30 rounded-sm px-1.5 py-0.5 transition-colors shrink-0"
                     title="Start a targeted session for this round"
                   >
                     weakest — practice →
@@ -674,9 +674,9 @@ function PatternBoard({
 function SessionList({ sessions }: { sessions: SessionSummary[] }) {
   return (
     <div className="space-y-3">
-      <p className="font-mono text-xs tracking-widest text-sc-dim uppercase">
+      <h2 className="font-mono text-xs tracking-widest text-sc-dim uppercase">
         Past sessions
-      </p>
+      </h2>
       {sessions.map((s, i) => (
         <ScrollReveal key={s.id} delay={Math.min(i * 60, 600)}>
           <SessionRow session={s} index={i} />

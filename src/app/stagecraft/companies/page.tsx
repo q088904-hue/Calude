@@ -87,7 +87,7 @@ export default function CompaniesPage() {
                       {pack.watchOuts.slice(0, 2).map((w, i) => (
                         <span
                           key={i}
-                          className="rounded-sc border border-sc-border bg-sc-raised shadow-sc-sm px-2 py-0.5 font-mono text-[10px] text-sc-dim"
+                          className="rounded-sc border border-sc-border bg-sc-raised shadow-sc-sm px-2 py-0.5 font-mono text-xs text-sc-dim"
                         >
                           {w.length > 40 ? w.slice(0, 40) + "…" : w}
                         </span>

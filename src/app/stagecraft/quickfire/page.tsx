@@ -702,7 +702,7 @@ export default function QuickFirePage() {
         <div className="sc-entry sc-e1">
           <div className="flex items-center gap-2 mb-4">
             <span
-              className={`inline-block rounded-sm px-2 py-0.5 font-mono text-[10px] tracking-widest uppercase ${
+              className={`inline-block rounded-sm px-2 py-0.5 font-mono text-xs tracking-widest uppercase ${
                 current.hot
                   ? "border border-sc-red/40 bg-sc-red/10 text-sc-red"
                   : "border border-sc-border bg-sc-surface text-sc-dim"
@@ -729,7 +729,7 @@ export default function QuickFirePage() {
               <button
                 type="button"
                 onClick={toggleRecording}
-                className={`flex items-center gap-1.5 rounded-sm border px-2.5 py-1 font-mono text-[10px] tracking-wide transition-all ${
+                className={`flex items-center gap-1.5 rounded-sm border px-2.5 py-1 font-mono text-xs tracking-wide transition-all ${
                   recording
                     ? "border-sc-red/40 bg-sc-red/10 text-sc-red"
                     : "border-sc-border bg-sc-surface text-sc-dim hover:border-sc-gold-dim hover:text-sc-gold"
@@ -742,7 +742,7 @@ export default function QuickFirePage() {
                   </>
                 ) : (
                   <>
-                    <span className="text-[11px]">🎙</span>
+                    <span className="text-xs">🎙</span>
                     Speak
                   </>
                 )}
@@ -778,7 +778,7 @@ export default function QuickFirePage() {
 
           {/* Interim transcript — shown below textarea while speaking */}
           {interimTranscript && (
-            <p className="font-mono text-[11px] text-sc-muted/60 italic leading-relaxed px-1">
+            <p className="font-mono text-xs text-sc-muted/60 italic leading-relaxed px-1">
               …{interimTranscript}
             </p>
           )}
@@ -797,7 +797,7 @@ export default function QuickFirePage() {
                 {recSeconds >= 60 && recSeconds < 90 && " — closing"}
               </span>
             ) : (
-              <span className="font-mono text-[10px] text-sc-dim/60">⌘↵ to submit</span>
+              <span className="font-mono text-xs text-sc-dim/60">⌘↵ to submit</span>
             )}
           </div>
 
@@ -830,7 +830,7 @@ export default function QuickFirePage() {
               ].map(({ ok, label }) => (
                 <span
                   key={label}
-                  className={`inline-flex items-center gap-1 rounded-sm px-2 py-0.5 font-mono text-[10px] ${
+                  className={`inline-flex items-center gap-1 rounded-sm px-2 py-0.5 font-mono text-xs ${
                     ok
                       ? "border border-sc-green/30 bg-sc-green-bg text-sc-green"
                       : "border border-sc-border bg-sc-surface text-sc-dim"
@@ -934,7 +934,7 @@ export default function QuickFirePage() {
                 {sections.patternTags.map((tag) => (
                   <span
                     key={tag}
-                    className="inline-flex items-center gap-1 rounded-sm border border-sc-red/25 bg-sc-red/[0.04] px-2 py-0.5 font-mono text-[10px] text-sc-red"
+                    className="inline-flex items-center gap-1 rounded-sm border border-sc-red/25 bg-sc-red/[0.04] px-2 py-0.5 font-mono text-xs text-sc-red"
                   >
                     <span>●</span>
                     {tag}
@@ -1049,7 +1049,7 @@ export default function QuickFirePage() {
           <div ref={revisionRef} className="sc-entry sc-e4 space-y-4">
             <div className="flex items-center gap-2">
               <div className="flex-1 h-px bg-sc-border" />
-              <span className="font-mono text-[10px] tracking-widest text-sc-dim uppercase px-3">
+              <span className="font-mono text-xs tracking-widest text-sc-dim uppercase px-3">
                 Revise your answer
               </span>
               <div className="flex-1 h-px bg-sc-border" />
@@ -1080,7 +1080,7 @@ export default function QuickFirePage() {
                   ? wpm(revisedAnswer)
                   : "0 words"}
               </span>
-              <span className="font-mono text-[10px] text-sc-dim/60">⌘↵ to re-grade</span>
+              <span className="font-mono text-xs text-sc-dim/60">⌘↵ to re-grade</span>
             </div>
 
             {!revisedStreaming && !revisionDone && (
@@ -1104,7 +1104,7 @@ export default function QuickFirePage() {
             {/* Score comparison */}
             {revisionDone && scores && revisedScores && (
               <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-5 py-4 space-y-3">
-                <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase mb-1">
+                <p className="font-mono text-xs tracking-widest text-sc-dim uppercase mb-1">
                   Score comparison
                 </p>
                 {(
@@ -1170,7 +1170,7 @@ export default function QuickFirePage() {
             {/* Revised coaching — sample answer only */}
             {revisionDone && revisedSections && (
               <div className="rounded-sm border border-sc-gold-dim bg-sc-gold-bg px-4 py-4">
-                <p className="font-mono text-[10px] tracking-widest text-sc-gold uppercase mb-2">
+                <p className="font-mono text-xs tracking-widest text-sc-gold uppercase mb-2">
                   Revised sample answer
                 </p>
                 <p className="text-sm text-sc-ink leading-relaxed">
@@ -1183,7 +1183,7 @@ export default function QuickFirePage() {
 
         {/* Empty submit state CTA */}
         {stage === "ready" && !feedback && (
-          <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase text-center sc-entry sc-e4">
+          <p className="font-mono text-xs tracking-widest text-sc-dim uppercase text-center sc-entry sc-e4">
             {QUESTION_BANK.length} questions in the pool · weighted toward high-risk
           </p>
         )}
@@ -1240,7 +1240,7 @@ function QuickFireSessionStrip(props: {
     <div className="border-b border-sc-border bg-sc-raised px-6 py-3">
       <div className="max-w-xl mx-auto flex items-center gap-6 flex-wrap">
         {/* Session label */}
-        <span className="font-mono text-[10px] tracking-widest text-sc-dim uppercase shrink-0">
+        <span className="font-mono text-xs tracking-widest text-sc-dim uppercase shrink-0">
           This session · {n}Q
         </span>
 
@@ -1254,7 +1254,7 @@ function QuickFireSessionStrip(props: {
             ] as const
           ).map(({ label, value, title }) => (
             <span key={label} className="flex items-baseline gap-1" title={title}>
-              <span className="font-mono text-[10px] text-sc-dim">{label}</span>
+              <span className="font-mono text-xs text-sc-dim">{label}</span>
               <span className={`font-mono text-sm font-semibold tabular-nums ${colorForScore(value)}`}>
                 {value}
               </span>
@@ -1262,7 +1262,7 @@ function QuickFireSessionStrip(props: {
           ))}
           {/* Composite */}
           <span className="flex items-baseline gap-1 border-l border-sc-border pl-4" title="Composite">
-            <span className="font-mono text-[10px] text-sc-dim">avg</span>
+            <span className="font-mono text-xs text-sc-dim">avg</span>
             <span className={`font-mono text-sm font-semibold tabular-nums ${colorForScore(composite)}`}>
               {composite}
             </span>
@@ -1272,12 +1272,12 @@ function QuickFireSessionStrip(props: {
         {/* Recurring patterns */}
         {recurringPatterns.length > 0 && (
           <div className="flex items-center gap-2 ml-auto">
-            <span className="font-mono text-[10px] text-sc-dim uppercase tracking-wider shrink-0">Recurring:</span>
+            <span className="font-mono text-xs text-sc-dim uppercase tracking-wider shrink-0">Recurring:</span>
             <div className="flex flex-wrap gap-1.5">
               {recurringPatterns.map(([tag, count]) => (
                 <span
                   key={tag}
-                  className="rounded-sm border border-sc-red/30 bg-sc-red/10 px-2 py-0.5 font-mono text-[10px] text-sc-red"
+                  className="rounded-sm border border-sc-red/30 bg-sc-red/10 px-2 py-0.5 font-mono text-xs text-sc-red"
                   title={`Flagged ${count}× this session`}
                 >
                   [{tag}] ×{count}

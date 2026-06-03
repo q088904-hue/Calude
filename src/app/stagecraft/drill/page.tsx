@@ -160,7 +160,7 @@ function ScoreChip({
     <span
       className={`inline-flex items-center gap-1 rounded-sm border px-2 py-0.5 font-mono text-xs ${cls}`}
     >
-      <span className="opacity-50 text-[10px] uppercase tracking-wider">
+      <span className="opacity-50 text-xs uppercase tracking-wider">
         {label}
       </span>
       <span className="font-bold tabular-nums">{value}/10</span>
@@ -487,7 +487,7 @@ function DrillPage() {
 
         {/* ── Drill selector ── */}
         <div className="space-y-2">
-          <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase">
+          <p className="font-mono text-xs tracking-widest text-sc-dim uppercase">
             Question
           </p>
           <div className="flex flex-wrap gap-2">
@@ -519,7 +519,7 @@ function DrillPage() {
           }`}
         >
           <p
-            className={`font-mono text-[10px] tracking-widest uppercase mb-2 ${
+            className={`font-mono text-xs tracking-widest uppercase mb-2 ${
               drill.risk ? "text-sc-red" : "text-sc-dim"
             }`}
           >
@@ -650,11 +650,11 @@ function DrillPage() {
                           {String(Math.floor(srSeconds / 60)).padStart(1, "0")}:{String(srSeconds % 60).padStart(2, "0")}
                         </span>
                         {srSeconds >= 90 ? (
-                          <span className="font-mono text-[10px] text-sc-red">— wrap up</span>
+                          <span className="font-mono text-xs text-sc-red">— wrap up</span>
                         ) : srSeconds >= 60 ? (
-                          <span className="font-mono text-[10px] text-sc-gold">— start closing</span>
+                          <span className="font-mono text-xs text-sc-gold">— start closing</span>
                         ) : (
-                          <span className="font-mono text-[10px] text-sc-dim animate-pulse">listening…</span>
+                          <span className="font-mono text-xs text-sc-dim animate-pulse">listening…</span>
                         )}
                       </div>
                     )}
@@ -689,7 +689,7 @@ function DrillPage() {
                       <>
                         <div className="flex items-center gap-2 pt-1">
                           <div className="flex-1 h-px bg-sc-border" />
-                          <span className="font-mono text-[10px] text-sc-dim uppercase">or use Whisper</span>
+                          <span className="font-mono text-xs text-sc-dim uppercase">or use Whisper</span>
                           <div className="flex-1 h-px bg-sc-border" />
                         </div>
                         <button
@@ -728,7 +728,7 @@ function DrillPage() {
                 {recorderState === "transcribed" && transcript && (
                   <div className="space-y-3">
                     <div>
-                      <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase mb-1.5">
+                      <p className="font-mono text-xs tracking-widest text-sc-dim uppercase mb-1.5">
                         Your answer
                       </p>
                       <div className="rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-4 py-3 text-sm text-sc-ink leading-relaxed">
@@ -903,7 +903,7 @@ function DrillPage() {
         {/* ── Attempt history ── */}
         {attempts.length > 1 && (
           <div className="space-y-2">
-            <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase">
+            <p className="font-mono text-xs tracking-widest text-sc-dim uppercase">
               This session
             </p>
             <div className="space-y-1.5">
@@ -912,7 +912,7 @@ function DrillPage() {
                   key={a.n}
                   className="flex items-center gap-3 rounded-sc border border-sc-border bg-sc-surface shadow-sc-sm px-3 py-2"
                 >
-                  <span className="font-mono text-[10px] text-sc-dim w-5 text-right shrink-0">
+                  <span className="font-mono text-xs text-sc-dim w-5 text-right shrink-0">
                     #{a.n}
                   </span>
                   <span
@@ -926,7 +926,7 @@ function DrillPage() {
                   >
                     {a.composite}/10
                   </span>
-                  <span className="font-mono text-[10px] text-sc-dim shrink-0 hidden sm:inline">
+                  <span className="font-mono text-xs text-sc-dim shrink-0 hidden sm:inline">
                     C:{a.content} E:{a.english} D:{a.delivery}
                   </span>
                   <p className="flex-1 text-xs text-sc-muted truncate min-w-0">
@@ -960,7 +960,7 @@ function FeedbackBlock({
   return (
     <div className="space-y-1.5">
       <p
-        className={`font-mono text-[10px] tracking-widest uppercase ${labelColor}`}
+        className={`font-mono text-xs tracking-widest uppercase ${labelColor}`}
       >
         {label}
       </p>

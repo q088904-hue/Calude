@@ -72,7 +72,7 @@ function ScoreChip({
     <span
       className={`inline-flex items-center gap-1 rounded-sm border px-2 py-0.5 font-mono text-xs ${cls}`}
     >
-      <span className="opacity-50 text-[10px] uppercase tracking-wider">
+      <span className="opacity-50 text-xs uppercase tracking-wider">
         {label}
       </span>
       <span className="font-bold tabular-nums">{value}/10</span>
@@ -138,7 +138,7 @@ function QACard({ item, n }: { item: QAItem; n: number }) {
         {/* John's answer (always visible) */}
         {item.answer && (
           <div className="pl-8">
-            <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase mb-1.5">
+            <p className="font-mono text-xs tracking-widest text-sc-dim uppercase mb-1.5">
               Your answer
             </p>
             <p className="text-sm text-sc-muted leading-relaxed">{item.answer}</p>
@@ -148,7 +148,7 @@ function QACard({ item, n }: { item: QAItem; n: number }) {
         {/* Sample answer preview — always shown, no need to expand */}
         {sections?.sampleAnswer && (
           <div className="pl-8">
-            <p className="font-mono text-[10px] tracking-widest text-sc-gold uppercase mb-1.5">
+            <p className="font-mono text-xs tracking-widest text-sc-gold uppercase mb-1.5">
               Sample answer
             </p>
             <p className="text-sm text-sc-ink leading-relaxed">
@@ -162,7 +162,7 @@ function QACard({ item, n }: { item: QAItem; n: number }) {
       <div className="border-t border-sc-line px-4 py-2.5 flex items-center gap-3">
         <Link
           href={`/stagecraft/drill?q=${encodeURIComponent(item.question)}`}
-          className="font-mono text-[10px] text-sc-dim hover:text-sc-gold transition-colors"
+          className="font-mono text-xs text-sc-dim hover:text-sc-gold transition-colors"
         >
           Re-drill this question →
         </Link>
@@ -184,7 +184,7 @@ function QACard({ item, n }: { item: QAItem; n: number }) {
             <div className="border-t border-sc-line px-4 py-4 space-y-4 bg-sc-raised">
               {/* Grammar fix */}
               <div>
-                <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase mb-2">
+                <p className="font-mono text-xs tracking-widest text-sc-dim uppercase mb-2">
                   Grammar fix
                 </p>
                 <p className="text-sm text-sc-muted leading-relaxed whitespace-pre-wrap">
@@ -194,7 +194,7 @@ function QACard({ item, n }: { item: QAItem; n: number }) {
 
               {/* Delivery tip */}
               <div>
-                <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase mb-1.5">
+                <p className="font-mono text-xs tracking-widest text-sc-dim uppercase mb-1.5">
                   Delivery tip
                 </p>
                 <p className="text-sm text-sc-muted leading-relaxed">
@@ -353,7 +353,7 @@ export default function SessionDetailPage({
 
             {/* ── Q&A list ── */}
             <div className="space-y-4">
-              <p className="font-mono text-[10px] tracking-widest text-sc-dim uppercase">
+              <p className="font-mono text-xs tracking-widest text-sc-dim uppercase">
                 {record.items.length} question{record.items.length !== 1 ? "s" : ""}
               </p>
               {record.items.map((item) => (
