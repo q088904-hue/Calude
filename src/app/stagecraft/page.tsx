@@ -842,6 +842,13 @@ function StagecraftInner() {
         </div>
         <div className="flex items-center gap-3">
           <NavDropdown />
+          <a
+            href="/api/stagecraft/auth/logout"
+            className="font-mono text-xs text-sc-dim hover:text-sc-muted transition-colors min-h-[36px] inline-flex items-center"
+            title="Sign out"
+          >
+            Sign out
+          </a>
           <AnimatedThemeToggler className="ml-2 shrink-0" />
         </div>
       </header>
