@@ -694,6 +694,7 @@ function SessionRow({
   index: number;
 }) {
   const [open, setOpen] = useState(false);
+  const panelId = `sc-session-panel-${s.id}`;
 
   const dateStr = new Date(s.startedAt).toLocaleDateString("en-US", {
     weekday: "short",
@@ -718,6 +719,8 @@ function SessionRow({
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        aria-controls={panelId}
         className="w-full text-left px-4 py-3 flex items-center gap-3 hover:bg-sc-raised transition-colors"
       >
         <span className="font-mono text-xs text-sc-dim w-5 shrink-0">
@@ -748,7 +751,7 @@ function SessionRow({
       </button>
 
       {open && (
-        <div className="border-t border-sc-line px-4 py-3 space-y-3">
+        <div id={panelId} className="border-t border-sc-line px-4 py-3 space-y-3">
           {/* Pattern tags */}
           {uniquePatterns.length > 0 ? (
             <div className="flex flex-wrap gap-1.5">
