@@ -9,6 +9,7 @@ import Link from "next/link";
 import { StagecraftHeader } from "@/components/stagecraft/StagecraftHeader";
 import { parseFeedbackSections } from "@/lib/stagecraft/feedbackParser";
 import { renderSampleAnswer } from "@/lib/stagecraft/feedbackRenderers";
+import { syncActivity } from "@/lib/stagecraft/activitySync";
 import type { Round } from "@/lib/stagecraft/types";
 import { getSRClass, type SREvent, type SRInstance } from "@/lib/stagecraft/speechRecognition";
 import { SuggestedAnswer } from "@/components/stagecraft/SuggestedAnswer";
@@ -509,6 +510,7 @@ export default function QuickFirePage() {
           localStorage.setItem("sc_streak_dates", JSON.stringify(dates.slice(-60)));
         }
       })();
+      void syncActivity(); // 3.3-A: push quickfire activity to server
 
       const res = await fetch("/api/stagecraft/grade", {
         method: "POST",

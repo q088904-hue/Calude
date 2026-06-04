@@ -24,6 +24,7 @@ import { summarise, type SessionSummary } from "./sessionSummary";
 import { devAuthEnabled, DEV_USER_ID } from "./authShared";
 import type { Profile, SessionRecord, QAItem } from "./types";
 import type { StagecraftConfig } from "./configStore";
+import type { ActivityData } from "./activityStore";
 
 /** Retained for claimSentinel.ts (the 3.1 single-tenant owner). */
 export const SENTINEL_USER_ID = "00000000-0000-0000-0000-000000000000";
@@ -222,4 +223,29 @@ export async function saveConfig(conf: StagecraftConfig): Promise<void> {
     .from(CONFIG)
     .upsert({ user_id: c.userId, data: conf }, { onConflict: "user_id" });
   if (error) fail("saveConfig", error.message);
+}
+
+// ── activity (3.3-A) ─────────────────────────────────────────────────────────
+
+const ACTIVITY = "stagecraft_activity";
+
+export async function getActivity(): Promise<ActivityData> {
+  const c = await ctx();
+  if (!c) return {};
+  const { data, error } = await c.db
+    .from(ACTIVITY)
+    .select("data")
+    .eq("user_id", c.userId)
+    .maybeSingle();
+  if (error) fail("getActivity", error.message);
+  return data ? (data as { data: ActivityData }).data : {};
+}
+
+export async function saveActivity(activity: ActivityData): Promise<void> {
+  const c = await ctx();
+  if (!c) return;
+  const { error } = await c.db
+    .from(ACTIVITY)
+    .upsert({ user_id: c.userId, data: activity }, { onConflict: "user_id" });
+  if (error) fail("saveActivity", error.message);
 }
