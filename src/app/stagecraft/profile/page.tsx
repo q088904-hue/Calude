@@ -216,6 +216,21 @@ export default function ProfilePage() {
             {/* ── AI connection ── */}
             <AiConnectionSection />
 
+            {/* ── Data export (OBS-7) ── */}
+            <Section title="Your data" label="Export & backup">
+              <p className="text-xs text-sc-muted mb-3 leading-relaxed">
+                Download everything Stagecraft has stored for you — profile,
+                interview config, and full session history — as a single JSON
+                file you can keep as a backup.
+              </p>
+              <a
+                href="/api/stagecraft/export"
+                className="inline-flex items-center gap-2 rounded-sc border border-sc-border bg-sc-surface px-3 py-2 text-xs font-mono text-sc-muted hover:text-sc-ink hover:border-sc-gold-dim transition-colors min-h-[36px]"
+              >
+                ↓ Export my data (JSON)
+              </a>
+            </Section>
+
             {/* ── Interview target ── */}
             <Section title="Interview target" label="Upcoming interview" accent>
               <p className="text-xs text-sc-muted mb-3 leading-relaxed">
