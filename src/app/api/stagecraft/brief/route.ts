@@ -5,6 +5,7 @@
 // exactly what to practice today and why.
 
 import { NextRequest } from "next/server";
+import { requireStagecraftUser } from "@/lib/stagecraft/auth";
 import Anthropic from "@anthropic-ai/sdk";
 
 export const runtime = "nodejs";
@@ -55,6 +56,8 @@ Word budget: 80–110 words. Do not exceed 110.
 `.trim();
 
 export async function POST(request: NextRequest) {
+  const gate = await requireStagecraftUser();
+  if (gate instanceof Response) return gate;
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
     return Response.json(

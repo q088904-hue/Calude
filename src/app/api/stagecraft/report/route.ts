@@ -3,6 +3,7 @@
 // for the session, streams it back, and persists it via setReport().
 
 import { NextRequest } from "next/server";
+import { requireStagecraftUser } from "@/lib/stagecraft/auth";
 import Anthropic from "@anthropic-ai/sdk";
 import { getSession, setReport } from "@/lib/stagecraft/sessionStore";
 import { SESSION_REPORT_PROMPT } from "@/lib/stagecraft/prompts";
@@ -21,6 +22,8 @@ interface Body {
 }
 
 export async function POST(request: NextRequest) {
+  const gate = await requireStagecraftUser();
+  if (gate instanceof Response) return gate;
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
     return Response.json(

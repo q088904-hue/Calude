@@ -4,6 +4,7 @@
 // POST          -> create | appendItem | setReport (envelope)
 
 import { NextRequest } from "next/server";
+import { requireStagecraftUser } from "@/lib/stagecraft/auth";
 import {
   listSessions,
   getSession,
@@ -51,6 +52,8 @@ type ReportBody = {
 type Body = CreateBody | AppendBody | ReportBody;
 
 export async function POST(request: NextRequest) {
+  const gate = await requireStagecraftUser();
+  if (gate instanceof Response) return gate;
   let body: Body;
   try {
     body = (await request.json()) as Body;

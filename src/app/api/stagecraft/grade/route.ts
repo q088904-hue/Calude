@@ -3,6 +3,7 @@
 // and streams back the 5-block coaching feedback as text/plain.
 
 import { NextRequest } from "next/server";
+import { requireStagecraftUser } from "@/lib/stagecraft/auth";
 import Anthropic from "@anthropic-ai/sdk";
 import { buildSystemPrompt, buildUserMessage } from "@/lib/stagecraft/prompts";
 import { getProfile } from "@/lib/stagecraft/profileStore";
@@ -66,6 +67,8 @@ interface Body {
 }
 
 export async function POST(request: NextRequest) {
+  const gate = await requireStagecraftUser();
+  if (gate instanceof Response) return gate;
   const apiKey = await getAnthropicKey();
   if (!apiKey) {
     return Response.json(

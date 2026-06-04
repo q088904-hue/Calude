@@ -15,9 +15,16 @@ export async function getSupabaseServer() {
     // Dev mock — no-op server client
     return new Proxy({} as ReturnType<typeof createServerClient>, {
       get: (_, prop) => {
+        // CRITICAL: never look thenable. getSupabaseServer() is async, so if this
+        // mock exposed a `then` function the runtime would try to unwrap it as a
+        // promise and hang forever. Return undefined for then/catch/finally.
+        if (prop === "then" || prop === "catch" || prop === "finally") return undefined;
         if (prop === "auth") {
           return {
             getUser: async () => ({ data: { user: { id: "dev-user-id" } }, error: null }),
+            signOut: async () => ({ error: null }),
+            exchangeCodeForSession: async () => ({ data: { session: null }, error: null }),
+            signInWithOtp: async () => ({ data: {}, error: null }),
           };
         }
         return () =>

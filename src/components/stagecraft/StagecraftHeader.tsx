@@ -52,6 +52,13 @@ export function StagecraftHeader({
       <div className="flex items-center gap-3">
         <CountdownChip />
         {children}
+        <a
+          href="/api/stagecraft/auth/logout"
+          className="font-mono text-xs text-sc-dim hover:text-sc-muted transition-colors min-h-[36px] inline-flex items-center"
+          title="Sign out"
+        >
+          Sign out
+        </a>
         <AnimatedThemeToggler />
       </div>
     </header>
