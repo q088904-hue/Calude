@@ -58,5 +58,23 @@ Additive; `007` has a full down section; revert the 6 commits restores 3.2. Acti
 ## Deferred (per plan / scope)
 Supabase Realtime push, offline write-queue/PWA, third-party analytics, profile field-level merge (single-user low-concurrency — sessions got the real conflict treatment), broader per-page focus-refetch, multi-user.
 
+## ✅ LIVE VERIFICATION RESULTS (project `xxgbehlzzolomuoumjog`, via service-role + dev-auth path)
+Run 2026-06-04. 007 applied via SQL editor; real app code exercised against live Supabase under the dev-auth path (admin client, `DEV_USER_ID`); all DEV test rows cleaned up afterward.
+
+| # | Criterion | Result |
+|---|---|---|
+| 1 | Migration successful | ✅ `stagecraft_activity` + `stagecraft_events` + sessions `updated_at`/`version` present |
+| 2 | Activity sync works | ✅ POST#1 → 3 streakDates/2 sessions/1 qf; union POST#3 → **4 unique** dates |
+| 3 | Activity idempotent | ✅ identical POST#2 → still **3** (no dup dates) |
+| 4 | No session item loss | ✅ append idx1 / idx1-again / idx2 → **version 3, items [1,2]** (duplicate deduped); **stale-write guard: first write 1 row, conflicting write 0 rows** |
+| 5 | Events recorded | ✅ `{session_start:1, export:1}` in `stagecraft_events` |
+| 6 | Retention queries valid | ✅ active sessions w/ summary + readiness trend `[7.3]` + event counts returned |
+| 7 | Rollback validated | ✅ `STAGECRAFT_STORE=file` → activity 200 + history 3 sessions (data intact); additive + 007 down section paired |
+
+**Approval criteria: ALL MET.** Live test data removed (events left 0). No magic-link needed — verified via the dev-auth admin path; production (real session) uses the same code through the SSR client + RLS.
+
+## Recommendation
+**APPROVE merge of Initiative 3.3 to main.** All seven criteria pass live; code static-verified (tsc/eslint/build/61-61); additive + rollback-validated; fileStore stays default; Supabase cutover unchanged. Post-merge: production-cutover envs already documented (3.2); `007` must be applied to any environment that flips to supabase (already applied to the project here).
+
 ## Status
-Stopped at merge gate. **Not merged.** Code phases A/B/C/D/E complete + static-verified; live verification (A/B/D + 007 apply) pending operator creds + magic-link. Awaiting your decision: run the live runbook before merge (recommended, matches 3.1/3.2 discipline), or merge code-now with live verification at deploy.
+Stopped at merge gate. **Not merged.** Live verification complete — awaiting your merge approval.
