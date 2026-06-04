@@ -12,6 +12,7 @@ import {
   appendItem,
   setReport,
 } from "@/lib/stagecraft/sessionStore";
+import { emit } from "@/lib/stagecraft/events";
 import type { SessionConfig, QAItem } from "@/lib/stagecraft/types";
 
 export const runtime = "nodejs";
@@ -75,6 +76,7 @@ export async function POST(request: NextRequest) {
       items: [],
       startedAt: now,
     });
+    await emit("session_start", { round: body.config?.round });
     return Response.json({ ok: true });
   }
 

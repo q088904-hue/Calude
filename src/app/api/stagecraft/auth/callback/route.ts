@@ -7,6 +7,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getSupabaseServer } from "@/lib/supabase/server";
 import { isAllowed } from "@/lib/stagecraft/authShared";
 import { claimSentinelRows } from "@/lib/stagecraft/claimSentinel";
+import { emit } from "@/lib/stagecraft/events";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -48,6 +49,7 @@ export async function GET(request: NextRequest) {
   } catch {
     // Non-fatal for login; the claim is idempotent and can be re-run.
   }
+  await emit("login", {});
 
   return NextResponse.redirect(new URL(next, request.url));
 }

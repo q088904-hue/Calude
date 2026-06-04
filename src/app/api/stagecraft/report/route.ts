@@ -6,6 +6,7 @@ import { NextRequest } from "next/server";
 import { requireStagecraftUser } from "@/lib/stagecraft/auth";
 import Anthropic from "@anthropic-ai/sdk";
 import { getSession, setReport } from "@/lib/stagecraft/sessionStore";
+import { emit } from "@/lib/stagecraft/events";
 import { SESSION_REPORT_PROMPT } from "@/lib/stagecraft/prompts";
 import type { Round } from "@/lib/stagecraft/types";
 
@@ -111,6 +112,7 @@ ${itemsBlock}`;
         response.on("end", async () => {
           try {
             await setReport(body.sessionId, finalText);
+            await emit("session_complete", { sessionId: body.sessionId });
           } catch {
             /* persistence is best-effort here */
           }
