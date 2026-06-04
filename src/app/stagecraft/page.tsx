@@ -13,6 +13,7 @@ import {
   useMemo,
   useRef,
   useState,
+  useSyncExternalStore,
 } from "react";
 import type { HistoryPayload } from "@/app/api/stagecraft/history/route";
 import {
@@ -1101,21 +1102,39 @@ function getTodayQuickFireCount(): number {
   return parseInt(localStorage.getItem("sc_qf_count") ?? "0", 10);
 }
 
-function DailyPracticeTracker({ sessionCount }: { sessionCount: number }) {
-  const [streak, setStreak] = useState(0);
-  const [todaySessions, setTodaySessions] = useState(0);
-  const [todayFires, setTodayFires] = useState(0);
-  const [mounted, setMounted] = useState(false);
+// OBS-6 (Option B): the daily counters live in localStorage, which is absent
+// during SSR. Instead of a mount-effect that setStates (cascading-render lint +
+// extra render), subscribe via useSyncExternalStore. getServerSnapshot returns a
+// sentinel used on the server AND the initial hydration render, so the component
+// hides until hydration completes (faithfully replacing the old `mounted` gate)
+// with no hydration mismatch. Cross-tab updates arrive via the `storage` event.
+const DAILY_SERVER_SNAPSHOT = "server";
 
-  useEffect(() => {
-    setStreak(getStreakFromStorage());
-    setTodaySessions(getTodaySessionCount());
-    setTodayFires(getTodayQuickFireCount());
-    setMounted(true);
-  }, []);
+function readDailySnapshot(): string {
+  // Composite string → stable by value for useSyncExternalStore's Object.is check.
+  return `${getStreakFromStorage()}|${getTodaySessionCount()}|${getTodayQuickFireCount()}`;
+}
+
+function subscribeDaily(onChange: () => void): () => void {
+  if (typeof window === "undefined") return () => {};
+  window.addEventListener("storage", onChange);
+  return () => window.removeEventListener("storage", onChange);
+}
+
+function DailyPracticeTracker({ sessionCount }: { sessionCount: number }) {
+  const snapshot = useSyncExternalStore(
+    subscribeDaily,
+    readDailySnapshot,
+    () => DAILY_SERVER_SNAPSHOT,
+  );
+
+  // Server + initial hydration render → hide (matches the prior `!mounted` gate).
+  if (snapshot === DAILY_SERVER_SNAPSHOT) return null;
+
+  const [streak, todaySessions, todayFires] = snapshot.split("|").map(Number);
 
   // If nothing has happened yet (no sessions ever, no quick fires today, no streak), hide
-  if (!mounted || (sessionCount === 0 && streak === 0 && todayFires === 0)) return null;
+  if (sessionCount === 0 && streak === 0 && todayFires === 0) return null;
 
   const totalToday = todaySessions + todayFires;
 
