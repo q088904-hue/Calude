@@ -12,6 +12,13 @@ Log observations as they're found (real usage or review). Each item: category ·
 
 | Cat | Sev | Status | Item | Where | Note / suggested small fix |
 |---|---|---|---|---|---|
+| Mobile | P2 | obs | Hub overflows horizontally at 375px (scrollWidth 600) | `/stagecraft` (HeroLanding) | `div.grain-overlay` renders 600px + a `div.flex.items-center` 414px; not viewport-constrained → horizontal scroll. *Small fix:* clip overlay to viewport (`max-width:100%` / `overflow-x:hidden` on container) + wrap the flex row. |
+| Mobile | P3 | obs | `grain-overlay` exceeds viewport on interior pages (414 vs 375) | `/stagecraft/quickfire` (likely all interior) | Same overlay sizing; minor overflow. Fold into the grain-overlay fix above. |
+| Reliability | P2 | obs | React hydration mismatch (8× on load) | `/stagecraft` → `<HeroLanding>` under framer-motion `AnimatePresence`/`PopChild` | SSR vs client attribute mismatch on the landing hero. Logged in dev; underlying mismatch can also occur in prod. *Investigate:* motion initial state / Date / window branch in HeroLanding; gate animation to post-mount or provide stable SSR snapshot. |
+| Content | P3 | obs | All Stagecraft routes share the generic root `<title>` | every `/stagecraft*` page | Title is "Datamatics Design Intelligence — AI-Powered Design Analysis" everywhere; no per-page titles. *Small fix:* per-route `metadata`/`<title>` (e.g. "Quickfire · Stagecraft"). |
+| UX | P3 | obs | No "Sign out" affordance on the hub/landing | `/stagecraft` (custom header, not `StagecraftHeader`) | Sign-out appears only on interior pages; absent on the main entry page. *Small fix:* add sign-out to the landing header (or a consistent account menu). |
+
+**Observed-OK (recorded, no action):** all 8 pages load 200 (no error boundary) · config/state/history/export APIs 200 · countdown chip renders correctly (`◷ 8 days left` when date set) · auth gate + dev bypass behave as designed.
 
 ---
 
@@ -47,8 +54,17 @@ These are starting points to confirm during a real-usage pass; they are not user
 
 ---
 
-## Pending: real-usage observation pass
-A genuine "use Stagecraft as a real user" pass (friction, bugs, performance, onboarding, auth, export/history/profile) has **not** been run yet — it requires direction (and ideally the Supabase-backed build running locally for the auth/persistence surfaces). Findings will be appended above when that pass is authorized.
+## Observation pass 1 — 2026-06-04 (dev mode, dev-auth bypass, file store)
+**Setup:** `next dev` + `STAGECRAFT_DEV_AUTH=1` on an assigned port; browsed via preview DOM inspection. Auth/persistence flows that need a real Supabase session (live magic-link login/logout, RLS-scoped reads) were **not** re-exercised here — they were verified live during the 3.2 merge gate. This pass covered hub, loop pages, history, profile, export, countdown, and responsive layout.
+
+**Findings → logged as rows OBS in the table above:**
+- Mobile P2: hub horizontal overflow at 375px (scrollWidth 600). Repro: load `/stagecraft` at 375px wide → page scrolls horizontally; offender `div.grain-overlay` (600px) + a flex row (414px).
+- Mobile P3: same overlay overflows interior pages (`/stagecraft/quickfire`, 414 vs 375).
+- Reliability P2: hydration mismatch ×8 in `<HeroLanding>` on `/stagecraft` load (framer-motion subtree). Repro: open `/stagecraft`, check console → "A tree hydrated but some attributes… didn't match".
+- Content P3: generic shared `<title>` on all routes.
+- UX P3: no sign-out on the hub/landing header.
+
+**Not yet observed (future passes):** real magic-link login/logout UX, Recruiter/STAR/Quickfire *interactive answer* flows (require API keys for grading), profile editing round-trip, export download UX in-browser, history detail pages, tablet/desktop breakpoints, reduced-motion, dark mode. These need a follow-up pass (and AI keys for the grading loop).
 
 ## Next milestone (after stabilization, on approval)
 **Stagecraft 3.3 Architecture Review** — cross-device sync semantics · conflict resolution · activity synchronization · offline behavior · retention metrics · analytics instrumentation. Planning only; wait for approval before any implementation planning.
