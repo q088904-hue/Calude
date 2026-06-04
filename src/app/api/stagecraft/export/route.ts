@@ -8,6 +8,7 @@ import { getProfile } from "@/lib/stagecraft/profileStore";
 import { getConfig } from "@/lib/stagecraft/configStore";
 import type { Profile, SessionRecord } from "@/lib/stagecraft/types";
 import type { StagecraftConfig } from "@/lib/stagecraft/configStore";
+import { emit } from "@/lib/stagecraft/events";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -35,6 +36,8 @@ export async function GET() {
     config,
     sessions,
   };
+
+  await emit("export", { sessions: payload.sessions.length });
 
   const filename = `stagecraft-export-${new Date().toISOString().slice(0, 10)}.json`;
   return new Response(JSON.stringify(payload, null, 2), {

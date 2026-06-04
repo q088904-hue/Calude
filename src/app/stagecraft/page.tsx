@@ -16,6 +16,7 @@ import {
   useSyncExternalStore,
 } from "react";
 import type { HistoryPayload } from "@/app/api/stagecraft/history/route";
+import { syncActivity, ACTIVITY_EVENT } from "@/lib/stagecraft/activitySync";
 import {
   parseFeedbackSections,
   parseFeedbackSectionsStreaming,
@@ -641,6 +642,7 @@ function StagecraftInner() {
         if (typeof window !== "undefined") {
           localStorage.setItem(SESSION_DATE_KEY, today);
           localStorage.setItem(SESSION_TODAY_KEY, String(getTodaySessionCount() + 1));
+          void syncActivity(); // 3.3-A: push to server + notify tracker
         }
         setStage("report");
         return;
@@ -654,6 +656,7 @@ function StagecraftInner() {
       if (typeof window !== "undefined") {
         localStorage.setItem(SESSION_DATE_KEY, today);
         localStorage.setItem(SESSION_TODAY_KEY, String(getTodaySessionCount() + 1));
+        void syncActivity(); // 3.3-A: push to server + notify tracker
       }
       setStage("report");
       return;
@@ -1134,7 +1137,11 @@ function readDailySnapshot(): string {
 function subscribeDaily(onChange: () => void): () => void {
   if (typeof window === "undefined") return () => {};
   window.addEventListener("storage", onChange);
-  return () => window.removeEventListener("storage", onChange);
+  window.addEventListener(ACTIVITY_EVENT, onChange);
+  return () => {
+    window.removeEventListener("storage", onChange);
+    window.removeEventListener(ACTIVITY_EVENT, onChange);
+  };
 }
 
 function DailyPracticeTracker({ sessionCount }: { sessionCount: number }) {
@@ -1143,6 +1150,20 @@ function DailyPracticeTracker({ sessionCount }: { sessionCount: number }) {
     readDailySnapshot,
     () => DAILY_SERVER_SNAPSHOT,
   );
+
+  // 3.3-A/C: reconcile activity with the server on mount + when the tab regains
+  // focus (cross-device convergence; no realtime). Does not setState — syncActivity
+  // dispatches ACTIVITY_EVENT which the store subscription above re-reads.
+  useEffect(() => {
+    void syncActivity();
+    const onVisible = () => void syncActivity();
+    window.addEventListener("focus", onVisible);
+    document.addEventListener("visibilitychange", onVisible);
+    return () => {
+      window.removeEventListener("focus", onVisible);
+      document.removeEventListener("visibilitychange", onVisible);
+    };
+  }, []);
 
   // Server + initial hydration render → hide (matches the prior `!mounted` gate).
   if (snapshot === DAILY_SERVER_SNAPSHOT) return null;

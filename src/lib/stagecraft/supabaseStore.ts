@@ -24,6 +24,7 @@ import { summarise, type SessionSummary } from "./sessionSummary";
 import { devAuthEnabled, DEV_USER_ID } from "./authShared";
 import type { Profile, SessionRecord, QAItem } from "./types";
 import type { StagecraftConfig } from "./configStore";
+import type { ActivityData } from "./activityStore";
 
 /** Retained for claimSentinel.ts (the 3.1 single-tenant owner). */
 export const SENTINEL_USER_ID = "00000000-0000-0000-0000-000000000000";
@@ -113,30 +114,70 @@ export async function upsertSession(record: SessionRecord): Promise<void> {
   if (error) fail("upsertSession", error.message);
 }
 
+// (3.3-B) Optimistic-concurrency write for sessions: read {data, version},
+// apply the mutation, write guarded by `version` and retry on conflict so a
+// concurrent device's change is never silently clobbered. Bounded retries fall
+// back to last-write-wins (rare). `mutate` must be pure + idempotent.
+async function optimisticSessionWrite(
+  sessionId: string,
+  mutate: (rec: SessionRecord) => SessionRecord,
+): Promise<SessionRecord | null> {
+  const c = await ctx();
+  if (!c) return null;
+  const MAX = 4;
+  for (let attempt = 0; attempt < MAX; attempt++) {
+    const { data, error } = await c.db
+      .from(SESSIONS)
+      .select("data, version")
+      .eq("id", sessionId)
+      .eq("user_id", c.userId)
+      .maybeSingle();
+    if (error) fail("optimisticSessionWrite/read", error.message);
+    if (!data) return null;
+    const current = data as { data: SessionRecord; version: number | null };
+    const version = current.version ?? 0;
+    const next = mutate(current.data);
+    const { data: updated, error: wErr } = await c.db
+      .from(SESSIONS)
+      .update({ ...toSessionRow(next, c.userId), version: version + 1 })
+      .eq("id", sessionId)
+      .eq("user_id", c.userId)
+      .eq("version", version)
+      .select("id");
+    if (wErr) fail("optimisticSessionWrite/write", wErr.message);
+    if (((updated as unknown[] | null)?.length ?? 0) > 0) return next; // won the race
+    // else: version moved under us → re-read and retry
+  }
+  // Retries exhausted → accept last-write-wins.
+  const existing = await getSession(sessionId);
+  if (!existing) return null;
+  const next = mutate(existing);
+  await upsertSession(next);
+  return next;
+}
+
 export async function appendItem(
   sessionId: string,
   item: QAItem,
 ): Promise<SessionRecord | null> {
-  const existing = await getSession(sessionId);
-  if (!existing) return null;
-  const updated: SessionRecord = { ...existing, items: [...existing.items, item] };
-  await upsertSession(updated);
-  return updated;
+  return optimisticSessionWrite(sessionId, (rec) => {
+    // Idempotent by item index → concurrent appends never duplicate/clobber.
+    const items = rec.items.some((i) => i.index === item.index)
+      ? rec.items.map((i) => (i.index === item.index ? item : i))
+      : [...rec.items, item];
+    return { ...rec, items };
+  });
 }
 
 export async function setReport(
   sessionId: string,
   report: string,
 ): Promise<SessionRecord | null> {
-  const existing = await getSession(sessionId);
-  if (!existing) return null;
-  const updated: SessionRecord = {
-    ...existing,
+  return optimisticSessionWrite(sessionId, (rec) => ({
+    ...rec,
     report,
     endedAt: new Date().toISOString(),
-  };
-  await upsertSession(updated);
-  return updated;
+  }));
 }
 
 /** Cheap, newest-first summaries (skips `data`/items entirely). Optional paging. */
@@ -222,4 +263,29 @@ export async function saveConfig(conf: StagecraftConfig): Promise<void> {
     .from(CONFIG)
     .upsert({ user_id: c.userId, data: conf }, { onConflict: "user_id" });
   if (error) fail("saveConfig", error.message);
+}
+
+// ── activity (3.3-A) ─────────────────────────────────────────────────────────
+
+const ACTIVITY = "stagecraft_activity";
+
+export async function getActivity(): Promise<ActivityData> {
+  const c = await ctx();
+  if (!c) return {};
+  const { data, error } = await c.db
+    .from(ACTIVITY)
+    .select("data")
+    .eq("user_id", c.userId)
+    .maybeSingle();
+  if (error) fail("getActivity", error.message);
+  return data ? (data as { data: ActivityData }).data : {};
+}
+
+export async function saveActivity(activity: ActivityData): Promise<void> {
+  const c = await ctx();
+  if (!c) return;
+  const { error } = await c.db
+    .from(ACTIVITY)
+    .upsert({ user_id: c.userId, data: activity }, { onConflict: "user_id" });
+  if (error) fail("saveActivity", error.message);
 }
