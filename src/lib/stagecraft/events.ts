@@ -4,8 +4,11 @@
 // request. No-op on the file backend / when unauthenticated. Server-only.
 
 import { getSupabaseServer } from "@/lib/supabase/server";
+import { getSupabaseAdmin } from "@/lib/supabase/admin";
 import { resolveStagecraftUser } from "./auth";
+import { devAuthEnabled } from "./authShared";
 import { isSupabaseBackend } from "./storeBackend";
+import { hasSupabaseEnv } from "./supabaseStore";
 
 export type StagecraftEvent =
   | "login"
@@ -24,12 +27,17 @@ export async function emit(
     if (!isSupabaseBackend()) return; // analytics only meaningful on the durable backend
     const user = await resolveStagecraftUser();
     if (!user) return;
-    const supabase = await getSupabaseServer();
-    // Un-generified client resolves insert() to `never`; loose handle (repo convention).
+    // Same client resolution as the store's ctx(): admin under dev-auth (bypasses
+    // RLS), SSR (auth.uid()) otherwise. Un-generified → loose handle (repo convention).
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    await (supabase as any)
-      .from("stagecraft_events")
-      .insert({ user_id: user.id, event, props });
+    let db: any;
+    if (devAuthEnabled()) {
+      if (!hasSupabaseEnv()) return;
+      db = getSupabaseAdmin();
+    } else {
+      db = await getSupabaseServer();
+    }
+    await db.from("stagecraft_events").insert({ user_id: user.id, event, props });
   } catch {
     /* analytics is best-effort — never propagate */
   }
