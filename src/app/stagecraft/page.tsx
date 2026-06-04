@@ -1063,19 +1063,35 @@ function recordPracticeDay(): number {
 
 function computeStreak(dates: string[]): number {
   if (!dates.length) return 0;
-  const sorted = [...dates].sort();
+  const DAY = 1000 * 60 * 60 * 24;
+  // Normalize "today" to local midnight so time-of-day never skews the diff.
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  // Unique practice days as midnight timestamps, newest first.
+  // NOTE (OBS-10): must sort chronologically — a plain string .sort() of
+  // toDateString() values orders by weekday name ("Thu" < "Tue" < "Wed"),
+  // which is NOT chronological and broke streak detection.
+  const days = [
+    ...new Set(
+      dates.map((s) => {
+        const d = new Date(s);
+        d.setHours(0, 0, 0, 0);
+        return d.getTime();
+      }),
+    ),
+  ]
+    .filter((t) => !Number.isNaN(t))
+    .sort((a, b) => b - a);
+
   let streak = 0;
-  const now = new Date();
-  for (let i = sorted.length - 1; i >= 0; i--) {
-    const d = new Date(sorted[i]);
-    const diffDays = Math.round(
-      (now.getTime() - d.getTime()) / (1000 * 60 * 60 * 24),
-    );
+  for (const t of days) {
+    const diffDays = Math.round((today.getTime() - t) / DAY);
     if (diffDays === streak) {
-      streak++;
-    } else {
-      break;
+      streak++; // consecutive day (today, then yesterday, …)
+    } else if (diffDays > streak) {
+      break; // gap → streak ends
     }
+    // diffDays < streak → already-counted day, skip
   }
   return streak;
 }
