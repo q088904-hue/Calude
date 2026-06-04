@@ -12,12 +12,15 @@ Log observations as they're found (real usage or review). Each item: category ·
 
 | Cat | Sev | Status | Item | Where | Note / suggested small fix |
 |---|---|---|---|---|---|
-| Mobile | P2 | obs | Hub overflows horizontally at 375px (scrollWidth 600) | `/stagecraft` (hub `page.tsx`) | A `div.flex.items-center` row measures 414px and the page scrolls to 600px. `grain-overlay` (fixed `inset:0`, decorative) reports the inflated width but is a **symptom, not the cause**. *Needs a focused layout pass* to find the unwrapped flex row — NOT a blind `overflow-x:hidden` (could clip real content). Left as obs deliberately. |
+| Mobile | P2 | obs | Hub overflows horizontally at **narrow mobile (≤~414px)**; scrollWidth 600 at 375 | `/stagecraft` (hub `page.tsx`) | A `div.flex.items-center` row measures 414px and the page scrolls to 600px. `grain-overlay` (fixed `inset:0`, decorative) reports the inflated width but is a **symptom, not the cause**. **Refined (pass 2): tablet (768) has NO overflow — mobile-only.** *Needs a focused layout pass* to find the unwrapped flex row — NOT a blind `overflow-x:hidden`. Left as obs deliberately. |
 | Mobile | P3 | obs | Horizontal overflow on interior pages (414 vs 375) | `/stagecraft/quickfire` (likely all interior) | Same root cause as above (unwrapped row), milder. Bundle with the hub layout pass. |
 | Reliability | P2 | obs | React hydration mismatch (8× on load) — **root site, OUT OF STAGECRAFT SCOPE** | `/` (Datamatics homepage) → `<HeroLanding>` (`src/app/page.tsx`, framer-motion) | Re-traced: `HeroLanding` is the Datamatics root `/` hero, not a Stagecraft page. The 8 errors came from the initial `/` load. Logged for awareness; **not a Stagecraft stabilization item** — belongs to a root-site cleanup track. |
 | Content | P3 | **done** | All Stagecraft routes shared the generic root `<title>` | `src/app/stagecraft/layout.tsx` | FIXED: segment `metadata` sets default "Stagecraft" + `"%s · Stagecraft"` template. Per-page titles (e.g. "Quickfire · Stagecraft") remain a follow-up since pages are client components. |
 | UX | P3 | **done** | No "Sign out" on the hub/landing header | `src/app/stagecraft/page.tsx` | FIXED: sign-out link added to the hub header right cluster (matches interior `StagecraftHeader` style). |
 | Reliability | P3 | obs | `setState` called synchronously within an effect (cascading renders) | `src/app/stagecraft/page.tsx:~1111` | Surfaced by ESLint (`react-hooks`), pre-existing. Not build-blocking. *Small fix candidate:* move the update into an event handler or guard it; verify no render loop. Needs care in the large hub file. |
+| UX / Reliability | P2 | obs | Data export has **no UI entry point** | UI vs `/api/stagecraft/export` | The export endpoint (3.1) works but nothing in the app links to it — no export/download button on profile or history. Users can't reach their backup/portability without hitting the API directly. *Small fix:* add an "Export my data" link (e.g. profile settings) pointing at the endpoint. |
+| Accessibility | P3 | obs | History session rows lack `aria-expanded` | `/stagecraft/history` session `<button>`s (`▼`) | Rows are inline expand/collapse buttons but expose no ARIA expanded state. (Also: the dedicated `/stagecraft/history/[id]` route is not linked from the list — list expands in place; confirm intent.) *Small fix:* add `aria-expanded`/`aria-controls`. |
+| UX | P4 | obs | App ignores OS `prefers-color-scheme` (dark is toggle-only) | global theme | Emulated dark scheme did not switch the theme; dark mode only via the header toggler. Likely intentional per design rules ("don't default to dark") — **confirm intent**, no action assumed. |
 
 **Observed-OK (recorded, no action):** all 8 pages load 200 (no error boundary) · config/state/history/export APIs 200 · countdown chip renders correctly (`◷ 8 days left` when date set) · auth gate + dev bypass behave as designed.
 
@@ -66,6 +69,21 @@ These are starting points to confirm during a real-usage pass; they are not user
 - UX P3: no sign-out on the hub/landing header.
 
 **Not yet observed (future passes):** real magic-link login/logout UX, Recruiter/STAR/Quickfire *interactive answer* flows (require API keys for grading), profile editing round-trip, export download UX in-browser, history detail pages, tablet/desktop breakpoints, reduced-motion, dark mode. These need a follow-up pass (and AI keys for the grading loop).
+
+## Observation pass 2 — 2026-06-04 (dev mode, dev-auth bypass, file store, AI keys present)
+**Setup:** same dev-auth harness; both AI keys configured this time, so the grade loop was exercised. Local data mutated during testing was **restored** afterward (test session removed → 10, profile.json deleted, config reset to `{}`).
+
+**New findings → rows in the table above:** OBS-7 (export has no UI entry point, P2), OBS-8 (history rows lack `aria-expanded`, P3), OBS-9 (ignores `prefers-color-scheme`, P4). OBS-1 refined → mobile-only (tablet clean).
+
+**Observed-OK (recorded, no action):**
+- Quickfire **answer→grade flow completes** — Content/English/Delivery scoring + feedback rendered, session counter increments, no errors.
+- Profile **edit→save→reload round-trip** persists correctly (file store).
+- History renders readiness, score-trend chart, pattern insights, and a clickable session list.
+- Dark mode via the header toggler works (`.dark`, bg #0D0D0F); crude contrast scan flagged only 2/124 elements (unconfirmed — verify in a focused a11y pass).
+- Tablet (768px): no horizontal overflow.
+- Recruiter loads with an answer input; Login page renders its email form.
+
+**Still not observed (harness/keys limits):** full Recruiter/STAR grade interactions, in-browser export download (no UI exists), real magic-link login/logout E2E (verified at the 3.2 merge gate), **reduced-motion** (not emulable through this preview harness — needs a manual OS-level pass), `/stagecraft/history/[id]` direct route, desktop ≥1280 width.
 
 ## Next milestone (after stabilization, on approval)
 **Stagecraft 3.3 Architecture Review** — cross-device sync semantics · conflict resolution · activity synchronization · offline behavior · retention metrics · analytics instrumentation. Planning only; wait for approval before any implementation planning.
