@@ -113,7 +113,10 @@ function DropdownGroup({ group }: { group: NavGroup }) {
 
 export function NavDropdown() {
   return (
-    <nav aria-label="Stagecraft sections" className="flex items-center gap-2">
+    <nav
+      aria-label="Stagecraft sections"
+      className="flex flex-wrap items-center gap-2"
+    >
       {NAV_GROUPS.map((group) => (
         <DropdownGroup key={group.label} group={group} />
       ))}

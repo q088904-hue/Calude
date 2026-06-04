@@ -792,7 +792,7 @@ function StagecraftInner() {
   return (
     <div className="stagecraft-root min-h-screen bg-sc-bg text-sc-ink">
       {/* Top chrome */}
-      <header className="border-b border-sc-border px-6 py-4 flex items-center justify-between">
+      <header className="border-b border-sc-border px-6 py-4 flex flex-wrap items-center justify-between gap-y-2">
         <div className="flex items-center gap-3 shrink-0">
           <Link
             href="/"

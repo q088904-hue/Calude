@@ -33,7 +33,7 @@ export function StagecraftHeader({
   return (
     <header
       data-scrolled={scrolled ? "true" : undefined}
-      className={`border-b border-sc-border px-6 py-4 flex items-center justify-between bg-sc-bg transition-shadow duration-150 ease-sc data-[scrolled=true]:shadow-sc-sm ${
+      className={`border-b border-sc-border px-6 py-4 flex flex-wrap items-center justify-between gap-y-2 bg-sc-bg transition-shadow duration-150 ease-sc data-[scrolled=true]:shadow-sc-sm ${
         sticky ? "sticky top-0 z-10" : ""
       }`}
     >
